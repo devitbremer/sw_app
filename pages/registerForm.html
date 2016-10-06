@@ -1,0 +1,58 @@
+<form class="login-form">
+    <div class="row">
+        <div class="input-field col s12 center">
+            <img src="images/login-logo.png" alt="" class="circle responsive-img valign profile-image-login">
+            <p class="center login-form-text">Swapit! É mais barato!</p>
+        </div>
+    </div>
+    <div class="row margin">
+        <div class="input-field col s12">
+            <i class="material-icons prefix">person</i>
+            <input id="personName" type="text" ng-model="person.personName">
+            <label for="personName" class="center-align">Nome</label>
+        </div>
+    </div>
+    <div class="row margin">
+        <div class="input-field col s12">
+            <i class="material-icons prefix">email</i>
+            <input id="perEmail" type="text" ng-model="person.email">
+            <label for="perEmail" class="center-align">E-mail</label>
+        </div>
+    </div>
+    <div class="row margin">
+        <div class="input-field col s12">
+            <i class="material-icons prefix">phone</i>
+            <input id="perPhone" type="text" ng-model="person.phone">
+            <label for="perPhone" class="center-align">Telefone</label>
+        </div>
+    </div>
+    <div class="row margin">
+        <div class="input-field col s12">
+            <i class="material-icons prefix">vpn_key</i>
+            <input id="password" type="password" ng-model="person.password">
+            <label for="password" class="center-align">Senha</label>
+        </div>
+    </div>
+    <div class="row margin">
+        <div class="input-field col s12">
+            <i class="material-icons prefix">vpn_key</i>
+            <input id="password2" type="password" ng-model="pswd2">
+            <label for="password2" class="center-align">A mesma senha</label>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+    <div class="row">
+        <div class="input-field col s12">
+            <a class="btn waves-effect waves-light col s12" ng-click="newPerson()">Salvar</a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="input-field col s6 m6 l6">
+            <p class="margin medium-small"><a href="#/">Já tennho conta!</a></p>
+        </div>
+
+    </div>
+
+</form>
