@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" ng-app="swApp">
 
 
 
@@ -27,6 +27,38 @@
     <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection">
     <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection">
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="css/page-center.css" type="text/css" rel="stylesheet" media="screen,projection">
+
+    <!-- Scripts -->
+
+    <script src="js/jquery-1.11.2.min.js"></script>
+    <script src="js/materialize.js"></script>
+    <script src="angular/angular.min.js"></script>
+    <script src="angular/angular-route.min.js"></script>
+    <script src="js/sw-app.js"></script>
+
+    <!--prism-->
+    <script type="text/javascript" src="js/prism.js"></script>
+    <!--scrollbar-->
+    <script type="text/javascript" src="js/plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+
+    <!--plugins.js - Some Specific JS codes for Plugin Settings-->
+    <script type="text/javascript" src="js/plugins.js"></script>
+
+    <style>
+        .facebook{
+            background-color:#3b5998;
+        }
+        .facebook:hover{
+            background-color:#5682DE;
+        }
+        .google{
+            background-color:#B92D20;
+        }
+        .google:hover{
+            background-color:#D62D20;
+        }
+    </style>
 
 
 
@@ -42,77 +74,12 @@
   <!-- End Page Loading -->
 
 
-
-  <div id="login-page" class="row" style="margin-top: 5%">
-    <div class="col s4 z-depth-4 card-panel offset-l4">
-      <form>
-        <div class="row">
-          <div class="input-field col s12 center">
-            <img src="images/login-logo.png" alt="" class="circle responsive-img profile-image-login">
-            <p class="center login-form-text">Swapit! É mais barato!</p>
-          </div>
-        </div>
-        <div class="row margin">
-          <div class="input-field col s8 center offset-l2">
-            <i class="material-icons prefix">person</i>
-            <input id="email" type="text">
-            <label for="email" class="center-align">E-mail</label>
-          </div>
-        </div>
-        <div class="row margin">
-          <div class="input-field col s8 center offset-l2">
-            <i class="material-icons prefix">vpn_key</i>
-            <input id="password" type="password">
-            <label for="password">Senha</label>
-          </div>
-        </div>
-        <div class="row">          
-          <div class="input-field col s12 m8 l8 offset-l2">
-              <input type="checkbox" id="remember-me" />
-              <label for="remember-me">Lembrar</label>
-          </div>
-        </div>
-        <div class="row">
-          <div class="input-field col s8 center offset-l2">
-            <a href="index.html" class="btn waves-effect waves-light col s12 green"><i class="meterial_icons"></i>Entrar</a>
-          </div>
-          <div class="input-field col s8 center offset-l2">
-            <a href="index.html" class="btn waves-effect waves-light col s12 indigo darken-2"><i class="meterial_icons"></i>Entrar com Facebook</a>
-          </div>
-          <div class="input-field col s8 center offset-l2">
-            <a href="index.html" class="btn waves-effect waves-light col s12 red"><i class="meterial_icons"></i> Entrar com Google</a>
-          </div>
-        </div>
-        <div class="row">
-          <div class="input-field col s12 m6 l6">
-            <p class="margin medium-small"><a href="page-register.html">Não possuo cadastro.</a></p>
-          </div>
-          <div class="input-field col s12 m6 l6">
-              <p class="margin right-align medium-small"><a href="page-forgot-password.html">Esqueci minha senha.</a></p>
-          </div>          
-        </div>
-
-      </form>
-    </div>
+  <div id="login-page" class="row">
+      <div class="col s12 z-depth-4 card-panel">
+          <div ng-view></div>
+      </div>
   </div>
 
-
-
-  <!-- ================================================
-    Scripts
-    ================================================ -->
-
-  <!-- jQuery Library -->
-  <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
-  <!--materialize js-->
-  <script type="text/javascript" src="js/materialize.js"></script>
-  <!--prism-->
-  <script type="text/javascript" src="js/prism.js"></script>
-  <!--scrollbar-->
-  <script type="text/javascript" src="js/plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>
-
-  <!--plugins.js - Some Specific JS codes for Plugin Settings-->
-  <script type="text/javascript" src="js/plugins.js"></script>
 
 </body>
 
