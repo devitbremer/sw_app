@@ -1,0 +1,193 @@
+<!--Top toolbar-->
+<nav>
+    <div class="nav-wrapper orange">
+        <a href="index.html" class="brand-logo center hide-on-small-and-down">SWAPIT</a>
+        <a href="index.html" class="brand-logo left hide-on-med-and-up">SWAPIT</a>
+        <ul id="nav-mobile" class="right">
+            <li>
+                <a ng-show="userLoged != false" class='dropdown-button' href="#" data-hover="true"
+                   data-beloworigin="true" data-activates='dropdown1'>
+                    <i class="material-icons left">account_circle</i><i class="material-icons right">arrow_drop_down</i>
+                    MINHA CONTA
+                </a>
+                <a ng-show="userLoged == false" class='dropdown-button' href="#" data-hover="true"
+                   data-beloworigin="true" data-activates='dropdown2'>
+                    <i class="material-icons left">account_circle</i><i class="material-icons right">arrow_drop_down</i>
+                    MINHA CONTA
+                </a>
+            </li>
+        </ul>
+
+        <!-- Opções Dropdown -->
+        <ul id='dropdown1' class='dropdown-content'>
+            <li><a href="#!">Meu perfil</a></li>
+            <li class="divider"></li>
+            <li><a href="#!">Minhas propostas</a></li>
+            <li class="divider"></li>
+            <li><a href="#!" class="blue-grey-text darken-3 text-darken-3">Sair</a></li>
+        </ul>
+
+        <ul id='dropdown2' class='dropdown-content'>
+            <li><a href="#/register"><i class="material-icons left">person_add</i> Nova Conta</a></li>
+            <li class="divider"></li>
+            <li><a href="#/login"><i class="material-icons left">home</i> Entrar</a></li>
+            <li class="divider"></li>
+        </ul>
+
+    </div>
+</nav>
+
+<!--Categories-->
+<div class="row" style="margin-top: 10%">
+    <div class="row center" style="margin-left: 12%;margin-right: 12%">
+
+        <div class="col s4 m4 l2 center  swpadding-rigth">
+            <div class="yellow hoverable white-text">
+                <div>
+                    <img class="responsive-img" src="icons/Dog.png">
+                </div>
+                Pets
+            </div>
+        </div>
+
+        <div class="col s4 m4 l2 center swpadding-rigth swpadding-left">
+            <div class="orange hoverable white-text">
+                <div>
+                    <img class="responsive-img" src="icons/Car.png">
+                </div>
+                Automóveis
+            </div>
+        </div>
+
+        <div class="col s4 m4 l2 center swpadding-rigth swpadding-left">
+            <div class="orange darken-3 hoverable white-text">
+                <div>
+                    <img class="responsive-img" src="icons/Laptop.png">
+                </div>
+                Tech
+            </div>
+        </div>
+
+        <div class="col s4 m4 l2 center swpadding-rigth swpadding-left">
+            <div class="red hoverable white-text">
+                <div>
+                    <img class="responsive-img" src="icons/Sports%20Mode.png">
+                </div>
+                Esportes
+            </div>
+        </div>
+
+        <div class="col s4 m4 l2 center swpadding-rigth swpadding-left">
+            <div class="pink darken-3 hoverable white-text">
+                <div>
+                    <img class="responsive-img" src="icons/Clothes.png">
+                </div>
+                Roupas
+            </div>
+        </div>
+
+        <div class="col s4 m4 l2 center swpadding-rigth swpadding-left">
+            <div class="purple darken-3 hoverable white-text">
+                <div>
+                    <img class="responsive-img" src="icons/Interior%20Accesories.png">
+                </div>
+                Móveis
+            </div>
+        </div>
+    </div>
+
+    <div class="row hide-on-small-only" style="margin-left: 12%;margin-right: 12%">
+
+        <div class="col s4 m4 l2 center swpadding-rigth swpadding-left">
+            <div class="deep-purple darken-2 hoverable white-text">
+                <div>
+                    <img class="responsive-img" src="icons/Drone.png">
+                </div>
+                Hobbies
+            </div>
+        </div>
+
+        <div class="col s4 m4 l2 center swpadding-rigth swpadding-left">
+            <div class="indigo darken-2 hoverable white-text">
+                <div>
+                    <img class="responsive-img" src="icons/Structural.png">
+                </div>
+                Imóveis
+            </div>
+        </div>
+
+        <div class="col s4 m4 l2 center swpadding-rigth swpadding-left">
+            <div class="blue darken-3 hoverable white-text">
+                <div>
+                    <img class="responsive-img" src="icons/Sun%20Glasses.png">
+                </div>
+                Acessórios
+            </div>
+        </div>
+
+        <div class="col s4 m4 l2 center swpadding-rigth swpadding-left">
+            <div class="light-blue hoverable white-text">
+                <div>
+                    <img class="responsive-img" src="icons/Touchscreen%20Smartphone.png">
+                </div>
+                Smartphones
+            </div>
+        </div>
+
+        <div class="col s4 m4 l2 center swpadding-rigth swpadding-left">
+            <div class="cyan darken-1 hoverable white-text">
+                <div>
+                    <img class="responsive-img" src="icons/Services.png">
+                </div>
+                Serviços
+            </div>
+        </div>
+
+        <div class="col s4 m4 l2 center swpadding-rigth swpadding-left">
+            <div class="green darken-2 hoverable white-text">
+                <div>
+                    <img class="responsive-img" src="icons/Meeting.png">
+                </div>
+                Empregos
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="center" style="margin-top:5rem;margin-left: 12%;margin-right: 12%">
+    <nav>
+        <div class="nav-wrapper blue-grey">
+            <form>
+                <div class="input-field">
+                    <input id="search" type="search" required>
+                    <label for="search"><i class="material-icons black-text">search</i></label>
+                    <i class="material-icons">close</i>
+                </div>
+            </form>
+        </div>
+    </nav>
+
+    <div style="margin-top: 12%">
+        <a class="waves-effect waves-light btn btn-large green darken-2 hide-on-large-only"
+           style="width: 75%">Adicionar</a>
+    </div>
+</div>
+
+<div class="fixed-action-btn hide-on-med-and-down" style="bottom: 20%; right: 10%;">
+    <a class="btn-floating btn-large waves-effect waves-light green darken-2">
+        <i class="material-icons">add</i>
+    </a>
+</div>
+<!--Inicia botão dropDown-->
+<script type="text/javascript">
+    $('.dropdown-button').dropdown({
+                inDuration: 300,
+                outDuration: 225,
+                constrain_width: false, // Does not change width of dropdown to that of the activator
+                hover: true, // Activate on hover
+                gutter: 0, // Spacing from edge
+                belowOrigin: false, // Displays dropdown below the button
+                alignment: 'left' // Displays dropdown with edge aligned to the left of button
+            }
+    );
+</script>
