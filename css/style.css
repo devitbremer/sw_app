@@ -1,5 +1,4 @@
 
-
 body {
   background-color: #fcfcfc;
 }
@@ -25,7 +24,27 @@ footer {
   max-width: 100% !important;
   width: 98%;
 }
-
+.facebook{
+  background-color:#3b5998;
+}
+.facebook:hover{
+  background-color:#5682DE;
+}
+.google{
+  background-color:#B92D20;
+}
+.google:hover{
+  background-color:#D62D20;
+}
+.swpadding-left{
+  padding-left: 10px
+}
+.swpadding-rigth{
+  padding-right: 10px;
+}
+.swpadding-top{
+  padding-top:5%;
+}
 #left-sidebar-nav span.badge.new{
   line-height: 20px;
   margin-top: 11px;
