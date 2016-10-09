@@ -16,7 +16,10 @@ swApp.config(function ($routeProvider) {
             templateUrl: 'pages/registerForm.html',
             controller: 'registerController'
         })
-
+        .when('/profile', {
+            templateUrl: 'pages/profileManager.html',
+            controller: 'profileController'
+        })
         .when('/forgot', {
             templateUrl: 'pages/forgotForm.html',
             controller: 'forgotController'
@@ -104,7 +107,37 @@ swApp.controller('registerController', ['$scope', '$filter', '$http', '$location
 
 }]);
 
-swApp.controller('loginController', ['$scope', function ($scope) {
+swApp.controller('loginController', ['$scope','$http', function ($scope,$http) {
+
+    //BUSCA DADOS NA VIEW
+   $scope.login={
+       'email':"",
+       'pass':""
+   }
+
+   //ENVIA DADOS PARA O WS
+    $scope.login = function () {
+        $http.get('http://localhost:8080/swapitws/rs/person/login/'+$scope.login.email+'/'+$scope.login.pass)
+
+
+            .success(function (result) {
+
+                console.log(result);
+                console.log($scope.personId);
+
+                //Aqui tenho que salvar a pessoa num singleton para poder acessar no fuuro
+
+            })
+            .error(function (data, status) {
+
+                console.log(data);
+                var $toastContent = $('<span><i class="material-icons red-text">error_outline</i>  Algo deu errado!' +
+                    '<p class="center">Tente novamente daqui a pouco...</p>' +
+                    '</span>');
+                Materialize.toast($toastContent, 10000);
+
+            });
+    }
 
 }]);
 
@@ -134,5 +167,65 @@ swApp.controller('detailsController', ['$scope', function ($scope) {
 swApp.controller('newProposalController', ['$scope', function ($scope) {
 
     $scope.userLoged = false;
+
+}]);
+swApp.controller('profileController', ['$scope','$http', function ($scope,$http) {
+
+    //Definindo o usuário
+    $scope.userLoged = true;
+    $scope.personId='3a09593e-3e2e-4c17-a2de-2f308776dbd7';
+    $scope.cep = '';
+
+    //Aqui teremos que trocar para pegar a pessoa do singleton
+    //BUSCANDO PESSOA
+    $scope.getPerson = function () {
+        $http.get('http://localhost:8080/swapitws/rs/person/getbyID/'+$scope.personId)
+
+
+            .success(function (result) {
+
+                console.log(result);
+                console.log($scope.personId);
+
+                //SALVANDO PESSOA NO $SCOPE
+                $scope.person=result;
+            })
+            .error(function (data, status) {
+                console.log(status);
+                console.log(data);
+                var $toastContent = $('<span><i class="material-icons red-text">error_outline</i>  Algo deu errado!' +
+                    '<p class="center">Tente novamente daqui a pouco...</p>' +
+                    '</span>');
+                Materialize.toast($toastContent, 10000);
+
+            });
+    }
+
+    //buscando CEP
+
+    $scope.getAddress =  function () {
+
+        $http.get('http://localhost:8080/swapitws/rs/street/getbycep/'+$scope.cep)
+
+            .success(function (resultAddress) {
+
+                console.log(resultAddress)
+
+                //SALVANDO CEP NO $SCOPE
+                $scope.address=resultAddress
+            })
+
+            .error(function (data,status) {
+
+                console.log(data);
+                console.log(status);
+
+                var $toastContent = $('<span><i class="material-icons red-text">error_outline</i>  Algo deu errado!' +
+                    '<p class="center">Erro ao buscar CEP...</p>' +
+                    '</span>');
+                Materialize.toast($toastContent, 10000);
+            })
+
+    }
 
 }]);
