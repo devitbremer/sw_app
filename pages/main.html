@@ -1,0 +1,90 @@
+<!--INSERE TOPO-->
+<ng-include src="'pages/topnavbar.html'"></ng-include>
+
+<!-- INICIO MAIN -->
+<div id="main">
+
+    <div class="wrapper green">
+
+        <!-- INSERE SIDE MENU-->
+        <ng-include src="'pages/sideMenu.html'"></ng-include>
+
+        <!-- INICIA CONTEUDO -->
+        <section id="content">
+
+
+            <!--start container-->
+
+            <div class="container">
+                <div class="row">
+                    <div class="col s12 m10 l9 offset-m1" style="margin-top: 20px;margin-bottom: 20px;">
+                        <nav>
+                            <div class="nav-wrapper blue-grey darken-4">
+                                <form>
+                                    <div class="input-field">
+                                        <input id="search" type="search" required>
+                                        <label for="search"><i class="material-icons white-text">search</i></label>
+                                        <i class="material-icons">close</i>
+                                    </div>
+                                </form>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row" style="margin-bottom: 15px;">
+                <div class="col s12 m10 l9 offset-m1">
+                    <a href="#/details" class="black-text">
+                        <div class="grey lighten-4 valign-wrapper hoverable">
+                            <div class="col s3 m2 l2">
+                                <img src="images/avatar.jpg" class="responsive-img">
+                            </div>
+                            <div class="col s6 m4 l6 ">
+                                <h5 class="title truncate"> Título da Proposta</h5>
+                                <p class="black-text left-align truncate hide-on-small-only">Aqui vai a descrição do bagulho, exatamente do
+                                    jeito que a criatura cadastrou. Temos que pensar num formato
+                                    para (tamanho) esses dados. Ou não.
+                                    Aqui vai a descrição do bagulho, exatamente do jeito que a criatura cadastrou. Temos
+                                    que pensar num formato
+                                    para esses dados. Ou não.
+                                </p>
+                            </div>
+                            <div class="col s2 m1 l2 valign">
+                                <p class="black-text center-align">R$ 200,00</p>
+                            </div>
+                            <div class="col s2 m1 l2  valign">
+                                <p class="black-text center-align"> HOJE</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12 m8 l8 center">
+                    <ul class="pagination">
+                        <li class="disabled"><a href="#!"><i class="material-icons">keyboard_arrow_left</i></a></li>
+                        <li class="active"><a href="#!">1</a></li>
+                        <li class="waves-effect"><a href="#!">2</a></li>
+                        <li class="waves-effect"><a href="#!">3</a></li>
+                        <li class="waves-effect"><a href="#!">4</a></li>
+                        <li class="waves-effect"><a href="#!">5</a></li>
+                        <li class="waves-effect"><a href="#!"><i class="material-icons">keyboard_arrow_right</i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    <!-- FIM CONTEUDO -->
+
+
+</div>
+
+</div>
+<!-- FIM MAIN -->
+
+
+<!-- //////////////////////////////////////////////////////////////////////////// -->
+
+<!-- INSERE FOOTER --><ng-include src="'pages/footer.html'"></ng-include>

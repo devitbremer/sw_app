@@ -1,0 +1,132 @@
+<!--INSERE TOPO-->
+<ng-include src="'pages/topnavbar.html'"></ng-include>
+
+<!-- INICIO MAIN -->
+<div id="main">
+
+    <div class="wrapper green">
+
+        <!-- INSERE SIDE MENU-->
+        <ng-include src="'pages/sideMenu.html'"></ng-include>
+
+        <!-- INICIA CONTEUDO -->
+        <section id="content">
+
+
+            <!--start container-->
+
+            <div class="container">
+                <div class="row">
+                    <div class="col s12 m9 l9" style="margin-top: 20px;margin-bottom: 20px;">
+                        <nav>
+                            <div class="nav-wrapper blue-grey darken-4">
+                                <form>
+                                    <div class="input-field">
+                                        <input id="search" type="search" required>
+                                        <label for="search"><i class="material-icons white-text">search</i></label>
+                                        <i class="material-icons">close</i>
+                                    </div>
+                                </form>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+
+
+                <div class="container">
+
+                    <div class="row">
+                        <div class="col l9 teal">
+                            <div class="row">
+                                <h5 class="center">Titulo da proposta</h5>
+                            </div>
+                            <div class="row">
+                                <div class="col l6 m6 s12 yellow">
+                                    <div id="featuredImage">
+                                        <img src="images/ted_Eyes_with_lashes.png" class="responsive-img" style="max-height: 400px">
+                                    </div>
+                                    <div id="thumbImages" class="purple valign-wrapper flex space-between">
+                                        <img src="images/ted_Eyes_with_lashes.png" class="responsive-img valign hoverable" style="max-height: 60px">
+                                        <img src="images/ted_Eyes_with_lashes.png" class="responsive-img valign hoverable" style="max-height: 60px">
+                                        <img src="images/ted_Eyes_with_lashes.png" class="responsive-img valign hoverable" style="max-height: 60px">
+                                        <img src="images/ted_Eyes_with_lashes.png" class="responsive-img valign hoverable" style="max-height: 60px">
+                                        <img src="images/ted_Eyes_with_lashes.png" class="responsive-img valign hoverable" style="max-height: 60px">
+                                    </div>
+                                </div>
+                                <div id="description" class="col l6 m6 s12 lime">
+                                    <p>
+                                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
+
+                                        Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+
+                                        Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.
+
+                                        Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.
+
+                                        In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibu
+                                    </p>
+                                    <span>Detalhes</span>
+                                    <p>Estado: {{}}</p>
+                                    <p>Cidade: {{}}</p>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col l6 m6 s12 blue">
+                                    <!--Botões de ação telas grandes-->
+                                    <div id="actions" class="col l6 m6 s12 hide-on-small-and-down flex space-between">
+                                        <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons white-text">favorite</i></a>
+                                        <a class="btn-floating btn-large waves-effect waves-light red">Denunciar</a>
+                                    </div>
+
+                                    <!--Botões popup de ação tela pequena-->
+                                    <div id="actionsSmall" class="hide-on-med-and-up">
+                                        <div class="fixed-action-btn horizontal" style="bottom: 45px; right: 24px;">
+                                            <a class="btn-floating btn-large red">
+                                                <i class="large material-icons">mode_edit</i>
+                                            </a>
+                                            <ul>
+                                                <li><a class="btn-floating red"><i class="material-icons">insert_chart</i></a></li>
+                                                <li><a class="btn-floating yellow darken-1"><i class="material-icons">format_quote</i></a></li>
+                                                <li><a class="btn-floating green"><i class="material-icons">publish</i></a></li>
+                                                <li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="contact" class="col s12 m6 l6">
+                                    <div class="card blue-grey darken-4">
+                                        <div class="card-content white-text"
+                                        <span class="card-title">Contato</span>
+                                        <p>
+                                            Fulano te Tal<br>
+                                            e-mail@provedor.com.br<br>
+                                            (41)97231976<br>
+                                            (41)32177700
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+            <!--end container-->
+        </section>
+        <!-- FIM CONTEUDO -->
+
+
+    </div>
+
+</div>
+<!-- FIM MAIN -->
+
+
+<!-- //////////////////////////////////////////////////////////////////////////// -->
+
+<!-- INSERE FOOTER --><ng-include src="'pages/footer.html'"></ng-include>
