@@ -26,6 +26,22 @@ swApp.config(function ($routeProvider) {
             templateUrl: 'pages/start.html',
             controller: 'startController'
         })
+        .when('/main',{
+            templateUrl:'pages/main.html',
+            controller:'mainController'
+        })
+        .when('/details',{
+            templateUrl:'pages/propDetails.html',
+            controller:'detailsController'
+        })
+        .when('/new',{
+            templateUrl:'pages/newProposal.html',
+            controller:'newProposalController'
+        })
+        .when('/edit',{
+            templateUrl:'pages/newProposal.html',
+            controller:'newProposalController'
+        })
         .when('/', {
             templateUrl: 'pages/start.html',
             controller: 'startController'
@@ -101,5 +117,22 @@ swApp.controller('startController', ['$scope', function ($scope,$rootScope, $loc
 
     $scope.userLoged = false;
 
+
+}]);
+swApp.controller('mainController', ['$scope', function ($scope) {
+
+    $scope.userLoged = false;
+
+}]);
+
+swApp.controller('detailsController', ['$scope', function ($scope) {
+
+    $scope.userLoged = false;
+
+}]);
+
+swApp.controller('newProposalController', ['$scope', function ($scope) {
+
+    $scope.userLoged = false;
 
 }]);

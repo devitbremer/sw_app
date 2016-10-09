@@ -24,11 +24,18 @@ footer {
   max-width: 100% !important;
   width: 98%;
 }
+.flex{
+  display: flex;
+}
+.flex.space-between {
+  justify-content: space-between;
+}
+
 .facebook{
   background-color:#3b5998;
 }
 .facebook:hover{
-  background-color:#5682DE;
+  background-color: #3a70de;
 }
 .google{
   background-color:#B92D20;

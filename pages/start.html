@@ -1,42 +1,4 @@
-<!--Top toolbar-->
-<nav>
-    <div class="nav-wrapper orange">
-        <a href="index.html" class="brand-logo center hide-on-small-and-down">SWAPIT</a>
-        <a href="index.html" class="brand-logo left hide-on-med-and-up">SWAPIT</a>
-        <ul id="nav-mobile" class="right">
-            <li>
-                <a ng-show="userLoged != false" class='dropdown-button' href="#" data-hover="true"
-                   data-beloworigin="true" data-activates='dropdown1'>
-                    <i class="material-icons left">account_circle</i><i class="material-icons right">arrow_drop_down</i>
-                    MINHA CONTA
-                </a>
-                <a ng-show="userLoged == false" class='dropdown-button' href="#" data-hover="true"
-                   data-beloworigin="true" data-activates='dropdown2'>
-                    <i class="material-icons left">account_circle</i><i class="material-icons right">arrow_drop_down</i>
-                    MINHA CONTA
-                </a>
-            </li>
-        </ul>
-
-        <!-- Opções Dropdown -->
-        <ul id='dropdown1' class='dropdown-content'>
-            <li><a href="#!">Meu perfil</a></li>
-            <li class="divider"></li>
-            <li><a href="#!">Minhas propostas</a></li>
-            <li class="divider"></li>
-            <li><a href="#!" class="blue-grey-text darken-3 text-darken-3">Sair</a></li>
-        </ul>
-
-        <ul id='dropdown2' class='dropdown-content'>
-            <li><a href="#/register"><i class="material-icons left">person_add</i> Nova Conta</a></li>
-            <li class="divider"></li>
-            <li><a href="#/login"><i class="material-icons left">home</i> Entrar</a></li>
-            <li class="divider"></li>
-        </ul>
-
-    </div>
-</nav>
-
+<ng-include src="'pages/topnavbar.html'"></ng-include>
 <!--Categories-->
 <div class="row" style="margin-top: 10%">
     <div class="row center" style="margin-left: 12%;margin-right: 12%">
@@ -156,11 +118,11 @@
 
 <div class="center" style="margin-top:5rem;margin-left: 12%;margin-right: 12%">
     <nav>
-        <div class="nav-wrapper blue-grey">
+        <div class="nav-wrapper blue-grey darken-4">
             <form>
                 <div class="input-field">
                     <input id="search" type="search" required>
-                    <label for="search"><i class="material-icons black-text">search</i></label>
+                    <label for="search"><i class="material-icons white-text">search</i></label>
                     <i class="material-icons">close</i>
                 </div>
             </form>
@@ -174,20 +136,8 @@
 </div>
 
 <div class="fixed-action-btn hide-on-med-and-down" style="bottom: 20%; right: 10%;">
-    <a class="btn-floating btn-large waves-effect waves-light green darken-2">
+    <a href="#/new" class="btn-floating btn-large waves-effect waves-light green darken-2">
         <i class="material-icons">add</i>
     </a>
 </div>
 <!--Inicia botão dropDown-->
-<script type="text/javascript">
-    $('.dropdown-button').dropdown({
-                inDuration: 300,
-                outDuration: 225,
-                constrain_width: false, // Does not change width of dropdown to that of the activator
-                hover: true, // Activate on hover
-                gutter: 0, // Spacing from edge
-                belowOrigin: false, // Displays dropdown below the button
-                alignment: 'left' // Displays dropdown with edge aligned to the left of button
-            }
-    );
-</script>
