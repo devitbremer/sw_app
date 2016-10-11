@@ -20,20 +20,16 @@
                     <form>
                         <div id="profileData" class="col l6 m6 s12 yellow offset-l3">
                             <div class="input-field col s12">
-                                <input id="personName" type="text">
+                                <input id="personName" type="text" ng-model="person.personName">
                                 <label for="personName" class="active">Nome Completo</label>
                             </div>
                             <div class="input-field col s12">
-                                <input disabled id="personEmail" type="email">
+                                <input disabled id="personEmail" type="email" ng-model="person.email">
                                 <label for="personEmail" class="active">email</label>
                             </div>
                             <div class="row">
                                 <div class="input-field col s12 m6 l6">
-                                    <input id="personFone" type="text">
-                                    <label for="personFone" class="active">Telefone Fixo</label>
-                                </div>
-                                <div class="input-field col s12 m6 l6">
-                                    <input id="personCel" type="text">
+                                    <input id="personCel" type="text" ng-model="person.phone">
                                     <label for="personCel">Celular</label>
                                 </div>
                             </div>
@@ -61,7 +57,7 @@
 
                             <div class="row">
                                 <div class="input-field col s8 m6 l6">
-                                    <input disabled id="street" type="text">
+                                    <input disabled id="street" type="text" ng-model="person.streetName">
                                     <label for="street" class="active">Rua</label>
                                 </div>
                                 <div class="input-field col s4 m2 l2">
@@ -71,11 +67,11 @@
                             </div>
                             <div class="row">
                                 <div class="input-field col s12 m6 l6">
-                                    <input disabled id="city" type="text">
+                                    <input disabled id="city" type="text" ng-model="addressModel.district.city.name">
                                     <label for="city" class="active">Cidade</label>
                                 </div>
                                 <div class="input-field col s12 m6 l6">
-                                    <input disabled id="district" type="text" class="disabled">
+                                    <input disabled id="district" type="text" class="disabled" ng-model="addressModel.district.name">
                                     <label for="district" class="active">Bairro</label>
                                 </div>
                             </div>
