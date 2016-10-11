@@ -240,83 +240,108 @@
 
             <!--start container-->
 
-            <div class="container" style="padding-top: 4%">
+            <div class="container" style="padding-top: 2%">
                 <div class="row">
                     <form>
-                        <div id="profileData" class="col l6 m6 s12 yellow offset-l3">
-                            <div class="input-field col s12">
-                                <input id="personName" type="text" required>
-                                <label for="personName">Nome Completo</label>
-                            </div>
-                            <div class="input-field col s12">
-                                <input disabled id="personEmail" required></input>
-                                <label for="personEmail" class="active">email</label>
-                            </div>
-                            <div class="row">
-                                <div class="input-field col s12 m6 l6">
-                                    <input id="personFone" type="text" required>
-                                    <label for="personFone">Telefone Fixo</label>
-                                </div>
-                                <div class="input-field col s12 m6 l6">
-                                    <input id="personCel" type="text" required>
-                                    <label for="personCel">Celular</label>
-                                </div>
-                            </div>
+                        <div id="profileData" class="col l6 m8 s12  offset-l3 offset-m2 grey lighten-1">
+                            <div class="card">
+                                <div class="card-content">
+                                    <i class="material-icons">person_add</i>
+                                    <span class="card-title">Dados Pessoais</span>
+                                    <div class="divider"></div>
+                                    <br>
+                                    <div class="row">
+                                        <div class="input-field col s12">
+                                            <i class="material-icons prefix">account_circle</i>
+                                            <input id="personName" type="text" ng-model="person.personName">
+                                            <label for="personName" class="active">Nome Completo</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col s12">
+                                            <i class="material-icons prefix">email</i>
+                                            <input disabled id="personEmail" type="email" ng-model="person.email">
+                                            <label for="personEmail" class="active">email</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col s12 m6 l6">
+                                            <i class="material-icons prefix">smartphone</i>
+                                            <input id="personCel" type="text" ng-model="person.phone">
+                                            <label for="personCel" class="active">Celular</label>
+                                        </div>
+                                    </div>
 
-                            <div class="row">
-                                <div class="input-field col s12 m6 l6">
-                                    <input id="password" type="text" required>
-                                    <label for="password">Nova Senha</label>
-                                </div>
-                                <div class="input-field col s12 m6 l6">
-                                    <input id="passwordConfirm" type="text" required>
-                                    <label for="passwordConfirm">Confirmação</label>
+                                    <div class="row">
+                                        <div class="input-field col s12 m6 l6">
+                                            <i class="material-icons prefix">lock</i>
+                                            <input id="password" type="password" ng-model="person.password">
+                                            <label for="password" class="active">Nova Senha</label>
+                                        </div>
+                                        <div class="input-field col s12 m6 l6">
+                                            <i class="material-icons prefix">lock</i>
+                                            <input id="passwordConfirm" type="text">
+                                            <label for="passwordConfirm" class="active">Nova senha - Outra vez!</label>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
+                            <div class="card">
+                                <div class="card-content">
+                                    <i class="material-icons">edit_location</i>
+                                    <span class="card-title">Endereço</span>
+                                    <div class="divider"></div>
+                                    <br>
+                                    <div class="row">
+                                        <div class="input-field col s12 m6 l6">
+                                            <i class="material-icons prefix">add_location</i>
+                                            <input id="cep" type="text" ng-model="person.addressReduce.zipcode">
+                                            <label for="cep" class="active">CEP</label>
+                                        </div>
+                                        <div class="col s12 m6 l6">
+                                            <button class="btn waves-effect waves-light orange darken-1" ng-click="getAddress()"><i class="material-icons left">search</i>Buscar CEP</button>
+                                        </div>
+                                    </div>
 
-                            <div class="row">
-                                <div class="input-field col s12 m6 l6">
-                                    <input id="cep" type="text">
-                                    <label for="cep">CEP</label>
+                                    <div class="row">
+                                        <div class="input-field col s8 m6 l6">
+                                            <i class="material-icons prefix">place</i>
+                                            <input disabled id="street" type="text" ng-model="person.addressReduce.streetName">
+                                            <label for="street" class="active">Rua</label>
+                                        </div>
+                                        <div class="input-field col s4 m2 l2">
+                                            <input id="number" type="text" ng-model="person.addressReduce.number">
+                                            <label for="number" class="active">Número</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col s12 m6 l6">
+                                            <i class="material-icons prefix">home</i>
+                                            <input disabled id="city" type="text" ng-model="person.addressReduce.cityName">
+                                            <label for="city" class="active">Cidade</label>
+                                        </div>
+                                        <div class="input-field col s12 m6 l6">
+                                            <input disabled id="district" type="text" class="disabled" ng-model="person.addressReduce.districtName">
+                                            <label for="district" class="active">Bairro</label>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="row">
-                                <div class="input-field col s8 m6 l6">
-                                    <input disabled id="street" type="text">
-                                    <label for="street" class="active">Rua</label>
-                                </div>
-                                <div class="input-field col s4 m2 l2">
-                                    <input disabled id="number" type="text">
-                                    <label for="number" class="active">Rua</label>
-                                </div>
                             </div>
-                            <div class="row">
-                                <div class="input-field col s12 m6 l6">
-                                    <input disabled id="city" type="text">
-                                    <label for="city" class="active">Cidade</label>
-                                </div>
-                                <div class="input-field col s12 m6 l6">
-                                    <input disabled id="district" type="text" class="disabled">
-                                    <label for="district" class="active">Bairro</label>
-                                </div>
-                            </div>
-
                             <!--Fim o tipo de operação-->
-                        </div>
-
-
-
-                        <!--Botões de Ação-->
-                        <div class="row">
-                            <div class="col s12" style="margin-top: 50px;">
-                                <div class="col l8 offset-l4">
-                                    <button class="btn btn-large waves-effect waves-light orange" type="submit" name="action">Apagar Conta<i class="material-icons left">delete</i></button>
-                                    <button class="btn btn-large waves-effect waves-light green" type="submit" name="action">Salvar<i class="material-icons left">save</i></button>
-                                    <button class="btn btn-large waves-effect waves-light red" type="reset" name="action">Cancelar<i class="material-icons left">cancel</i></button>
+                            <!--Botões de Ação-->
+                            <div class="row" style="margin-bottom: 10px">
+                                <div class="col s12 flex space-between">
+                                    <button class="btn btn-large waves-effect waves-light orange">Apagar Conta<i class="material-icons left">delete</i></button>
+                                    <button class="btn btn-large waves-effect waves-light green">Salvar<i class="material-icons left">save</i></button>
+                                    <button class="btn btn-large waves-effect waves-light red" ng-click="updatePerson()">Cancelar<i class="material-icons left">cancel</i></button>
                                 </div>
                             </div>
                         </div>
+
+
+
+
                     </form>
                 </div>
             </div>

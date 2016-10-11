@@ -183,10 +183,9 @@ swApp.controller('newProposalController', ['$scope', function ($scope) {
 }]);
 swApp.controller('profileController', ['$scope','httpq', function ($scope,httpq) {
 
-        //DEFININDO SE O USUÄRIO ESTÁ LOGADO
-        $scope.userLoged = true;
-        $scope.cep = '';
-    
+    //DEFININDO SE O USUÄRIO ESTÁ LOGADO
+    $scope.userLoged = true;
+    $scope.userID = '3a09593e-3e2e-4c17-a2de-2f308776dbd7';
     //MONTANDO A PESSOA COMPLETA
     $scope.person = {
         "personId": "",
@@ -213,34 +212,34 @@ swApp.controller('profileController', ['$scope','httpq', function ($scope,httpq)
         }
      }
 
-
-     console.log($scope.person)
-
     //OS DADOS ABAIXO SÃO CARREGADOS AO ACESSAR A PÁGINA
-    httpq.get('http://localhost:8080/swapitws/rs/person/getbyID/3a09593e-3e2e-4c17-a2de-2f308776dbd7')
+    httpq.get('http://10.11.0.96:8080/swapitws/rs/person/getbyID/'+ $scope.userID)
         .then(function (data) {
 
             //ATUALIZA MODEL
-            $scope.person.personId = data.personId;
-            $scope.person.personName = data.personName;
-            $scope.person.email = data.email;
-            $scope.person.phone = data.phone;
-            $scope.person.password = data.password;
-            $scope.person.sex = data.sex;
-            $scope.person.blocked = data.blocked;
-            $scope.person.level = data.level;
+            $scope.person = data;
         })
         .catch(function (response) {
             console.error('Xabu na consulta',response.status, response.data);
         })
 
+
     //OS DADOS ABAIXO SÃO CARREGADOS AO BUSCAR CEP
     $scope.getAddress = function () {
-        httpq.get('http://localhost:8080/swapitws/rs/street/getbycep/'+$scope.cep)
+        httpq.get('http://10.11.0.96:8080/swapitws/rs/street/getbycep/'+$scope.person.addressReduce.zipcode)
             .then(function (data) {
                 //ATUALIZA MODEL COM
-                $scope.person.streetid = data.streetid;
-                $scope.person.streetName = data.name;
+                $scope.person.addressReduce.streetid = data.streetid;
+                $scope.person.addressReduce.streetName = data.name;
+                $scope.person.addressReduce.complement = data.complement;
+                $scope.person.addressReduce.number = '';
+                $scope.person.addressReduce.districtName = data.district.name;
+                $scope.person.addressReduce.cityName = data.district.city.name;
+                $scope.person.addressReduce.stateAcronym= data.district.city.state.acronym;
+                $scope.person.addressReduce.stateName = data.district.city.state.name;
+                $scope.person.addressReduce.countryAcronym= data.district.city.state.country.acronym;
+                $scope.person.addressReduce.countryName = data.district.city.state.country.name;
+
             })
     }
     
