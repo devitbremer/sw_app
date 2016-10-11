@@ -15,44 +15,47 @@
 
             <!--start container-->
 
-            <div class="container" style="padding-top: 4%">
+            <div class="container" style="padding-top: 4%" ng-init="getPerson()">
                 <div class="row">
                     <form>
                         <div id="profileData" class="col l6 m6 s12 yellow offset-l3">
                             <div class="input-field col s12">
-                                <input id="personName" type="text" required>
-                                <label for="personName">Nome Completo</label>
+                                <input id="personName" type="text">
+                                <label for="personName" class="active">Nome Completo</label>
                             </div>
                             <div class="input-field col s12">
-                                <input disabled id="personEmail" required></input>
+                                <input disabled id="personEmail" type="email">
                                 <label for="personEmail" class="active">email</label>
                             </div>
                             <div class="row">
                                 <div class="input-field col s12 m6 l6">
-                                    <input id="personFone" type="text" required>
-                                    <label for="personFone">Telefone Fixo</label>
+                                    <input id="personFone" type="text">
+                                    <label for="personFone" class="active">Telefone Fixo</label>
                                 </div>
                                 <div class="input-field col s12 m6 l6">
-                                    <input id="personCel" type="text" required>
+                                    <input id="personCel" type="text">
                                     <label for="personCel">Celular</label>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="input-field col s12 m6 l6">
-                                    <input id="password" type="text" required>
-                                    <label for="password">Nova Senha</label>
+                                    <input id="password" type="password">
+                                    <label for="password" class="active">Nova Senha</label>
                                 </div>
                                 <div class="input-field col s12 m6 l6">
-                                    <input id="passwordConfirm" type="text" required>
+                                    <input id="passwordConfirm" type="text">
                                     <label for="passwordConfirm">Confirmação</label>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="input-field col s12 m6 l6">
-                                    <input id="cep" type="text">
+                                    <input id="cep" type="text" ng-model="cep">
                                     <label for="cep">CEP</label>
+                                </div>
+                                <div class="col s12 m6 l6">
+                                    <button class="btn waves-effect waves-light orange darken-1" ng-click="getAddress()"><i class="material-icons left">search</i>Buscar CEP</button>
                                 </div>
                             </div>
 
@@ -62,8 +65,8 @@
                                     <label for="street" class="active">Rua</label>
                                 </div>
                                 <div class="input-field col s4 m2 l2">
-                                    <input disabled id="number" type="text">
-                                    <label for="number" class="active">Rua</label>
+                                    <input id="number" type="text">
+                                    <label for="number" class="active">Número</label>
                                 </div>
                             </div>
                             <div class="row">
@@ -86,9 +89,9 @@
                         <div class="row">
                             <div class="col s12" style="margin-top: 50px;">
                                 <div class="col l8 offset-l4">
-                                    <button class="btn btn-large waves-effect waves-light orange" type="submit" name="action">Apagar Conta<i class="material-icons left">delete</i></button>
-                                    <button class="btn btn-large waves-effect waves-light green" type="submit" name="action">Salvar<i class="material-icons left">save</i></button>
-                                    <button class="btn btn-large waves-effect waves-light red" type="reset" name="action">Cancelar<i class="material-icons left">cancel</i></button>
+                                    <button class="btn btn-large waves-effect waves-light orange">Apagar Conta<i class="material-icons left">delete</i></button>
+                                    <button class="btn btn-large waves-effect waves-light green">Salvar<i class="material-icons left">save</i></button>
+                                    <button class="btn btn-large waves-effect waves-light red" ng-click="updatePerson()">Cancelar<i class="material-icons left">cancel</i></button>
                                 </div>
                             </div>
                         </div>
