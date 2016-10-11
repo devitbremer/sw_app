@@ -51,6 +51,18 @@ swApp.config(function ($routeProvider) {
         })
 });
 
+swApp.factory('httpq', function($http, $q) {
+    return {
+        get: function() {
+            var deferred = $q.defer();
+            $http.get.apply(null, arguments)
+                .success(deferred.resolve)
+                .error(deferred.resolve);
+            return deferred.promise;
+        }
+    }
+});
+
 
 //Adicionar serviços no array e função.
 swApp.controller('registerController', ['$scope', '$filter', '$http', '$location', function ($scope, $filter, $http, $location) {
@@ -169,63 +181,70 @@ swApp.controller('newProposalController', ['$scope', function ($scope) {
     $scope.userLoged = false;
 
 }]);
-swApp.controller('profileController', ['$scope','$http', function ($scope,$http) {
+swApp.controller('profileController', ['$scope','httpq', function ($scope,httpq) {
 
-    //Definindo o usuário
-    $scope.userLoged = true;
-    $scope.personId='3a09593e-3e2e-4c17-a2de-2f308776dbd7';
-    $scope.cep = '';
+        //Definindo o usuário
+        $scope.userLoged = true;
 
-    //Aqui teremos que trocar para pegar a pessoa do singleton
-    //BUSCANDO PESSOA
-    $scope.getPerson = function () {
-        $http.get('http://localhost:8080/swapitws/rs/person/getbyID/'+$scope.personId)
+    httpq.get('http://localhost:8080/swapitws/rs/person/getbyID/3a09593e-3e2e-4c17-a2de-2f308776dbd7')
+        .then(function (data) {
+            $scope.person=data;
+
+        })
+        .catch(function (response) {
+            console.error('Xabu na consulta',response.status, response.data);
+        })
+    
+    console.log($scope.person);
 
 
-            .success(function (result) {
+    //MONTANDO A PESSOA
+    $scope.personComplete = {
+        "personId": "",
+        "personName":"",
+        "email": "",
+        "phone": "",
+        "password": "",
+        "sex": "",
+        "blocked": "",
+        "level": "admin",
+        "favorite": [
 
-                console.log(result);
-                console.log($scope.personId);
-
-                //SALVANDO PESSOA NO $SCOPE
-                $scope.person=result;
-            })
-            .error(function (data, status) {
-                console.log(status);
-                console.log(data);
-                var $toastContent = $('<span><i class="material-icons red-text">error_outline</i>  Algo deu errado!' +
-                    '<p class="center">Tente novamente daqui a pouco...</p>' +
-                    '</span>');
-                Materialize.toast($toastContent, 10000);
-
-            });
+        ],
+        "address": {
+            "addressId": "cc8248f5-f000-4dfd-bb01-187790937404",
+            "street": {
+                "streetid": "00000055-9B33-4D28-901E-3B309F6C03F7",
+                "streettype": {
+                    "streettypeid": "EB3136E5-F68F-4A7A-BA14-B75BDA00AD54",
+                    "name": "Rua"
+                },
+                "name": "Alcides Ribeiro da Silva",
+                "complement": "NULL",
+                "district": {
+                    "districtid": "3C785FF3-33E1-43B8-A78D-4F3B20CF2AF6",
+                    "name": "Gramame",
+                    "city": {
+                        "cityid": "81BD88D6-708D-4975-8502-23FD00771479",
+                        "name": "JoÃ£o Pessoa",
+                        "zipcode": "NULL",
+                        "state": {
+                            "stateid": "30A38B3B-CCAF-4017-AB51-B5713E28D405",
+                            "acronym": "PB",
+                            "name": "ParaÃ­ba",
+                            "country": {
+                                "countryId": "1CF60BF8-E241-4942-B9AF-27B76A2123A9",
+                                "acronym": "BR",
+                                "name": "Brasil"
+                            }
+                        }
+                    }
+                },
+                "zipcode": "58067073"
+            },
+            "number": "555"
+        }
     }
 
-    //buscando CEP
-
-    $scope.getAddress =  function () {
-
-        $http.get('http://localhost:8080/swapitws/rs/street/getbycep/'+$scope.cep)
-
-            .success(function (resultAddress) {
-
-                console.log(resultAddress)
-
-                //SALVANDO CEP NO $SCOPE
-                $scope.address=resultAddress
-            })
-
-            .error(function (data,status) {
-
-                console.log(data);
-                console.log(status);
-
-                var $toastContent = $('<span><i class="material-icons red-text">error_outline</i>  Algo deu errado!' +
-                    '<p class="center">Erro ao buscar CEP...</p>' +
-                    '</span>');
-                Materialize.toast($toastContent, 10000);
-            })
-
-    }
 
 }]);
