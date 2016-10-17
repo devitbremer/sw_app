@@ -4,7 +4,7 @@
 <!-- INICIO MAIN -->
 <div id="main">
 
-    <div class="wrapper green">
+    <div class="wrapper">
 
         <!-- INSERE SIDE MENU-->
         <ng-include src="'pages/sideMenu.html'"></ng-include>
@@ -15,112 +15,187 @@
 
             <!--start container-->
 
-            <div class="container" style="padding-top: 4%">
+            <div class="container" style="padding-top: 2%">
                 <div class="row">
                     <form>
-                        <div id="proposalData" class="col l6 m6 s12 yellow">
-                            <div class="input-field col s12">
-                                <input id="proposalTitle" type="text" required>
-                                <label for="proposalTitle">Título da Proposta</label>
-                            </div>
-                            <div class="input-field col s12">
-                                <textarea id="proposalDescription" class="materialize-textarea" required></textarea>
-                                <label for="proposalDescription">Descrição da Proposta</label>
-                            </div>
-                            <div class="row">
-                                <div class="input-field col s12 m6 l6">
-                                    <select class="icons">
-                                        <option value="" disabled selected>Escolha uma categoria</option>
-                                        <option value="" data-icon="images/avatar.jpg" class="circle">example 1</option>
-                                        <option value="" data-icon="images/office.jpg" class="circle">example 2</option>
-                                        <option value="" data-icon="images/sample1.jpg" class="circle">example 1</option>
-                                    </select>
-                                </div>
+                        <div id="proposalData" class="col l6 m6 s12">
+                            <div class="card">
+                                <div class="card-content">
+                                    <i class="material-icons prefix">note_add</i>
+                                    <span class="card-title">Nova Proposta</span>
+                                    <div class="divider"></div>
+                                    <br>
+                                    <div class="row">
+                                        <div class="input-field col s12">
+                                            <i class="material-icons prefix">title</i>
+                                            <input id="proposalTitle" type="text">
+                                            <label for="proposalTitle">Título da Proposta</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col s12">
+                                            <i class="material-icons prefix">short_text</i>
+                                            <textarea id="proposalDescription" class="materialize-textarea"></textarea>
+                                            <label for="proposalDescription">Descrição da Proposta</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col s12 m8 l8">
+                                            <i class="material-icons prefix">list</i>
+                                            <select class="icons">
+                                                <option value="" disabled selected>Escolha uma categoria</option>
+                                                <option value="" data-icon="images/avatar.jpg" class="circle">
+                                                    example 1
+                                                </option>
+                                                <option value="" data-icon="images/office.jpg" class="circle">
+                                                    example 2
+                                                </option>
+                                                <option value="" data-icon="images/sample1.jpg" class="circle">
+                                                    example 1
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <br>
+                                        <span class="card-title">Endereço</span>
+                                        <br>
+                                        <div class="input-field col s8 m6 l6">
+                                            <i class="material-icons prefix">add_location</i>
+                                            <input id="cep" type="text">
+                                            <label for="cep">CEP</label>
+                                        </div>
+                                        <div class="input-field col s4 m4 l4">
+                                            <button class="btn waves-effect waves-light"><i class="material-icons left">search</i>
+                                                BUSCAR
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col s12 m6 l6">
+                                            <i class="material-icons prefix">home</i>
+                                            <input disabled id="city" type="text">
+                                            <label for="city" class="active">Cidade</label>
+                                        </div>
+                                        <div class="input-field col s12 m6 l6">
+                                            <input disabled id="district" type="text" class="disabled">
+                                            <label for="district" class="active">Bairro</label>
+                                        </div>
+                                    </div>
+                                    <!--Seleciona o tipo de operação-->
+                                    <div class="row">
+                                        <br>
+                                        <span class="card-title">Operação</span>
+                                        <br>
+                                        <div class="input-field col s6 m4 l4">
+                                            <input type="checkbox" id="sell">
+                                            <label for="sell">Venda</label>
+                                        </div>
+                                        <div class="input-field col s6 m6 l6">
+                                            <input id="sellPrice" type="text">
+                                            <label for="sellPrice">Preço</label>
+                                        </div>
+                                    </div>
 
-                            </div>
-                            <div class="row">
-                                <div class="input-field col s12 m6 l6">
-                                    <input id="cep" type="text">
-                                    <label for="cep">CEP</label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="input-field col s12 m6 l6">
-                                    <input disabled id="city" type="text">
-                                    <label for="city" class="active">Cidade</label>
-                                </div>
-                                <div class="input-field col s12 m6 l6">
-                                    <input disabled id="district" type="text" class="disabled">
-                                    <label for="district" class="active">Bairro</label>
-                                </div>
-                            </div>
-                            <!--Seleciona o tipo de operação-->
-                            <div class="row">
-                                <div class="input-field col s6 m4 l4">
-                                    <input type="checkbox" id="sell">
-                                    <label for="sell">Venda</label>
-                                </div>
-                                <div class="input-field col s6 m6 l6">
-                                    <input id="sellPrice" type="text">
-                                    <label for="sellPrice">Preço</label>
+                                    <div class="row">
+                                        <div class="input-field col s6 m4 l4">
+                                            <input type="checkbox" id="swap">
+                                            <label for="swap">Troca</label>
+                                        </div>
+                                        <div class="input-field col s12 m6 l6">
+                                            <select class="icons">
+                                                <option value="" disabled selected>Escolha uma categoria</option>
+                                                <option value="" data-icon="images/avatar.jpg" class="circle">
+                                                    example 1
+                                                </option>
+                                                <option value="" data-icon="images/office.jpg" class="circle">
+                                                    example 2
+                                                </option>
+                                                <option value="" data-icon="images/sample1.jpg" class="circle">
+                                                    example 1
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="input-field col s6 m4 l4">
+                                            <input type="checkbox" id="sell_swap">
+                                            <label for="sell_swap">Venda + Troca</label>
+                                        </div>
+                                        <div class="input-field col s6 m5 l3">
+                                            <input id="sellPrice2" type="text">
+                                            <label for="sellPrice2">Preço</label>
+                                        </div>
+                                        <div class="input-field col s12 m5 l5">
+                                            <select class="icons">
+                                                <option value="" disabled selected>Escolha uma categoria</option>
+                                                <option value="" data-icon="images/avatar.jpg" class="circle">
+                                                    example 1
+                                                </option>
+                                                <option value="" data-icon="images/office.jpg" class="circle">
+                                                    example 2
+                                                </option>
+                                                <option value="" data-icon="images/sample1.jpg" class="circle">
+                                                    example 1
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <!--Fim o tipo de operação-->
                                 </div>
                             </div>
 
-                            <div class="row">
-                                <div class="input-field col s6 m4 l4">
-                                    <input type="checkbox" id="swap">
-                                    <label for="swap">Troca</label>
-                                </div>
-                                <div class="input-field col s12 m6 l6">
-                                    <select class="icons">
-                                        <option value="" disabled selected>Escolha uma categoria</option>
-                                        <option value="" data-icon="images/avatar.jpg" class="circle">example 1</option>
-                                        <option value="" data-icon="images/office.jpg" class="circle">example 2</option>
-                                        <option value="" data-icon="images/sample1.jpg" class="circle">example 1</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="input-field col s6 m4 l4">
-                                    <input type="checkbox" id="sell_swap">
-                                    <label for="sell_swap">Venda + Troca</label>
-                                </div>
-                                <div class="input-field col s6 m5 l3">
-                                    <input id="sellPrice" type="text">
-                                    <label for="sellPrice">Preço</label>
-                                </div>
-                                <div class="input-field col s12 m5 l5">
-                                    <select class="icons">
-                                        <option value="" disabled selected>Escolha uma categoria</option>
-                                        <option value="" data-icon="images/avatar.jpg" class="circle">example 1</option>
-                                        <option value="" data-icon="images/office.jpg" class="circle">example 2</option>
-                                        <option value="" data-icon="images/sample1.jpg" class="circle">example 1</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <!--Fim o tipo de operação-->
                         </div>
 
-                        <!--Uploado de imagens-->
-                        <div id="imagePiker" class="col l6 m6 s12 blue" style="height:100px;">
-                            <div class="file-field input-field">
-                                <div class="btn">
-                                    <span><i class="material-icons">search</i></span>
-                                    <input type="file" multiple>
-                                </div>
-                                <div class="file-path-wrapper">
-                                    <input class="file-path validate" type="text" placeholder="Selecione atá 5 fotos">
+                        <!--Upload de imagens-->
+
+                        <div id="imagePiker" class="col l6 m6 s12">
+                            <div class="card">
+                                <div class="card-content">
+                                    <i class="material-icons">add</i>
+                                    <span class="card-title">Adicionar Fotos</span>
+                                    <div class="divider"></div>
+                                    <br>
+                                    <button class="btn waves-effect waves-light" ngf-select="uploadFiles($files)" multiple accept="image/*">
+                                        <i class="material-icons left">add_circle</i> Adicionar Fotos
+                                    </button>
+                                    <br>
+                                    <br>Files:
+                                    <ul>
+                                        <li ng-repeat="f in files">
+                                            {{f.name}}
+                                        </li>
+                                    </ul>
+
+                                    <div class="progress" ng-show="progress >= 0">
+                                        <div class="determinate" style="width:{{progress}}%" ng-bind="progress + '%'"></div>
+                                    </div>
+                                    {{errorMsg}}
+
+                                    <!--<div class="file-field input-field">
+                                        <div class="btn">
+                                            <span><i class="material-icons">search</i></span>
+                                            <input type="file" multiple>
+                                        </div>
+                                        <div class="file-path-wrapper">
+                                            <input class="file-path validate" type="text"
+                                                   placeholder="Selecione até 5 fotos">
+                                        </div>
+                                    </div>-->
                                 </div>
                             </div>
+
                         </div>
 
                         <!--Botões de Ação-->
                         <div class="row">
                             <div class="col s12" style="margin-top: 50px;">
                                 <div class="col l4 offset-l4">
-                                    <button class="btn btn-large waves-effect waves-light green" type="submit" name="action">Publicar<i class="material-icons left">save</i></button>
-                                    <button class="btn btn-large waves-effect waves-light red" type="reset" name="action">Cancelar<i class="material-icons left">cancel</i></button>
+                                    <button class="btn btn-large waves-effect waves-light green" type="submit"
+                                            name="action">Publicar<i class="material-icons left">save</i></button>
+                                    <button class="btn btn-large waves-effect waves-light red" type="reset"
+                                            name="action">Cancelar<i class="material-icons left">cancel</i></button>
                                 </div>
                             </div>
                         </div>
@@ -137,8 +212,13 @@
 
 </div>
 <!-- FIM MAIN -->
-
+<script>
+    $(document).ready(function () {
+        $('select').material_select();
+    });
+</script>
 
 <!-- //////////////////////////////////////////////////////////////////////////// -->
 
-<!-- INSERE FOOTER --><ng-include src="'pages/footer.html'"></ng-include>
+<!-- INSERE FOOTER -->
+<ng-include src="'pages/footer.html'"></ng-include>

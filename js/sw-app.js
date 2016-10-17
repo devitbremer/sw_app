@@ -1,7 +1,7 @@
 /**
  * Created by devit on 03/10/2016.
  */
-var swApp = angular.module('swApp', ['ngRoute']);
+var swApp = angular.module('swApp', ['ngRoute','ngAnimate', 'ngTouch','ngFileUpload']);
 
 
 swApp.config(function ($routeProvider) {
@@ -174,11 +174,70 @@ swApp.controller('detailsController', ['$scope', function ($scope) {
 
     $scope.userLoged = false;
 
+    //GALERIA DE FOTOS
+    // Set of Photos
+    $scope.photos = [
+        {src: 'http://farm9.staticflickr.com/8042/7918423710_e6dd168d7c_b.jpg', desc: 'Image 01'},
+        {src: 'http://farm9.staticflickr.com/8449/7918424278_4835c85e7a_b.jpg', desc: 'Image 02'},
+        {src: 'http://farm9.staticflickr.com/8457/7918424412_bb641455c7_b.jpg', desc: 'Image 03'},
+        {src: 'http://farm9.staticflickr.com/8179/7918424842_c79f7e345c_b.jpg', desc: 'Image 04'},
+        {src: 'http://farm9.staticflickr.com/8315/7918425138_b739f0df53_b.jpg', desc: 'Image 05'},
+        {src: 'http://farm9.staticflickr.com/8461/7918425364_fe6753aa75_b.jpg', desc: 'Image 06'}
+    ];
+
+    // initial image index
+    $scope._Index = 0;
+
+    // if a current image is the same as requested image
+    $scope.isActive = function (index) {
+        return $scope._Index === index;
+    };
+
+    // show prev image
+    $scope.showPrev = function () {
+        $scope._Index = ($scope._Index > 0) ? --$scope._Index : $scope.photos.length - 1;
+    };
+
+    // show next image
+    $scope.showNext = function () {
+        $scope._Index = ($scope._Index < $scope.photos.length - 1) ? ++$scope._Index : 0;
+    };
+
+    // show a certain image
+    $scope.showPhoto = function (index) {
+        $scope._Index = index;
+    };
+
+
+
 }]);
 
-swApp.controller('newProposalController', ['$scope', function ($scope) {
+swApp.controller('newProposalController', ['$scope','Upload','$timeout', function ($scope, Upload, $timeout) {
 
     $scope.userLoged = false;
+
+    $scope.uploadFiles = function(files, errFiles) {
+        $scope.files = files;
+        $scope.errFiles = errFiles;
+        angular.forEach(files, function(file) {
+            file.upload = Upload.upload({
+                url: 'http://localhost/sw_app/images/proposal_images/',
+                data: {file: file}
+            });
+
+            file.upload.then(function (response) {
+                $timeout(function () {
+                    file.result = response.data;
+                });
+            }, function (response) {
+                if (response.status > 0)
+                    $scope.errorMsg = response.status + ': ' + response.data;
+            }, function (evt) {
+                file.progress = Math.min(100, parseInt(100.0 *
+                    evt.loaded / evt.total));
+            });
+        });
+    }
 
 }]);
 swApp.controller('profileController', ['$scope','httpq', function ($scope,httpq) {
@@ -241,6 +300,34 @@ swApp.controller('profileController', ['$scope','httpq', function ($scope,httpq)
                 $scope.person.addressReduce.countryName = data.district.city.state.country.name;
 
             })
+            .catch(function (response) {
+                console.error('Xabu na consulta',response.status, response.data);
+            })
+    }
+
+    $scope.updatePerson = function(){
+        $http.put('http://localhost:8080/swapitws/rs/person/update', $scope.person)
+
+            .success(function (result) {
+
+                console.log(result);
+                console.log($scope.person);
+
+                var $toastContent = $('<span>' +
+                    '<i class="material-icons green-text">check</i>Cadastro Atualizado!' +
+                    '</span>');
+                Materialize.toast($toastContent, 5000);
+
+            })
+            .error(function (data, status) {
+
+                console.log(data);
+                var $toastContent = $('<span><i class="material-icons red-text">error_outline</i>  Algo deu errado!' +
+                    '<p class="center">Tente novamente daqui a pouco...</p>' +
+                    '</span>');
+                Materialize.toast($toastContent, 5000);
+
+            });
     }
     
 
