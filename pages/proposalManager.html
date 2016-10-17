@@ -1,0 +1,61 @@
+<!--INSERE TOPO-->
+<ng-include src="'pages/topnavbar.html'"></ng-include>
+
+<!-- INICIO MAIN -->
+<div id="main">
+
+    <div class="wrapper">
+
+        <!-- INSERE SIDE MENU-->
+        <ng-include src="'pages/sideMenu.html'"></ng-include>
+
+        <!-- INICIA CONTEUDO -->
+        <section id="content" class="-">
+
+
+            <div class="row" style="margin-bottom: 15px; margin-top: 4%;">
+                <div class="col s12 m10 l9 white valign-wrapper center">
+                    <div class="col s3 m2 l2">
+                        <img src="images/avatar.jpg" class="responsive-img valign">
+                    </div>
+                    <div class="col s6 m4 l6 ">
+                        <h5 class="title truncate"> Título da Proposta</h5>
+                        <p class="black-text left-align truncate hide-on-small-only">Aqui vai a descrição do bagulho, exatamente do
+                            jeito que a criatura cadastrou. Temos que pensar num formato
+                            para (tamanho) esses dados. Ou não.
+                            Aqui vai a descrição do bagulho, exatamente do jeito que a criatura cadastrou. Temos
+                            que pensar num formato
+                            para esses dados. Ou não.
+                        </p>
+                    </div>
+                    <div class="col l2">
+                        <button class="btn waves-effect waves-light red valign">
+                            <i class="material-icons left">delete</i>
+                            Delete
+                        </button>
+                    </div>
+                    <div class="col l2">
+                        <button class="btn waves-effect waves-light orange valign">
+                            <i class="material-icons left">block</i>
+                            Block
+                        </button>
+                    </div>
+            </div>
+
+    </section>
+
+
+</div>
+
+</div>
+<!-- FIM MAIN -->
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('.tooltipped').tooltip({delay: 50});
+    });
+</script>
+<!-- //////////////////////////////////////////////////////////////////////////// -->
+
+<!-- INSERE FOOTER -->
+<ng-include src="'pages/footer.html'"></ng-include>

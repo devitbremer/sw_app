@@ -49,6 +49,10 @@ swApp.config(function ($routeProvider) {
             templateUrl: 'pages/start.html',
             controller: 'startController'
         })
+        .when('/propManager',{
+            templateUrl:'pages/proposalManager.html',
+            controller:'proposalManagerController'
+        })
 });
 
 swApp.factory('httpq', function($http, $q) {
@@ -240,13 +244,14 @@ swApp.controller('newProposalController', ['$scope','Upload','$timeout', functio
     }
 
 }]);
-swApp.controller('profileController', ['$scope','httpq', function ($scope,httpq) {
+
+swApp.controller('profileController', ['$scope','httpq','$http', function ($scope,httpq,$http) {
 
     //DEFININDO SE O USUÄRIO ESTÁ LOGADO
     $scope.userLoged = true;
     $scope.userID = '3a09593e-3e2e-4c17-a2de-2f308776dbd7';
     //MONTANDO A PESSOA COMPLETA
-    $scope.person = {
+    $scope.person = [{
         "personId": "",
         "personName":"",
         "email": "",
@@ -269,10 +274,10 @@ swApp.controller('profileController', ['$scope','httpq', function ($scope,httpq)
             "countryAcronym": "",
             "countryName": ""
         }
-     }
+     }]
 
     //OS DADOS ABAIXO SÃO CARREGADOS AO ACESSAR A PÁGINA
-    httpq.get('http://10.11.0.96:8080/swapitws/rs/person/getbyID/'+ $scope.userID)
+    httpq.get('http://localhost:8080/swapitws/rs/person/getbyID/'+ $scope.userID)
         .then(function (data) {
 
             //ATUALIZA MODEL
@@ -285,8 +290,10 @@ swApp.controller('profileController', ['$scope','httpq', function ($scope,httpq)
 
     //OS DADOS ABAIXO SÃO CARREGADOS AO BUSCAR CEP
     $scope.getAddress = function () {
-        httpq.get('http://10.11.0.96:8080/swapitws/rs/street/getbycep/'+$scope.person.addressReduce.zipcode)
+        httpq.get('http://localhost:8080/swapitws/rs/street/getbycep/'+$scope.person.addressReduce.zipcode)
             .then(function (data) {
+
+                console.log(data);
                 //ATUALIZA MODEL COM
                 $scope.person.addressReduce.streetid = data.streetid;
                 $scope.person.addressReduce.streetName = data.name;
@@ -329,6 +336,12 @@ swApp.controller('profileController', ['$scope','httpq', function ($scope,httpq)
 
             });
     }
-    
+
+
+}]);
+
+swApp.controller('proposalManagerController', ['$scope', function ($scope) {
+
+    $scope.userLoged = false;
 
 }]);
