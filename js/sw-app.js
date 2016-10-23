@@ -216,10 +216,11 @@ swApp.controller('detailsController', ['$scope', function ($scope) {
 
 }]);
 
-swApp.controller('newProposalController', ['$scope','Upload','$timeout', function ($scope, Upload, $timeout) {
+swApp.controller('newProposalController', ['$scope','Upload','$timeout','httpq','$http', function ($scope, Upload, $timeout,httpq,$http) {
 
-    $scope.userLoged = false;
+    $scope.userLoged = true;
 
+    //Carrega Arquivos
     $scope.uploadFiles = function(files, errFiles) {
         $scope.files = files;
         $scope.errFiles = errFiles;
@@ -242,6 +243,38 @@ swApp.controller('newProposalController', ['$scope','Upload','$timeout', functio
             });
         });
     }
+
+
+
+    //Criando Hierarquia de Categorias
+     $scope.response = [];
+
+    //Realiza Consulta
+    httpq.get('http://localhost:8080/swapitws/rs/category/getAll')
+        .then(function (data) {
+
+            //ATUALIZA MODEL
+            $scope.response = data;
+        })
+        .catch(function (response) {
+            console.error('Xabu na consulta',$scope.response.status, $scope.response.data);
+        })
+
+
+    //Cria Arvore
+    var map = {}, node, roots = [];
+    for (var i = 0; i < $scope.response.length; i += 1) {
+        node = $scope.response[i];
+        node.children = [];
+        map[node.categoryId] = i;
+        if (node.parentId !== null) {
+            $scope.response[map[node.parentId]].children.push(node);
+        } else {
+            roots.push(node);
+        }
+    }
+    console.log(roots);
+
 
 }]);
 
@@ -345,3 +378,4 @@ swApp.controller('proposalManagerController', ['$scope', function ($scope) {
     $scope.userLoged = false;
 
 }]);
+
