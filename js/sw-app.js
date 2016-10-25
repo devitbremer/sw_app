@@ -1,7 +1,7 @@
 /**
  * Created by devit on 03/10/2016.
  */
-var swApp = angular.module('swApp', ['ngRoute','ngAnimate', 'ngTouch','ngFileUpload']);
+var swApp = angular.module('swApp', ['ngRoute','ngAnimate', 'ngTouch','ngFileUpload','angularTreeview']);
 
 
 swApp.config(function ($routeProvider) {
@@ -218,13 +218,51 @@ swApp.controller('detailsController', ['$scope', function ($scope) {
 
 swApp.controller('newProposalController', ['$scope','Upload','$timeout','httpq','$http', function ($scope, Upload, $timeout,httpq,$http) {
 
+    $scope.userID = '3a09593e-3e2e-4c17-a2de-2f308776dbd7';
     $scope.userLoged = true;
 
-    //Carrega Arquivos
-    $scope.uploadFiles = function(files, errFiles) {
+    $scope.zipcode='';
+    $scope.city = '';
+    $scope.district='';
+
+    //CHECKBOXES
+    $scope.sell ='';
+    $scope.swap ='';
+    $scope.sw_sell='';
+
+    //CAMPOS DE VALOR
+
+    $scope.newProp={
+                     "title":"",
+                     "description":"",
+                     "addressReduce":{
+                     "streetid":""
+                     },
+                     "price": 0,
+                     "priceCatInterest":0,
+                     "totalPrice":0,
+
+                     "category":{
+                     "categoryId":""
+                     },
+
+                     "interest_category":"",
+
+                     "personReduce":{
+                     "personId":$scope.userID
+                     },
+
+                     "image":[],
+                     "publish_date":"",
+                     "removel_date":""
+                    }
+
+
+
+    $scope.uploadFiles = function (files, errFiles) {
         $scope.files = files;
         $scope.errFiles = errFiles;
-        angular.forEach(files, function(file) {
+        angular.forEach(files, function (file) {
             file.upload = Upload.upload({
                 url: 'http://localhost/sw_app/images/proposal_images/',
                 data: {file: file}
@@ -245,38 +283,142 @@ swApp.controller('newProposalController', ['$scope','Upload','$timeout','httpq',
     }
 
 
-
     //Criando Hierarquia de Categorias
-     $scope.response = [];
 
-    //Realiza Consulta
-    httpq.get('http://localhost:8080/swapitws/rs/category/getAll')
-        .then(function (data) {
-
-            //ATUALIZA MODEL
-            $scope.response = data;
-        })
-        .catch(function (response) {
-            console.error('Xabu na consulta',$scope.response.status, $scope.response.data);
-        })
+    var whereElementsIdIsInThisField = 'categoryId';
+    var andTheReferenceToAParentIsInThisField =  'parentId';
+    var andSaveTheChildrenInThisField  = 'children';
 
 
-    //Cria Arvore
-    var map = {}, node, roots = [];
-    for (var i = 0; i < $scope.response.length; i += 1) {
-        node = $scope.response[i];
-        node.children = [];
-        map[node.categoryId] = i;
-        if (node.parentId !== null) {
-            $scope.response[map[node.parentId]].children.push(node);
-        } else {
-            roots.push(node);
+//Função que monta a arvore
+    function buildTree(flatList, idFieldName, parentKeyFieldName, fieldNameForChildren) {
+        var rootElements = [];
+        var lookup = {};
+
+        // Take the flat list and transform it into a dictionary of key/values.
+        // This will allow us to quickly get the reference of an object like a lookup table.
+        flatList.forEach(function (flatItem) {
+            var itemId = flatItem[idFieldName];
+            lookup[itemId] = flatItem;
+            flatItem[fieldNameForChildren] = [];
+        });
+
+        flatList.forEach(function (flatItem) {
+
+            var parentKey = flatItem[parentKeyFieldName];
+
+            if (parentKey != null) {
+
+                // Item is linked to a parent, retrieve the parent.
+                var parentObject = lookup[flatItem[parentKeyFieldName]];
+
+                if(parentObject){
+                    // Parent found, add the item as a child.
+                    parentObject[fieldNameForChildren].push(flatItem);
+                }else{
+                    // No parent found, add the item as a root element.
+                    rootElements.push(flatItem);
+                }
+            } else {
+                // No parent, add the item as a root element.
+                rootElements.push(flatItem);
+            }
+
+        });
+
+        return rootElements;
+    };
+
+
+        //CARREGANDO CATEGORIAS
+        httpq.get('http://localhost:8080/swapitws/rs/category/getAll')
+            .then(function (data) {
+
+                $scope.flatData = data;
+                $scope.flatData3 = data;
+
+                //Monta a arvore
+                $scope.treedata = buildTree($scope.flatData, whereElementsIdIsInThisField, andTheReferenceToAParentIsInThisField, andSaveTheChildrenInThisField);
+                $scope.treedata2 = buildTree(angular.copy($scope.flatData), whereElementsIdIsInThisField, andTheReferenceToAParentIsInThisField, andSaveTheChildrenInThisField);
+                $scope.treedata3 = buildTree(angular.copy($scope.flatData3), whereElementsIdIsInThisField, andTheReferenceToAParentIsInThisField, andSaveTheChildrenInThisField);
+            })
+
+            .catch(function (response) {
+                console.error('Xabu na consulta', response.status, response.data);
+            })
+
+
+    //Watcher para setar as categorias da roposta
+    $scope.$watch( 'categorias.currentNode', function( newObj, oldObj ) {
+        if( $scope.categorias && angular.isObject($scope.categorias.currentNode) ) {
+            $scope.newProp.category.categoryId = $scope.categorias.currentNode.categoryId;
         }
+    }, false);
+
+    $scope.$watch( 'vt_category.currentNode', function( newObj, oldObj ) {
+        if( $scope.vt_category && angular.isObject($scope.vt_category.currentNode) ) {
+            $scope.newProp.interest_category = $scope.vt_category.currentNode.categoryId;
+        }
+    }, false);
+
+    $scope.$watch( 't_category.currentNode', function( newObj, oldObj ) {
+        if( $scope.t_category && angular.isObject($scope.t_category.currentNode) ) {
+            $scope.newProp.interest_category = $scope.t_category.currentNode.categoryId;
+        }
+    }, false);
+
+
+
+    //CAREGANDO O ENDEREÇO DA PROPOSTA
+    $scope.getAddress = function () {
+        httpq.get('http://localhost:8080/swapitws/rs/street/getbycep/'+$scope.zipcode)
+            .then(function (data) {
+                $scope.newProp.addressReduce.streetid = data.streetid;
+                $scope.city = data.district.city.name;
+                $scope.district = data.district.name;
+
+            })
+            .catch(function (response) {
+                console.error('Xabu na consulta',response.status, response.data);
+            })
     }
-    console.log(roots);
+
+
+
+    $scope.saveProp = function(){
+
+        //GERANDO A DATA
+        $scope.newProp.publish_date = new Date();
+
+        $http.post('http://localhost:8080/swapitws/rs/proposition/save', $scope.newProp)
+
+            .success(function (result) {
+
+                console.log(result);
+
+                var $toastContent = $('<span>' +
+                    '<i class="material-icons green-text">check</i>Proposta Salva!' +
+                    '</span>');
+                Materialize.toast($toastContent, 5000);
+
+            })
+            .error(function (data, status) {
+
+                console.log(data,status);
+                console.log($scope.newProp);
+                var $toastContent = $('<span><i class="material-icons red-text">error_outline</i>  Algo deu errado!' +
+                    '<p class="center">Tente novamente daqui a pouco...</p>' +
+                    '</span>');
+                Materialize.toast($toastContent, 5000);
+
+            });
+    }
 
 
 }]);
+
+
+
 
 swApp.controller('profileController', ['$scope','httpq','$http', function ($scope,httpq,$http) {
 
@@ -320,13 +462,11 @@ swApp.controller('profileController', ['$scope','httpq','$http', function ($scop
             console.error('Xabu na consulta',response.status, response.data);
         })
 
-
     //OS DADOS ABAIXO SÃO CARREGADOS AO BUSCAR CEP
     $scope.getAddress = function () {
         httpq.get('http://localhost:8080/swapitws/rs/street/getbycep/'+$scope.person.addressReduce.zipcode)
             .then(function (data) {
 
-                console.log(data);
                 //ATUALIZA MODEL COM
                 $scope.person.addressReduce.streetid = data.streetid;
                 $scope.person.addressReduce.streetName = data.name;
