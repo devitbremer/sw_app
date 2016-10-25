@@ -18,7 +18,7 @@
             <div class="container" style="padding-top: 2%">
                 <div class="row">
                     <form>
-                        <div id="proposalData" class="col l6 m6 s12">
+                        <div id="proposalData" class="col l8 m8 s12">
                             <div class="card">
                                 <div class="card-content">
                                     <i class="material-icons prefix">note_add</i>
@@ -28,32 +28,33 @@
                                     <div class="row">
                                         <div class="input-field col s12">
                                             <i class="material-icons prefix">title</i>
-                                            <input id="proposalTitle" type="text">
+                                            <input id="proposalTitle" type="text" ng-model="newProp.title">
                                             <label for="proposalTitle">Título da Proposta</label>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="input-field col s12">
                                             <i class="material-icons prefix">short_text</i>
-                                            <textarea id="proposalDescription" class="materialize-textarea"></textarea>
+                                            <textarea id="proposalDescription" class="materialize-textarea" ng-model="newProp.description"></textarea>
                                             <label for="proposalDescription">Descrição da Proposta</label>
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="input-field col s12 m8 l8">
-                                            <i class="material-icons prefix">list</i>
-                                            <select class="icons">
-                                                <option value="" disabled selected>Escolha uma categoria</option>
-                                                <option value="" data-icon="images/avatar.jpg" class="circle">
-                                                    example 1
-                                                </option>
-                                                <option value="" data-icon="images/office.jpg" class="circle">
-                                                    example 2
-                                                </option>
-                                                <option value="" data-icon="images/sample1.jpg" class="circle">
-                                                    example 1
-                                                </option>
-                                            </select>
+                                        <div class="input-field col s12 m8 l8 offset-l2">
+                                            <h6>Escolha uma categoria</h6>
+                                            <div class="card grey lighten-1">
+                                                <div class="card-content">
+                                                    <div
+                                                            data-angular-treeview="true"
+                                                            data-tree-id="categorias"
+                                                            data-tree-model="treedata"
+                                                            data-node-id="categoryId"
+                                                            data-node-label="categoryName"
+                                                            data-node-children="children"
+                                                            data-node-collapsed="false">
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -62,86 +63,100 @@
                                         <br>
                                         <div class="input-field col s8 m6 l6">
                                             <i class="material-icons prefix">add_location</i>
-                                            <input id="cep" type="text">
+                                            <input id="cep" type="text" ng-model="zipcode">
                                             <label for="cep">CEP</label>
                                         </div>
                                         <div class="input-field col s4 m4 l4">
-                                            <button class="btn waves-effect waves-light"><i class="material-icons left">search</i>
+                                            <button class="btn waves-effect waves-light orange darken-1" ng-click="getAddress()"><i class="material-icons left">search</i>
                                                 BUSCAR
                                             </button>
                                         </div>
                                     </div>
-                                    <div class="row">
+                                    <div class="row ">
                                         <div class="input-field col s12 m6 l6">
                                             <i class="material-icons prefix">home</i>
-                                            <input disabled id="city" type="text">
+                                            <input disabled id="city" type="text" ng-model="city">
                                             <label for="city" class="active">Cidade</label>
                                         </div>
                                         <div class="input-field col s12 m6 l6">
-                                            <input disabled id="district" type="text" class="disabled">
+                                            <input disabled id="district" type="text" ng-model="district">
                                             <label for="district" class="active">Bairro</label>
                                         </div>
                                     </div>
                                     <!--Seleciona o tipo de operação-->
+                                    <br>
+                                    <span class="card-title">Operação</span>
+                                    <br>
                                     <div class="row">
-                                        <br>
-                                        <span class="card-title">Operação</span>
-                                        <br>
-                                        <div class="input-field col s6 m4 l4">
-                                            <input type="checkbox" id="sell">
+                                        <div class="input-field col s6 m2 l4">
+                                            <input type="checkbox" id="sell" ng-model="sell" ng-disabled="swap==true || sw_sell==true">
                                             <label for="sell">Venda</label>
                                         </div>
-                                        <div class="input-field col s6 m6 l6">
-                                            <input id="sellPrice" type="text">
+
+                                        <div class="input-field col s6 m2 l4">
+                                            <input type="checkbox" id="swap" ng-model="swap" ng-disabled="sell==true || sw_sell==true">
+                                            <label for="swap">Troca</label>
+                                        </div>
+
+                                        <div class="input-field col s6 m2 l4">
+                                            <input type="checkbox" id="sell_swap" ng-model="sw_sell" ng-disabled="sell==true || swap==true">
+                                            <label for="sell_swap">Venda + Troca</label>
+                                        </div>
+                                    </div>
+                                    <br>
+
+                                    <div class="row" ng-hide="sell==false" >
+                                        <div class="input-field col s6 m6 l6 offset-l3">
+                                            <input id="sellPrice" type="text" ng-model="newProp.price" ng-disabled="sell!==true">
                                             <label for="sellPrice">Preço</label>
                                         </div>
                                     </div>
 
-                                    <div class="row">
-                                        <div class="input-field col s6 m4 l4">
-                                            <input type="checkbox" id="swap">
-                                            <label for="swap">Troca</label>
-                                        </div>
-                                        <div class="input-field col s12 m6 l6">
-                                            <select class="icons">
-                                                <option value="" disabled selected>Escolha uma categoria</option>
-                                                <option value="" data-icon="images/avatar.jpg" class="circle">
-                                                    example 1
-                                                </option>
-                                                <option value="" data-icon="images/office.jpg" class="circle">
-                                                    example 2
-                                                </option>
-                                                <option value="" data-icon="images/sample1.jpg" class="circle">
-                                                    example 1
-                                                </option>
-                                            </select>
+                                    <div class="row card grey lighten-3" ng-hide="swap==false">
+                                        <div class="input-field col s12 m6 l6 offset-l3" ng-hide="sell==true || sw_sell==true">
+                                            <div class="card grey lighten-1">
+                                                <div class="card-content">
+                                                    <div
+                                                            data-angular-treeview="true"
+                                                            data-tree-id="t_category"
+                                                            data-tree-model="treedata2"
+                                                            data-node-id="categoryId"
+                                                            data-node-label="categoryName"
+                                                            data-node-children="children"
+                                                    >
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
 
-                                    <div class="row">
-                                        <div class="input-field col s6 m4 l4">
-                                            <input type="checkbox" id="sell_swap">
-                                            <label for="sell_swap">Venda + Troca</label>
+                                    <div class="row card grey lighten-3" ng-hide="sw_sell == false">
+
+                                        <div class="input-field col s6 m3 l3">
+                                            <input id="sellPrice2" type="text" ng-model="newProp.price" ng-disabled="sw_sell!==true">
+                                            <label for="sellPrice2">Preço do seu produto</label>
                                         </div>
-                                        <div class="input-field col s6 m5 l3">
-                                            <input id="sellPrice2" type="text">
-                                            <label for="sellPrice2">Preço</label>
+                                        <div class="input-field col s12 m4 l6">
+                                            <div class="card grey lighten-1">
+                                                <div class="card-content">
+                                                    <div ng-hide="sell==true || swap==true"
+                                                            data-angular-treeview="true"
+                                                            data-tree-id="t_category"
+                                                            data-tree-model="treedata3"
+                                                            data-node-id="categoryId"
+                                                            data-node-label="categoryName"
+                                                            data-node-children="children"
+                                                    >
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="input-field col s12 m5 l5">
-                                            <select class="icons">
-                                                <option value="" disabled selected>Escolha uma categoria</option>
-                                                <option value="" data-icon="images/avatar.jpg" class="circle">
-                                                    example 1
-                                                </option>
-                                                <option value="" data-icon="images/office.jpg" class="circle">
-                                                    example 2
-                                                </option>
-                                                <option value="" data-icon="images/sample1.jpg" class="circle">
-                                                    example 1
-                                                </option>
-                                            </select>
+                                        <div class="input-field col s12 m3 l3">
+                                            <input id="intPrice" type="text" ng-model="newProp.priceCatInterest" ng-disabled="sw_sell!==true">
+                                            <label for="intPrice">Preço do que você quer</label>
                                         </div>
                                     </div>
+
                                     <!--Fim o tipo de operação-->
                                 </div>
                             </div>
@@ -150,7 +165,7 @@
 
                         <!--Upload de imagens-->
 
-                        <div id="imagePiker" class="col l6 m6 s12">
+                        <div id="imagePiker" class="col l4 m4 s12">
                             <div class="card">
                                 <div class="card-content">
                                     <i class="material-icons">add</i>
@@ -192,8 +207,8 @@
                         <div class="row">
                             <div class="col s12" style="margin-top: 50px;">
                                 <div class="col l4 offset-l4">
-                                    <button class="btn btn-large waves-effect waves-light green" type="submit"
-                                            name="action">Publicar<i class="material-icons left">save</i></button>
+                                    <button class="btn btn-large waves-effect waves-light green"
+                                            name="action" ng-click="saveProp()">Publicar<i class="material-icons left">save</i></button>
                                     <button class="btn btn-large waves-effect waves-light red" type="reset"
                                             name="action">Cancelar<i class="material-icons left">cancel</i></button>
                                 </div>
