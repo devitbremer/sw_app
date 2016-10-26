@@ -17,7 +17,7 @@
 
             <div class="container" style="padding-top: 2%">
                 <div class="row">
-                    <form>
+                    <form name="newProposition" novalidate>
                         <div id="proposalData" class="col l8 m8 s12">
                             <div class="card">
                                 <div class="card-content">
@@ -28,14 +28,16 @@
                                     <div class="row">
                                         <div class="input-field col s12">
                                             <i class="material-icons prefix">title</i>
-                                            <input id="proposalTitle" type="text" ng-model="newProp.title">
+                                            <input id="proposalTitle" type="text" name="title" ng-model="newProp.title" ng-required="true">
+                                            <li ng-show="newProposition.title.$error.required && newProposition.title.$dirty" class="red-text medium-small">Sua proposta deve ter um título</li>
                                             <label for="proposalTitle">Título da Proposta</label>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="input-field col s12">
                                             <i class="material-icons prefix">short_text</i>
-                                            <textarea id="proposalDescription" class="materialize-textarea" ng-model="newProp.description"></textarea>
+                                            <textarea id="proposalDescription" name="description" class="materialize-textarea" ng-model="newProp.description" ng-required="true"></textarea>
+                                            <li ng-show="newProposition.description.$error.required && newProposition.description.$dirty" class="red-text medium-small">Sua proposta deve ter um título</li>
                                             <label for="proposalDescription">Descrição da Proposta</label>
                                         </div>
                                     </div>
@@ -63,7 +65,8 @@
                                         <br>
                                         <div class="input-field col s8 m6 l6">
                                             <i class="material-icons prefix">add_location</i>
-                                            <input id="cep" type="text" ng-model="zipcode">
+                                            <input id="cep" type="text" name="cep" ng-model="zipcode" mask="99999-999" clean = "true" ng-required="true" ng-minlength="9">
+                                            <li ng-show="newProposition.cep.$error.minlength" class="red-text medium-small">O CEP deve ter 8 numeros!</li>
                                             <label for="cep">CEP</label>
                                         </div>
                                         <div class="input-field col s4 m4 l4">
@@ -108,7 +111,7 @@
                                     <div class="row" ng-hide="sell==false" >
                                         <div class="input-field col s6 m6 l6 offset-l3">
                                             <input id="sellPrice" type="text" ng-model="newProp.price" ng-disabled="sell!==true">
-                                            <label for="sellPrice">Preço</label>
+                                            <label for="sellPrice" class="active">Preço</label>
                                         </div>
                                     </div>
 
@@ -172,32 +175,11 @@
                                     <span class="card-title">Adicionar Fotos</span>
                                     <div class="divider"></div>
                                     <br>
-                                    <button class="btn waves-effect waves-light" ngf-select="uploadFiles($files)" multiple accept="image/*">
-                                        <i class="material-icons left">add_circle</i> Adicionar Fotos
-                                    </button>
-                                    <br>
-                                    <br>Files:
-                                    <ul>
-                                        <li ng-repeat="f in files">
-                                            {{f.name}}
-                                        </li>
-                                    </ul>
 
-                                    <div class="progress" ng-show="progress >= 0">
-                                        <div class="determinate" style="width:{{progress}}%" ng-bind="progress + '%'"></div>
+                                    <div>
+                                        <input type="file" id="file1" name="file" multiple
+                                               ng-files="getTheFiles($files)"  ng-required="true"/>
                                     </div>
-                                    {{errorMsg}}
-
-                                    <!--<div class="file-field input-field">
-                                        <div class="btn">
-                                            <span><i class="material-icons">search</i></span>
-                                            <input type="file" multiple>
-                                        </div>
-                                        <div class="file-path-wrapper">
-                                            <input class="file-path validate" type="text"
-                                                   placeholder="Selecione até 5 fotos">
-                                        </div>
-                                    </div>-->
                                 </div>
                             </div>
 
@@ -207,7 +189,7 @@
                         <div class="row">
                             <div class="col s12" style="margin-top: 50px;">
                                 <div class="col l4 offset-l4">
-                                    <button class="btn btn-large waves-effect waves-light green"
+                                    <button class="btn btn-large waves-effect waves-light green" ng-disabled="newProposition.$invalid"
                                             name="action" ng-click="saveProp()">Publicar<i class="material-icons left">save</i></button>
                                     <button class="btn btn-large waves-effect waves-light red" type="reset"
                                             name="action">Cancelar<i class="material-icons left">cancel</i></button>
