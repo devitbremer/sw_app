@@ -1,7 +1,7 @@
 /**
  * Created by devit on 03/10/2016.
  */
-var swApp = angular.module('swApp', ['ngRoute','ngAnimate', 'ngTouch','ngFileUpload','angularTreeview']);
+var swApp = angular.module('swApp', ['ngRoute','ngAnimate', 'ngTouch','ngFileUpload','angularTreeview','ngMask']);
 
 
 swApp.config(function ($routeProvider) {
@@ -67,8 +67,20 @@ swApp.factory('httpq', function($http, $q) {
     }
 });
 
+swApp.directive('ngFiles', ['$parse', function ($parse) {
 
-//Adicionar serviços no array e função.
+    function fn_link(scope, element, attrs) {
+        var onChange = $parse(attrs.ngFiles);
+        element.on('change', function (event) {
+            onChange(scope, { $files: event.target.files });
+        });
+    };
+
+    return {
+        link: fn_link
+    }
+} ])
+
 swApp.controller('registerController', ['$scope', '$filter', '$http', '$location', function ($scope, $filter, $http, $location) {
 
 
@@ -258,28 +270,40 @@ swApp.controller('newProposalController', ['$scope','Upload','$timeout','httpq',
                     }
 
 
+    //Função de Upload de imagens
 
-    $scope.uploadFiles = function (files, errFiles) {
-        $scope.files = files;
-        $scope.errFiles = errFiles;
-        angular.forEach(files, function (file) {
-            file.upload = Upload.upload({
-                url: 'http://localhost/sw_app/images/proposal_images/',
-                data: {file: file}
-            });
-
-            file.upload.then(function (response) {
-                $timeout(function () {
-                    file.result = response.data;
-                });
-            }, function (response) {
-                if (response.status > 0)
-                    $scope.errorMsg = response.status + ': ' + response.data;
-            }, function (evt) {
-                file.progress = Math.min(100, parseInt(100.0 *
-                    evt.loaded / evt.total));
-            });
+    var formdata = new FormData();
+    $scope.getTheFiles = function ($files) {
+        angular.forEach($files, function (value, key) {
+            formdata.append(key, value);
         });
+    };
+
+    // NOW UPLOAD THE FILES.
+    $scope.uploadFiles = function () {
+
+        var request = {
+            method: 'POST',
+            url: 'http://localhost:8080/swapitws/rs/propositionIMG/upload',
+            data: formdata,
+            headers: {
+                'Content-Type': undefined
+            }
+        };
+
+        // SEND THE FILES.
+        $http(request)
+            .success(function (response) {
+                console.log('o que veio do ws',response);
+                $scope.newProp.image = response;
+                console.log('como foi para o objeto',$scope.newProp.image)
+                console.log('proposta ao setar as imagens',$scope.newProp);
+            })
+            .error(function (response) {
+                console.log('treta')
+                console.log(response.status)
+                console.log(response.status)
+            });
     }
 
 
@@ -387,9 +411,12 @@ swApp.controller('newProposalController', ['$scope','Upload','$timeout','httpq',
 
     $scope.saveProp = function(){
 
-        //GERANDO A DATA
+        //GERA DATA E ATUALIZA MODEL
         $scope.newProp.publish_date = new Date();
 
+        //ENVIA IMAGENS E ATUALIZA MODEL
+        $scope.uploadFiles();
+        console.log('proposta ao enviar',$scope.newProp);
         $http.post('http://localhost:8080/swapitws/rs/proposition/save', $scope.newProp)
 
             .success(function (result) {
