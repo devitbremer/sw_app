@@ -294,15 +294,22 @@ swApp.controller('newProposalController', ['$scope','Upload','$timeout','httpq',
         // SEND THE FILES.
         $http(request)
             .success(function (response) {
-                console.log('o que veio do ws',response);
+
                 $scope.newProp.image = response;
-                console.log('como foi para o objeto',$scope.newProp.image)
-                console.log('proposta ao setar as imagens',$scope.newProp);
+
+                var $toastContent = $('<span>' +
+                    '<i class="material-icons green-text">check</i>Ok! ;-)' +
+                    '</span>');
+                Materialize.toast($toastContent, 5000);
+
             })
             .error(function (response) {
-                console.log('treta')
-                console.log(response.status)
-                console.log(response.status)
+
+                var $toastContent = $('<span>' +
+                    '<i class="material-icons red-text">error</i>response' +'Algo deu errado :('+
+                    '</span>');
+                Materialize.toast($toastContent, 5000);
+
             });
     }
 
@@ -412,16 +419,18 @@ swApp.controller('newProposalController', ['$scope','Upload','$timeout','httpq',
     $scope.saveProp = function(){
 
         //GERA DATA E ATUALIZA MODEL
-        $scope.newProp.publish_date = new Date();
+        var d = new Date();
+        var datestring = d.getDate()  + "-" + (d.getMonth()+1) + "-" + d.getFullYear() + " " + d.getHours() + ":" + d.getMinutes();
+        $scope.newProp.publish_date = datestring;
 
         //ENVIA IMAGENS E ATUALIZA MODEL
-        $scope.uploadFiles();
+
         console.log('proposta ao enviar',$scope.newProp);
         $http.post('http://localhost:8080/swapitws/rs/proposition/save', $scope.newProp)
 
             .success(function (result) {
 
-                console.log(result);
+                console.log($scope.newProp);
 
                 var $toastContent = $('<span>' +
                     '<i class="material-icons green-text">check</i>Proposta Salva!' +
@@ -439,6 +448,33 @@ swApp.controller('newProposalController', ['$scope','Upload','$timeout','httpq',
                 Materialize.toast($toastContent, 5000);
 
             });
+    }
+
+    $scope.clearProp = function () {
+        $scope.newProp = $scope.newProp={
+            "title":"",
+            "description":"",
+            "addressReduce":{
+                "streetid":""
+            },
+            "price": 0,
+            "priceCatInterest":0,
+            "totalPrice":0,
+
+            "category":{
+                "categoryId":""
+            },
+
+            "interest_category":"",
+
+            "personReduce":{
+                "personId":""
+            },
+
+            "image":[],
+            "publish_date":"",
+            "removel_date":""
+        }
     }
 
 
@@ -540,9 +576,71 @@ swApp.controller('profileController', ['$scope','httpq','$http', function ($scop
 
 }]);
 
-swApp.controller('proposalManagerController', ['$scope', function ($scope) {
+swApp.controller('proposalManagerController', ['$scope','httpq','$http', function ($scope,httpq,$http) {
 
-    $scope.userLoged = false;
+    $scope.userLoged = true;
+    $scope.userID = '3a09593e-3e2e-4c17-a2de-2f308776dbd7';
+    $scope.userProps = [];
+    $scope.singleProp = {};
+
+
+
+
+    //BUSCA TODAS AS PROPOSTA DO USUÄRIO
+        httpq.get('http://localhost:8080/swapitws/rs/proposition/getPropPerson/'+$scope.userID)
+
+            .then(function (response) {
+                $scope.userProps = response;
+            })
+            .catch(function (response) {
+
+                console.log(response)
+            })
+
+
+
+    $scope.deleteProp = function (propositionId) {
+
+        //BUSCA A PROPOSTA
+        httpq.get('http://localhost:8080/swapitws/rs/proposition/getbyID/'+propositionId)
+
+            .then(function (response) {
+                $scope.singleProp = response;
+
+                var d = new Date();
+                var datestring = d.getDate()  + "-" + (d.getMonth()+1) + "-" + d.getFullYear() + " " + d.getHours() + ":" + d.getMinutes();
+
+                $scope.singleProp.removel_date = datestring;
+                console.log($scope.singleProp)
+                //Atualiza a proposta
+                $http.put('http://localhost:8080/swapitws/rs/proposition/update',$scope.singleProp)
+
+                    .success(function (response) {
+                        var $toastContent = $('<span>' +
+                            '<i class="material-icons green-text">check</i>Feito! :)' +
+                            '</span>');
+                        Materialize.toast($toastContent, 5000);
+                    })
+
+                    .error(function (response) {
+                        console.log(response)
+                        var $toastContent = $('<span>' +
+                            '<i class="material-icons red-text">check</i>Não consegui remover a proposta!<p>Tente mais tarde :`(</p>' +
+                            '</span>');
+                        Materialize.toast($toastContent, 5000);
+                    })
+            })
+            .catch(function (response) {
+                console.log(response);
+            })
+
+    }
+
+    $scope.editProp = function (propositionId) {
+
+        console.log(propositionId)
+
+    }
 
 }]);
 
