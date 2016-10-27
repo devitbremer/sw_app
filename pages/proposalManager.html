@@ -13,31 +13,25 @@
         <section id="content" class="-">
 
 
-            <div class="row" style="margin-bottom: 15px; margin-top: 4%;">
-                <div class="col s12 m10 l9 white valign-wrapper center">
+            <div class="row" ng-repeat=" prop in userProps">
+                <div class="col s12 m10 l9 white card valign-wrapper center">
                     <div class="col s3 m2 l2">
-                        <img src="images/avatar.jpg" class="responsive-img valign">
+                        <img src="{{'http://localhost:8080/swapitws/rs/propositionIMG/download/'+prop.image[0].imageid}}" class="responsive-img valign">
                     </div>
                     <div class="col s6 m4 l6 ">
-                        <h5 class="title truncate"> Título da Proposta</h5>
-                        <p class="black-text left-align truncate hide-on-small-only">Aqui vai a descrição do bagulho, exatamente do
-                            jeito que a criatura cadastrou. Temos que pensar num formato
-                            para (tamanho) esses dados. Ou não.
-                            Aqui vai a descrição do bagulho, exatamente do jeito que a criatura cadastrou. Temos
-                            que pensar num formato
-                            para esses dados. Ou não.
-                        </p>
+                        <h5 class="title truncate"> {{prop.title}}</h5>
+                        <p class="black-text left-align truncate hide-on-small-only">{{prop.description}}</p>
                     </div>
                     <div class="col l2">
-                        <button class="btn waves-effect waves-light red valign">
+                        <button class="btn waves-effect waves-light red valign" ng-click="deleteProp(prop.propositionId)">
                             <i class="material-icons left">delete</i>
-                            Delete
+                            Deletar
                         </button>
                     </div>
                     <div class="col l2">
-                        <button class="btn waves-effect waves-light orange valign">
-                            <i class="material-icons left">block</i>
-                            Block
+                        <button class="btn waves-effect waves-light green valign" ng-click="editProp(prop.propositionId)">
+                            <i class="material-icons left">edit</i>
+                            Editar
                         </button>
                     </div>
             </div>
