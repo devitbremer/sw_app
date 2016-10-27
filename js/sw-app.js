@@ -419,7 +419,9 @@ swApp.controller('newProposalController', ['$scope','Upload','$timeout','httpq',
     $scope.saveProp = function(){
 
         //GERA DATA E ATUALIZA MODEL
-        $scope.newProp.publish_date = new Date();
+        var d = new Date();
+        var datestring = d.getDate()  + "-" + (d.getMonth()+1) + "-" + d.getFullYear() + " " + d.getHours() + ":" + d.getMinutes();
+        $scope.newProp.publish_date = datestring;
 
         //ENVIA IMAGENS E ATUALIZA MODEL
 
@@ -604,8 +606,12 @@ swApp.controller('proposalManagerController', ['$scope','httpq','$http', functio
 
             .then(function (response) {
                 $scope.singleProp = response;
-                $scope.singleProp.removel_date = new Date();
-                console.log($scope.singleProp.removel_date)
+
+                var d = new Date();
+                var datestring = d.getDate()  + "-" + (d.getMonth()+1) + "-" + d.getFullYear() + " " + d.getHours() + ":" + d.getMinutes();
+
+                $scope.singleProp.removel_date = datestring;
+                console.log($scope.singleProp)
                 //Atualiza a proposta
                 $http.put('http://localhost:8080/swapitws/rs/proposition/update',$scope.singleProp)
 

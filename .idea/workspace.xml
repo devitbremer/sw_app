@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7a40145a-9ec8-4c8c-8067-e792f5e7db04" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/sw-app.js" afterPath="$PROJECT_DIR$/js/sw-app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/newProposal.html" afterPath="$PROJECT_DIR$/pages/newProposal.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/proposalManager.html" afterPath="$PROJECT_DIR$/pages/proposalManager.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/topnavbar.html" afterPath="$PROJECT_DIR$/pages/topnavbar.html" />
     </list>
     <ignored path="sw_app.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -28,40 +24,7 @@
     <favorites_list name="sw_app" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="sw-app.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/js/sw-app.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="349">
-              <caret line="602" column="73" selection-start-line="602" selection-start-column="52" selection-end-line="602" selection-end-column="73" />
-              <folding>
-                <element signature="e#0#42#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="proposalManager.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pages/proposalManager.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="25" column="119" selection-start-line="25" selection-start-column="106" selection-end-line="25" selection-end-column="119" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="newProposal.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pages/newProposal.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="510">
-              <caret line="49" column="46" selection-start-line="49" selection-start-column="46" selection-end-line="49" selection-end-column="46" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -339,18 +302,18 @@
       <workItem from="1476875215481" duration="17399000" />
       <workItem from="1477233167074" duration="37000" />
       <workItem from="1477233270469" duration="56232000" />
-      <workItem from="1477507257180" duration="21307000" />
+      <workItem from="1477507257180" duration="23751000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="329804000" />
+    <option name="totallyTimeSpent" value="332248000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1040" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15126051" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15126051" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32998884" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -669,14 +632,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pages/newProposal.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="49" column="46" selection-start-line="49" selection-start-column="46" selection-end-line="49" selection-end-column="46" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pages/proposalManager.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="425">
@@ -685,10 +640,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/pages/newProposal.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="49" column="46" selection-start-line="49" selection-start-column="46" selection-end-line="49" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/js/sw-app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="349">
-          <caret line="602" column="73" selection-start-line="602" selection-start-column="52" selection-end-line="602" selection-end-column="73" />
+        <state relative-caret-position="419">
+          <caret line="419" column="0" selection-start-line="419" selection-start-column="0" selection-end-line="419" selection-end-column="0" />
           <folding>
             <element signature="e#0#42#0" expanded="false" />
           </folding>
