@@ -1,7 +1,7 @@
 /**
  * Created by devit on 03/10/2016.
  */
-var swApp = angular.module('swApp', ['ngRoute','ngAnimate', 'ngTouch','ngFileUpload','angularTreeview','ngMask']);
+var swApp = angular.module('swApp', ['ngRoute','ngAnimate', 'ngTouch','ngFileUpload','angularTreeview','ngMask','angular-md5','ngCookies']);
 
 
 swApp.config(function ($routeProvider) {
@@ -81,7 +81,17 @@ swApp.directive('ngFiles', ['$parse', function ($parse) {
     }
 } ])
 
-swApp.controller('registerController', ['$scope', '$filter', '$http', '$location', function ($scope, $filter, $http, $location) {
+swApp.service('propositionDetails' ,function () {
+
+    this.propId ='';
+});
+
+swApp.service('loginService', ['$location','httpq',function ($location,httpq) {
+
+    this.rememberMe = '';
+}])
+
+swApp.controller('registerController', ['$scope', '$filter', '$http', '$location','md5', function ($scope, $filter, $http, $location,md5) {
 
 
     $scope.pswd1 = '';
@@ -90,7 +100,6 @@ swApp.controller('registerController', ['$scope', '$filter', '$http', '$location
 
 
     $scope.person = {
-        "personId": "",
         "personName": "",
         "email": "",
         "phone": "",
@@ -102,20 +111,18 @@ swApp.controller('registerController', ['$scope', '$filter', '$http', '$location
 
 
     $scope.newPerson = function () {
+
+        $scope.person.password = md5.createHash($scope.pswd1 || '');
+
         $http.post('http://localhost:8080/swapitws/rs/person/save', $scope.person)
-
-
             .success(function (result) {
-
-                console.log(result);
-                console.log($scope.person);
-
                 var $toastContent = $('<span>' +
                     '<i class="material-icons green-text">check</i>Conta criada!' +
                     '<p>Acesse seu e-mail para ativa-la!</p>' +
                     '</span>');
                 Materialize.toast($toastContent, 10000);
 
+                console.log($scope.person)
                 $location.path('/login');
 
             })
@@ -131,36 +138,45 @@ swApp.controller('registerController', ['$scope', '$filter', '$http', '$location
     }
 
 
-    console.log($scope.person);
 
 }]);
 
-swApp.controller('loginController', ['$scope','$http', function ($scope,$http) {
+swApp.controller('loginController', ['$scope','$http','md5','$location','$cookies', function ($scope,$http,md5,$location,$cookies) {
 
     //BUSCA DADOS NA VIEW
-   $scope.login={
+   $scope.loginData={
        'email':"",
        'pass':""
    }
+    $scope.remember ='';
+
 
    //ENVIA DADOS PARA O WS
     $scope.login = function () {
-        $http.get('http://localhost:8080/swapitws/rs/person/login/'+$scope.login.email+'/'+$scope.login.pass)
+        $scope.loginData.pass = md5.createHash($scope.loginData.pass || '');
 
+        $http.get('http://localhost:8080/swapitws/rs/person/login/'+$scope.loginData.email+'/'+$scope.loginData.pass)
 
             .success(function (result) {
 
-                console.log(result);
-                console.log($scope.personId);
+                if ($scope.remember == true) {
+                    var now = new Date(),
+                        exp = new Date(now.getFullYear(), now.getMonth()+2, now.getDate());
 
-                //Aqui tenho que salvar a pessoa num singleton para poder acessar no fuuro
+                    $cookies.put('loginData',JSON.stringify(result),{
+                        expires: exp
+                    })
+
+                }
+                $location.path('/start');
+
+
 
             })
-            .error(function (data, status) {
+            .error(function (data) {
 
-                console.log(data);
-                var $toastContent = $('<span><i class="material-icons red-text">error_outline</i>  Algo deu errado!' +
-                    '<p class="center">Tente novamente daqui a pouco...</p>' +
+                var $toastContent = $('<span><i class="material-icons red-text">error_outline</i> Usuário ou senha inválidos' +
+                    '<p class="center"></p>' +
                     '</span>');
                 Materialize.toast($toastContent, 10000);
 
@@ -173,56 +189,124 @@ swApp.controller('forgotController', ['$scope', function ($scope) {
 
 }]);
 
-swApp.controller('startController', ['$scope', function ($scope,$rootScope, $location) {
+swApp.controller('startController', ['$scope','$location','$cookies', function ($scope, $location,$cookies) {
 
-
+    $scope.user = JSON.parse($cookies.get('loginData'));
+    console.log($scope.user);
     $scope.userLoged = false;
 
 
 }]);
-swApp.controller('mainController', ['$scope', function ($scope) {
+swApp.controller('mainController', ['$scope','httpq','$location','propositionDetails','$cookies',function ($scope,httpq,$location,propositionDetails,$cookies) {
+
 
     $scope.userLoged = false;
+    $scope.userID = '3a09593e-3e2e-4c17-a2de-2f308776dbd7';
+    $scope.propostas = [];
+    $scope.states=[];
+    $scope.cities=[];
+    $scope.selectedState='';
+    $scope.selectCity = '';
+
+
+
+    //BUSCA TODAS AS PROPOSTAS
+    httpq.get('http://localhost:8080/swapitws/rs/proposition/getPropPerson/'+$scope.userID)
+
+        .then(function (response) {
+            $scope.propostas = response;
+
+        })
+        .catch(function (response) {
+            console.log(response)
+        })
+
+    //BUSCA TODOS OS ESTADOS
+    httpq.get('http://localhost:8080/swapitws/rs/state/get')
+
+        .then(function (response) {
+            $scope.states = response;
+        })
+        .catch(function (response) {
+
+            console.log(response)
+        })
+
+    //BUSCA AS CIDADES DO ESTADO SELECIONADO
+    $scope.$watch('selectedState', function () {
+        httpq.get('http://localhost:8080/swapitws/rs/city/getCityState/'+$scope.selectedState)
+
+            .then(function (response) {
+                $scope.cities = response;
+            })
+            .catch(function (response) {
+                console.log(response);
+            })
+    })
+
+    //DIRECIONA PARA OS DETALHES DA PROPOSTA
+    $scope.viewDetails = function (propositionId) {
+
+        propositionDetails.propId = propositionId;
+        $location.path('/details');
+        console.log(propositionDetails.propId);
+        
+    }
 
 }]);
 
-swApp.controller('detailsController', ['$scope', function ($scope) {
+swApp.controller('detailsController', ['$scope','propositionDetails','httpq','$location', function ($scope, propositionDetails,httpq,$location) {
 
     $scope.userLoged = false;
+    $scope.propositionId = propositionDetails.propId;
+    $scope.proposition = {};
 
-    //GALERIA DE FOTOS
-    // Set of Photos
-    $scope.photos = [
-        {src: 'http://farm9.staticflickr.com/8042/7918423710_e6dd168d7c_b.jpg', desc: 'Image 01'},
-        {src: 'http://farm9.staticflickr.com/8449/7918424278_4835c85e7a_b.jpg', desc: 'Image 02'},
-        {src: 'http://farm9.staticflickr.com/8457/7918424412_bb641455c7_b.jpg', desc: 'Image 03'},
-        {src: 'http://farm9.staticflickr.com/8179/7918424842_c79f7e345c_b.jpg', desc: 'Image 04'},
-        {src: 'http://farm9.staticflickr.com/8315/7918425138_b739f0df53_b.jpg', desc: 'Image 05'},
-        {src: 'http://farm9.staticflickr.com/8461/7918425364_fe6753aa75_b.jpg', desc: 'Image 06'}
-    ];
 
-    // initial image index
-    $scope._Index = 0;
+    if (!propositionDetails.propId){
 
-    // if a current image is the same as requested image
-    $scope.isActive = function (index) {
-        return $scope._Index === index;
-    };
+        $location.path('/main')
+    }
 
-    // show prev image
-    $scope.showPrev = function () {
-        $scope._Index = ($scope._Index > 0) ? --$scope._Index : $scope.photos.length - 1;
-    };
+    httpq.get('http://localhost:8080/swapitws/rs/proposition/getbyID/'+$scope.propositionId)
 
-    // show next image
-    $scope.showNext = function () {
-        $scope._Index = ($scope._Index < $scope.photos.length - 1) ? ++$scope._Index : 0;
-    };
+        .then(function (response) {
+            $scope.proposition = response
 
-    // show a certain image
-    $scope.showPhoto = function (index) {
-        $scope._Index = index;
-    };
+
+            //GALERIA DE FOTOS
+            $scope.photos = $scope.proposition.image;
+            // Set of Photos
+
+            // initial image index
+            $scope._Index = 0;
+
+            // if a current image is the same as requested image
+            $scope.isActive = function (index) {
+                return $scope._Index === index;
+            };
+
+            // show prev image
+            $scope.showPrev = function () {
+                $scope._Index = ($scope._Index > 0) ? --$scope._Index : $scope.photos.length - 1;
+            };
+
+            // show next image
+            $scope.showNext = function () {
+                $scope._Index = ($scope._Index < $scope.photos.length - 1) ? ++$scope._Index : 0;
+            };
+
+            // show a certain image
+            $scope.showPhoto = function (index) {
+                $scope._Index = index;
+            };
+
+        })
+        .catch(function (response) {
+            console.log(response)
+        })
+
+
+
 
 
 
@@ -420,7 +504,7 @@ swApp.controller('newProposalController', ['$scope','Upload','$timeout','httpq',
 
         //GERA DATA E ATUALIZA MODEL
         var d = new Date();
-        var datestring = d.getDate()  + "-" + (d.getMonth()+1) + "-" + d.getFullYear() + " " + d.getHours() + ":" + d.getMinutes();
+        var datestring = d.getFullYear()+ "-"  + (d.getMonth()+1) + "-" +d.getDate();
         $scope.newProp.publish_date = datestring;
 
         //ENVIA IMAGENS E ATUALIZA MODEL
@@ -430,12 +514,11 @@ swApp.controller('newProposalController', ['$scope','Upload','$timeout','httpq',
 
             .success(function (result) {
 
-                console.log($scope.newProp);
-
                 var $toastContent = $('<span>' +
                     '<i class="material-icons green-text">check</i>Proposta Salva!' +
                     '</span>');
                 Materialize.toast($toastContent, 5000);
+                clearProp();
 
             })
             .error(function (data, status) {
@@ -451,7 +534,7 @@ swApp.controller('newProposalController', ['$scope','Upload','$timeout','httpq',
     }
 
     $scope.clearProp = function () {
-        $scope.newProp = $scope.newProp={
+        $scope.newProp ={
             "title":"",
             "description":"",
             "addressReduce":{
@@ -479,8 +562,6 @@ swApp.controller('newProposalController', ['$scope','Upload','$timeout','httpq',
 
 
 }]);
-
-
 
 
 swApp.controller('profileController', ['$scope','httpq','$http', function ($scope,httpq,$http) {
@@ -608,8 +689,12 @@ swApp.controller('proposalManagerController', ['$scope','httpq','$http', functio
                 $scope.singleProp = response;
 
                 var d = new Date();
-                var datestring = d.getDate()  + "-" + (d.getMonth()+1) + "-" + d.getFullYear() + " " + d.getHours() + ":" + d.getMinutes();
+                var e = new Date($scope.singleProp.publish_date);
 
+                var datestring = d.getFullYear()+ "-"  + (d.getMonth()+1) + "-" +d.getDate();
+                var datestring2 = e.getFullYear()+ "-" + (e.getMonth()+1) + "-" +e.getDate();
+
+                $scope.singleProp.publish_date = datestring2;
                 $scope.singleProp.removel_date = datestring;
                 console.log($scope.singleProp)
                 //Atualiza a proposta

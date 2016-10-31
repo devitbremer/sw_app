@@ -1,43 +1,50 @@
 <!--Top toolbar-->
-<nav>
-    <div class="nav-wrapper amber">
-        <a href="#/" class="brand-logo center">SWAPIT</a>
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li>
-                <a ng-show="userLoged != false" class='dropdown-button' href="#" data-hover="true"
-                   data-beloworigin="true" data-activates='dropdown1'>
-                    <i class="material-icons left">account_circle</i><i class="material-icons right">arrow_drop_down</i>
-                    MINHA CONTA
-                </a>
-                <a ng-show="userLoged == false" class='dropdown-button' href="#" data-hover="true"
-                   data-beloworigin="true" data-activates='dropdown2'>
-                    <i class="material-icons left">account_circle</i><i class="material-icons right">arrow_drop_down</i>
-                    MINHA CONTA
-                </a>
-            </li>
-        </ul>
 
-        <!-- Opções Dropdown -->
-        <ul id='dropdown1' class='dropdown-content'>
-            <li><a href="#!"><i class="material-icons left">person</i> Meu perfil</a></li>
-            <li class="divider"></li>
-            <li><a href="#/propManager"><i class="material-icons left">attach_money</i>Minhas propostas</a></li>
-            <li class="divider"></li>
-            <li><a href="#/login"><i class="material-icons left">home</i> Favoritos</a></li>
-            <li class="divider"></li>
-            <li><a href="#!" class="blue-grey-text darken-3 text-darken-3">Sair</a></li>
-        </ul>
+<header id="header" class="page-topbar">
+    <div class="navbar-fixed">
+        <nav>
+            <div class="nav-wrapper amber">
+                <a href="#/" class="brand-logo center">SWAPIT</a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li>
+                        <a ng-show="userLoged != false" class='dropdown-button' data-hover="true"
+                           data-beloworigin="true" data-activates='dropdown1'>
+                            <i class="material-icons left">account_circle</i><i class="material-icons right">arrow_drop_down</i>
+                            MINHA CONTA
+                        </a>
+                        <a ng-show="userLoged == false" class='dropdown-button' data-hover="true"
+                           data-beloworigin="true" data-activates='dropdown2'>
+                            <i class="material-icons left">account_circle</i><i class="material-icons right">arrow_drop_down</i>
+                            MINHA CONTA
+                        </a>
+                    </li>
+                </ul>
 
-        <ul id='dropdown2' class='dropdown-content'>
-            <li><a href="#/register"><i class="material-icons left">person_add</i> Nova Conta</a></li>
-            <li class="divider"></li>
-            <li><a href="#/login"><i class="material-icons left">home</i> Entrar</a></li>
-            <li class="divider"></li>
+                <!-- Opções Dropdown -->
+                <ul id='dropdown1' class='dropdown-content'>
+                    <li><a href="#!"><i class="material-icons left">person</i> Meu perfil</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#/propManager"><i class="material-icons left">attach_money</i>Minhas propostas</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#/login"><i class="material-icons left">home</i> Favoritos</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#!" class="blue-grey-text darken-3 text-darken-3">Sair</a></li>
+                </ul>
 
-        </ul>
+                <ul id='dropdown2' class='dropdown-content'>
+                    <li><a href="#/register"><i class="material-icons left">person_add</i> Nova Conta</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#/login"><i class="material-icons left">home</i> Entrar</a></li>
+                    <li class="divider"></li>
 
+                </ul>
+
+            </div>
+        </nav>
     </div>
-</nav>
+</header>
+
+
 <script type="text/javascript">
     $('.dropdown-button').dropdown({
                 inDuration: 300,

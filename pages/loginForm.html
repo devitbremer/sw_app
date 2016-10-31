@@ -10,27 +10,27 @@
             <div class="row margin">
                 <div class="input-field col s12 l8 offset-l2 center">
                     <i class="material-icons prefix">person</i>
-                    <input id="email" type="text">
+                    <input id="email" type="text" ng-model="loginData.email">
                     <label for="email" class="center-align">E-mail</label>
                 </div>
             </div>
             <div class="row margin">
                 <div class="input-field col s12 l8 offset-l2 center">
                     <i class="material-icons prefix">vpn_key</i>
-                    <input id="password" type="password">
+                    <input id="password" type="password" ng-model="loginData.pass">
                     <label for="password" class="center-align">Senha</label>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s12 l8 offset-l2">
-                    <input type="checkbox" id="remember-me"/>
+                    <input type="checkbox" id="remember-me" ng-model="remember"/>
                     <label for="remember-me">Lembrar</label>
                 </div>
             </div>
             <br>
             <div class="row">
                 <div class="input-field col s12 l8 offset-l2 center">
-                    <a href="#/start" class="btn waves-effect waves-light col s12">Entrar</a>
+                    <button ng-click="login()" class="btn waves-effect waves-light col s12">Entrar</button>
                 </div>
             </div>
             <div class="divider"></div>

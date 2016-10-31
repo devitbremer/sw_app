@@ -39,18 +39,29 @@
                             <div class="card">
                                 <div class="card-content center">
                                     <i class="material-icons">star</i>
-                                    <span class="card-title bold">Titulo da proposta</span>
+                                    <span class="card-title bold">{{proposition.title}}</span>
                                     <div class="divider"></div>
                                     <br>
                                     <div class="row">
                                         <div class="col l6 m6 s12">
-                                            <div class="container slider">
+                                            <div class="container slider-carousel">
                                                 <!-- LISTA AS FOTOS -->
-                                                <img class="responsive-img" ng-repeat="photo in photos" class="slide responsive-img" ng-swipe-right="showPrev()" ng-swipe-left="showNext()" ng-show="isActive($index)" ng-src="{{photo.src}}" />
+                                                <img  ng-repeat="photo in photos"
+                                                     class="slider-carousel responsive-img"
+                                                      ng-swipe-right="showPrev()"
+                                                      ng-swipe-left="showNext()"
+                                                      ng-show="isActive($index)"
+                                                      ng-src="{{'http://localhost:8080/swapitws/rs/propositionIMG/download/'+photo.imageid}}"
+                                                      style="max-height: 300px"
+                                                />
                                                 <!-- THUMBS -->
                                                 <ul class="nav">
                                                     <li ng-repeat="photo in photos" ng-class="{'active':isActive($index)}">
-                                                        <img src="{{photo.src}}" alt="{{photo.desc}}" title="{{photo.desc}}" ng-click="showPhoto($index);" />
+                                                        <img src="{{'http://localhost:8080/swapitws/rs/propositionIMG/download/'+photo.imageid}}"
+                                                             ng-click="showPhoto($index);"
+                                                             style="height: 50px"
+                                                             class="responsive-img"
+                                                        />
                                                     </li>
                                                 </ul>
                                             </div>
@@ -62,23 +73,7 @@
                                                     <span class="card-title">Detalhes</span>
                                                     <div class="divider"></div>
                                                     <br>
-                                                    <p>
-                                                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean
-                                                        commodo ligula eget dolor.
-
-                                                        Aenean massa. Cum sociis natoque penatibus et magnis dis
-                                                        parturient montes, nascetur ridiculus mus.
-
-                                                        Donec quam felis, ultricies nec, pellentesque eu, pretium quis,
-                                                        sem. Nulla consequat massa quis enim.
-
-                                                        Donec pede justo, fringilla vel, aliquet nec, vulputate eget,
-                                                        arcu.
-
-                                                        In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo.
-                                                        Nullam dictum felis eu pede mollis pretium. Integer tincidunt.
-                                                        Cras dapibu
-                                                    </p>
+                                                    <p class="center-align">{{proposition.description}}</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -86,16 +81,19 @@
                                     <div class="row">
                                         <div class="col l6 m6 s12">
                                             <!--Botões de ação telas grandes-->
+                                            <br>
+                                            <br>
+                                            <br>
                                             <div id="actions"class="hide-on-small-and-down">
-                                                <a class="waves-effect btn-flat btn-large waves-red waves-light"><i class="material-icons left red-text">favorite</i>Favorito</a>
-                                                <a class="waves-effect btn-flat btn-large waves-orange waves-light"><i class="material-icons left orange-text">block</i>Denunciar</a>
+                                                <button class="waves-effect btn-flat btn-large waves-red waves-light"><i class="material-icons left red-text">favorite</i>Favorito</button>
+                                                <button class="waves-effect btn-flat btn-large waves-orange waves-light"><i class="material-icons left orange-text">block</i>Denunciar</button>
                                             </div>
 
                                             <!--Botões popup de ação tela pequena-->
                                             <div id="actionsSmall" class="hide-on-med-and-up">
                                                 <div class="fixed-action-btn horizontal" style="bottom: 80px; right: 24px;">
                                                     <a class="btn-floating btn-large red">
-                                                        <i class="large material-icons">menu</i>
+                                                        <i class="large material-icons">more_horiz</i>
                                                     </a>
                                                     <ul>
                                                         <li>
@@ -113,14 +111,12 @@
                                             <div class="card green">
                                                 <div class="card-content white-text">
                                                     <span class="card-title">Contato</span>
-                                                    <p>
-                                                        Fulano te Tal<br>
-                                                        e-mail@provedor.com.br<br>
-                                                        (41)97231976<br>
-                                                        (41)32177700
-                                                    <p>Estado: {{}}</p>
-                                                    <p>Cidade: {{}}</p>
-                                                    </p>
+                                                    <div class="divider white"></div>
+                                                    <br>
+                                                    <p class="left-align"><i class="material-icons">person</i> {{proposition.personReduce.personName}}</p>
+                                                    <p class="left-align"><i class="material-icons">send</i> {{proposition.personReduce.email}}</p>
+                                                    <p class="left-align"><i class="material-icons">phone</i> {{proposition.personReduce.phone}}</p>
+                                                    <p class="left-align"><i class="material-icons">location_on</i> {{proposition.addressReduce.cityName}} - {{proposition.addressReduce.stateAcronym}}</p>
                                                 </div>
                                             </div>
                                         </div>
