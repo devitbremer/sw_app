@@ -9,6 +9,17 @@ footer {
 .margin {
   margin: 0;
 }
+
+#gwrapper {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+#main {
+  flex: 1 0 auto;
+}
+
 #input-select .input-field label {
   position: absolute;
   top: -14px;
@@ -98,7 +109,7 @@ footer {
   width: 100%;
 }
 
-.slider {
+.slider-carousel {
   position: relative;
   -webkit-perspective: 1000px;
   -moz-perspective: 1000px;
@@ -174,6 +185,12 @@ footer {
 }
 .swpadding-top{
   padding-top:5%;
+}
+.swmargin-top{
+  margin-top: 10px;
+}
+.swmargin-bottom{
+  margin-bottom: 10px;
 }
 #left-sidebar-nav span.badge.new{
   line-height: 20px;

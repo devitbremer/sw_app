@@ -34,28 +34,43 @@
             </div>
 
 
-            <div class="row" style="margin-bottom: 15px;">
-                <div class="col s12 m10 l9 offset-m1">
-                    <a href="#/details" class="black-text">
-                        <div class="grey lighten-4 valign-wrapper hoverable">
-                            <div class="col s3 m2 l2">
-                                <img src="images/avatar.jpg" class="responsive-img">
+            <div class="row" ng-repeat="proposta in propostas">
+                <div class="col s12 m12 l9" >
+                    <a href="" ng-click="viewDetails(proposta.propositionId)" class="black-text">
+                        <div class="grey lighten-4 valign-wrapper hoverable" style="height: 140px;">
+
+                            <div class="col s4 m3 l2">
+                                <img src="{{'http://localhost:8080/swapitws/rs/propositionIMG/download/'+proposta.image[0].imageid}}" class="responsive-img left" style="max-height: 130px;">
                             </div>
-                            <div class="col s6 m4 l6 ">
-                                <h5 class="title truncate"> Título da Proposta</h5>
-                                <p class="black-text left-align truncate hide-on-small-only">Aqui vai a descrição do bagulho, exatamente do
-                                    jeito que a criatura cadastrou. Temos que pensar num formato
-                                    para (tamanho) esses dados. Ou não.
-                                    Aqui vai a descrição do bagulho, exatamente do jeito que a criatura cadastrou. Temos
-                                    que pensar num formato
-                                    para esses dados. Ou não.
-                                </p>
+
+                            <div class="col s3 m4 l6 ">
+                                <h5 class="title truncate hide-on-small-and-down">{{proposta.title}}</h5>
+                                <span class="hide-on-med-and-up truncate">{{proposta.title}}</span>
+                                <p class="black-text left-align truncate hide-on-small-only">{{proposta.description}}</p>
                             </div>
-                            <div class="col s2 m1 l2 valign">
-                                <p class="black-text center-align">R$ 200,00</p>
+
+                            <div class="col s2 m2 l1 valign center cyan" ng-hide="proposta.interest_category">
+                                <span class="white-text">Preço</span>
+                                <div class="divider white"></div>
+                                <p class="white-text center-align">R$ {{proposta.price}}</p>
                             </div>
-                            <div class="col s2 m1 l2  valign">
-                                <p class="black-text center-align"> HOJE</p>
+
+                            <div class="col s2 m2 l1 center" ng-hide="!proposta.interest_category" style="background-color: {{proposta.category.color}}">
+                                <span class="white-text">Troco por</span>
+                                <div class="divider white"></div>
+                                <img src="{{'http://localhost/sw_app/icons/'+proposta.category.icon}}" class="responsive-img" style="max-height: 43px;">
+                            </div>
+
+                            <div class="col s2 m2 l1 valign center cyan" ng-hide="!proposta.priceCatInterest">
+                                <span class="white-text">Volta</span>
+                                <div class="divider white"></div>
+                                <p class="white-text center-align"><span>+ </span>R$ {{proposta.priceCatInterest}}</p>
+                            </div>
+
+                            <div class="col s2 m2 l1 center" style="background-color: {{proposta.category.color}}">
+                                <span class="white-text">Categoria</span>
+                                <div class="divider white"></div>
+                                <img src="{{'http://localhost/sw_app/icons/'+proposta.category.icon}}" class="responsive-img" style="max-height: 43px;">
                             </div>
                         </div>
                     </a>

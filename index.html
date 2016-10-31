@@ -20,6 +20,8 @@
     <!-- For iPhone -->
     <meta name="msapplication-TileColor" content="#00bcd4">
     <meta name="msapplication-TileImage" content="images/favicon/mstile-144x144.png">
+
+    <meta name="theme-color" content="#ffc107" />
     <!-- For Windows Phone -->
 
 
@@ -29,7 +31,7 @@
     <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection">
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/angular.treeview.css">
-    <link rel="stylesheet" type="text/css" href="css/angular-tree-widget.css">
+    <!--<link rel="stylesheet" type="text/css" href="css/angular-tree-widget.css">-->
     <!--link href="css/page-center.css" type="text/css" rel="stylesheet" media="screen,projection"-->
 
 
@@ -40,12 +42,14 @@
     <script src="angular/angular.min.js"></script>
     <script src="angular/angular-route.min.js"></script>
     <script src="angular/angular-animate.min.js"></script>
+    <script src="angular/angular-cookies.min.js"></script>
     <script src="angular/angular-touch.min.js"></script>
     <script src="ng-file-upload/ng-file-upload-shim.min.js"></script>
     <script src="ng-file-upload/ng-file-upload.min.js"></script>
     <script type="text/javascript" src="js/angular.treeview.js"></script>
     <script type="text/javascript" src="js/angular-tree-widget.js "></script>
     <script type="text/javascript" src="js/ngMask.min.js"></script>
+    <script type="text/javascript" src="js/angular-md5.min.js"></script>
     <script src="js/sw-app.js"></script>
 
     <!--prism-->
@@ -66,13 +70,9 @@
     <div class="loader-section section-right"></div>
 </div>
 <!-- End Page Loading -->
+
+
 <div ng-view></div>
-
-<!--<div id="login-page" class="row">
-    <div class="col s12 z-depth-4 card-panel">
-
-    </div>
-</div>-->
 
 
 </body>
