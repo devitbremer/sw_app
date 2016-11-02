@@ -10,6 +10,21 @@ footer {
   margin: 0;
 }
 
+.category-row{
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+
+.category{
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
 #gwrapper {
   display: flex;
   min-height: 100vh;

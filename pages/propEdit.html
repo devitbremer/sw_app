@@ -1,0 +1,260 @@
+<!--INSERE TOPO-->
+<ng-include src="'pages/topnavbar.html'"></ng-include>
+
+<!-- INICIO MAIN -->
+<div id="main">
+
+    <div class="wrapper">
+
+        <!-- INSERE SIDE MENU-->
+        <ng-include src="'pages/sideMenu.html'"></ng-include>
+
+        <!-- INICIA CONTEUDO -->
+        <section id="content">
+
+
+            <!--start container-->
+
+            <div class="container" style="padding-top: 2%">
+                <div class="row">
+                    <form name="prop" novalidate>
+                        <div id="proposalData" class="col l8 m10 s12 offset-m1">
+                            <div class="card">
+                                <div class="card-content">
+                                    <i class="material-icons prefix">note_add</i>
+                                    <span class="card-title">Nova Proposta</span>
+                                    <div class="divider"></div>
+                                    <br>
+                                    <div class="row">
+                                        <div class="input-field col s12">
+                                            <i class="material-icons prefix">title</i>
+                                            <input id="proposalTitle" type="text" name="title" ng-model="proposition.title"
+                                                   ng-required="true">
+                                            <li ng-show="prop.title.$error.required && proposition.title.$dirty"
+                                                class="red-text medium-small">Sua proposta deve ter um título!
+                                            </li>
+                                            <label for="proposalTitle" class="active">O que você vender?</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col s12">
+                                            <i class="material-icons prefix">short_text</i>
+                                            <textarea id="proposalDescription" name="description"
+                                                      class="materialize-textarea" length="255" ng-model="proposition.description"
+                                                      ng-required="true"></textarea>
+                                            <li ng-show="prop.description.$error.required && proposition.description.$dirty"
+                                                class="red-text medium-small">Sua proposta deve ter uma descrição!
+                                            </li>
+                                            <label for="proposalDescription" class="active">Nos fale um pouco mais sobre seu
+                                                produto!</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col s12 m8 l8 offset-l2 offset-m2">
+                                            <h6>Em qual das categorias abaixo seu produto se encaixa? Clique no ícone
+                                                para expandir.</h6>
+                                            <div class="card grey lighten-1">
+                                                <div class="card-content">
+                                                    <div
+                                                            data-angular-treeview="true"
+                                                            data-tree-id="categorias"
+                                                            data-tree-model="treedata"
+                                                            data-node-id="categoryId"
+                                                            data-node-label="categoryName"
+                                                            data-node-children="children"
+                                                            data-node-collapsed="false">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-content">
+                                    <i class="material-icons">add</i>
+                                    <span class="card-title">Adicionar Fotos</span>
+                                    <div class="divider"></div>
+                                    <br>
+
+                                    <div class="file-field input-field">
+                                        <div class="btn green">
+                                            <span><i class="material-icons">search</i> </span>
+                                            <input type="file" id="file1" name="file" multiple accept="image/x-png, image/gif, image/jpeg"
+                                                   ng-files="getTheFiles($files)" ng-required="true"/>
+                                        </div>
+                                        <div class="file-path-wrapper">
+                                            <input class="file-path validate" type="text" placeholder="Escolha um ou mais arquivos">
+                                        </div>
+                                        <div class="row">
+                                            <div class="col s12 center">
+                                                <button ng-click="uploadFiles()" class="btn waves-effect btn-large amber">Salvar<i class="material-icons left">save</i> </button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-content">
+                                    <div class="row">
+                                        <i class="material-icons">explore</i>
+                                        <span class="card-title">Em que cidade devemos exibir essa proposta?</span>
+                                        <div class="divider"></div>
+                                        <br>
+                                        <div class="input-field col s8 m6 l6">
+                                            <i class="material-icons prefix">add_location</i>
+                                            <input id="cep" type="text" name="cep" ng-model="zipcode" mask="99999-999"
+                                                   clean="true" ng-required="true" ng-minlength="9">
+                                            <li ng-show="prop.cep.$error.minlength"
+                                                class="red-text medium-small">O CEP deve ter 8 numeros!
+                                            </li>
+                                            <label for="cep" class="active">CEP</label>
+                                        </div>
+                                        <div class="input-field col s4 m4 l4">
+                                            <button class="btn waves-effect waves-light orange darken-1"
+                                                    ng-click="getAddress()"><i class="material-icons left">search</i>
+                                                BUSCAR
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="row ">
+                                        <div class="input-field col s12 m6 l6">
+                                            <i class="material-icons prefix">home</i>
+                                            <input disabled id="city" name="city" type="text" ng-model="city"
+                                                   ng-required="">
+                                            <label for="city" class="active">Cidade</label>
+                                        </div>
+                                        <div class="input-field col s12 m6 l6">
+                                            <i class="material-icons prefix">home</i>
+                                            <input disabled id="district" type="text" ng-model="district">
+                                            <label for="district" class="active">Bairro</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                                    <!--Seleciona o tipo de operação-->
+                                    <div class="card">
+                                        <div class="card-content">
+                                            <i class="material-icons">shuffle</i>
+                                            <span class="card-title">Operação</span>
+                                            <div class="divider"></div>
+                                            <br>
+                                            <div class="row">
+                                                <div class="input-field col s4 m4 l4">
+                                                    <input type="checkbox" id="sell" ng-model="sell" ng-disabled="swap==true || sw_sell==true">
+                                                    <label for="sell">Venda</label>
+                                                </div>
+
+                                                <div class="input-field col s4 m4 l4">
+                                                    <input type="checkbox" id="swap" ng-model="swap" ng-disabled="sell==true || sw_sell==true">
+                                                    <label for="swap">Troca</label>
+                                                </div>
+
+                                                <div class="input-field col s4 m4 l4">
+                                                    <input type="checkbox" id="sell_swap" ng-model="sw_sell" ng-disabled="sell==true || swap==true">
+                                                    <label for="sell_swap">Venda + Troca</label>
+                                                </div>
+                                            </div>
+                                            <br>
+
+                                            <div class="row" ng-hide="sell==false" >
+                                                <div class="input-field col s12 m6 l6 offset-l3 offset-m3">
+                                                    <input id="sellPrice" type="text" ng-model="proposition.price" ng-disabled="sell!==true">
+                                                    <label for="sellPrice" class="active">Preço</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="row" ng-hide="swap==false">
+                                                <div class="input-field col s12 m6 l6 offset-l3 offset-m3" ng-hide="sell==true || sw_sell==true">
+                                                    <div class="card grey lighten-1">
+                                                        <div class="card-content">
+                                                            <div
+                                                                    data-angular-treeview="true"
+                                                                    data-tree-id="t_category"
+                                                                    data-tree-model="treedata2"
+                                                                    data-node-id="categoryId"
+                                                                    data-node-label="categoryName"
+                                                                    data-node-children="children"
+                                                            >
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row" ng-hide="sw_sell == false">
+
+                                                <div class="input-field col s12 m4 l3">
+                                                    <input id="sellPrice2" type="text" ng-model="proposition.price" ng-disabled="sw_sell!==true">
+                                                    <label for="sellPrice2" class="active">Preço do seu produto</label>
+                                                </div>
+                                                <div class="input-field col s12 m4 l6">
+                                                    <div class="card grey lighten-1">
+                                                        <div class="card-content">
+                                                            <div ng-hide="sell==true || swap==true"
+                                                                 data-angular-treeview="true"
+                                                                 data-tree-id="t_category"
+                                                                 data-tree-model="treedata3"
+                                                                 data-node-id="categoryId"
+                                                                 data-node-label="categoryName"
+                                                                 data-node-children="children"
+                                                            >
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="input-field col s12 m4 l3">
+                                                    <input id="intPrice" type="text" ng-model="proposition.priceCatInterest" ng-disabled="sw_sell!==true">
+                                                    <label for="intPrice" class="active">Preço do que você quer</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+
+                        </div>
+                        <div id="actions" class="col col l8 m10 s12 offset-m1">
+                            <div class="card">
+                                <div class="card-content">
+                                    <div class="row">
+                                        <div class="col s12 center">
+
+                                                <button class="btn btn-large waves-effect waves-light amber" ng-disabled="prop.$invalid"
+                                                        name="action" ng-click="saveProp()">Salvar<i class="material-icons left">cloud</i></button>
+                                                <button class="btn btn-large waves-effect waves-light red" type="reset"
+                                                        name="action" ng-click="clearProp()">Cancelar<i class="material-icons left">cancel</i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+
+            <!--end container-->
+        </section>
+        <!-- FIM CONTEUDO -->
+
+
+    </div>
+
+</div>
+<!-- FIM MAIN -->
+<script>
+    $(document).ready(function () {
+        $('select').material_select();
+    });
+</script>
+
+<!-- //////////////////////////////////////////////////////////////////////////// -->
+
+<!-- INSERE FOOTER -->
+<ng-include src="'pages/footer.html'"></ng-include>

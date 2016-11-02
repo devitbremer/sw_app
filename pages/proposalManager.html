@@ -12,14 +12,14 @@
         <!-- INICIA CONTEUDO -->
         <section id="content" class="-">
 
-            <div class="row">
+            <!--<div class="row">
                 <div class="col s12 m10 l9 offset-m1">
 
                     <div class="row" ng-repeat=" prop in userProps">
                         <div class="card valign-wrapper center">
 
                                 <div class="col s3 m3 l2">
-                                    <img src="{{'http://localhost:8080/swapitws/rs/propositionIMG/download/'+prop.image[0].imageid}}"
+                                    <img ng-src="{{'http://localhost:8080/swapitws/rs/propositionIMG/download/'+prop.image[0].imageid}}"
                                          class="responsive-img valign" style="max-height: 120px; min-height: 50px">
                                 </div>
                                 <div class="col s5 m5 l6 ">
@@ -27,28 +27,59 @@
                                     <span class="truncate hide-on-med-and-up">{{prop.title}}</span>
                                     <p class="black-text left-align truncate hide-on-small-and-down">{{prop.description}}</p>
                                 </div>
-                                <div class="col s2 m2 l2 hide-on-small-and-down">
-                                    <button class="btn waves-effect waves-light red valign center"
-                                            ng-click="deleteProp(prop.propositionId)">
-                                        <i class="material-icons left">delete</i>
-                                    </button>
-                                </div>
-                                <div class="col s2 m2 l2 hide-on-small-and-down">
-                                    <button class="btn waves-effect waves-light green valign"
-                                            ng-click="editProp(prop.propositionId)">
-                                        <i class="material-icons left">edit</i>
-                                    </button>
-                                </div>
-                            <div class="col s2 hide-on-med-and-up">
-                                <a class="btn-floating waves-effect waves-light red" ng-click="deleteProp(prop.propositionId)">
+
+                            <div class="col s2 m1 l1">
+                                <a class="btn-floating btn-large waves-effect waves-light red" ng-click="deleteProp(prop.propositionId)">
                                     <i class="material-icons">delete</i>
                                 </a>
                             </div>
-                            <div class="col s2 hide-on-med-and-up">
-                                <a class="btn-floating waves-effect waves-light green" ng-click="editProp(prop.propositionId)">
+                            <div class="col s2 m1 l1">
+                                <a class="btn-floating btn-large waves-effect waves-light green" ng-click="editProp(prop.propositionId)">
                                     <i class="material-icons">edit</i>
                                 </a>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>-->
+            <div class="row" ng-repeat="prop in userProps">
+                <div class="col s12 m10 l9 card hoverable valign-wrapper offset-m1">
+                    <div class="col s4 m3 l2 valign card">
+                        <img ng-src="{{'http://localhost:8080/swapitws/rs/propositionIMG/download/'+prop.image[0].imageid}}" class="responsive-img left" style="height: 180px;">
+                    </div>
+
+                    <div class="col s8 m9 l10">
+                        <div class="row">
+                            <div class="col s12" id="propText">
+                                <h5 class="title truncate">{{prop.title}}</h5>
+                                <p class="black-text left-align truncate">{{prop.description}}</p>
+                            </div>
+                        </div>
+
+                        <div class="card-action">
+                            <div class="row">
+                                <div class="col m6 s6 center hide-on-small-and-down">
+                                    <a class=" btn-large waves-effect waves-light red" ng-click="deleteProp(prop.propositionId)">
+                                        <i class="material-icons left">delete</i>Apagar
+                                    </a>
+                                </div>
+                                <div class="col m6 s6 center hide-on-small-and-down">
+                                    <a class="btn-large waves-effect waves-light green" ng-click="editProp(prop.propositionId)">
+                                        <i class="material-icons left">edit</i>Editar
+                                    </a>
+                                </div>
+                                <div class="col s6 hide-on-med-and-up">
+                                    <a class="btn-floating btn-large waves-effect waves-light red" ng-click="deleteProp(prop.propositionId)">
+                                        <i class="material-icons">delete</i>
+                                    </a>
+                                </div>
+                                <div class="col s6  hide-on-med-and-up">
+                                    <a class="btn-floating btn-large waves-effect waves-light green" ng-click="editProp(prop.propositionId)">
+                                        <i class="material-icons">edit</i>
+                                    </a>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>

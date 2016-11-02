@@ -33,47 +33,46 @@
                 </div>
             </div>
 
-
             <div class="row" ng-repeat="proposta in propostas">
-                <div class="col s12 m12 l9" >
-                    <a href="" ng-click="viewDetails(proposta.propositionId)" class="black-text">
-                        <div class="grey lighten-4 valign-wrapper hoverable" style="height: 140px;">
+                <div class="col s12 m10 l9 card hoverable valign-wrapper offset-m1" ng-click="viewDetails(proposta.propositionId)">
+                    <div class="col s4 m3 l2 valign card">
+                        <img src="{{'http://localhost:8080/swapitws/rs/propositionIMG/download/'+proposta.image[0].imageid}}" class="responsive-img left" style="height: 180px;">
+                    </div>
 
-                            <div class="col s4 m3 l2">
-                                <img src="{{'http://localhost:8080/swapitws/rs/propositionIMG/download/'+proposta.image[0].imageid}}" class="responsive-img left" style="max-height: 130px;">
+                    <div class="col s8 m9 l10">
+                        <div class="row">
+                            <div class="col s12" id="propText">
+                                <h5 class="title truncate">{{proposta.title}}</h5>
+                                <p class="black-text left-align truncate">{{proposta.description}}</p>
                             </div>
+                        </div>
 
-                            <div class="col s3 m4 l6 ">
-                                <h5 class="title truncate hide-on-small-and-down">{{proposta.title}}</h5>
-                                <span class="hide-on-med-and-up truncate">{{proposta.title}}</span>
-                                <p class="black-text left-align truncate hide-on-small-only">{{proposta.description}}</p>
-                            </div>
-
-                            <div class="col s2 m2 l1 valign center cyan" ng-hide="proposta.interest_category">
-                                <span class="white-text">Preço</span>
+                        <div class="row category-row card-action">
+                            <div class="col s5 m3 l2 valign center cyan" ng-hide="proposta.interest_category">
+                                <span class="white-text truncate">Vendo por</span>
                                 <div class="divider white"></div>
                                 <p class="white-text center-align">R$ {{proposta.price}}</p>
                             </div>
 
-                            <div class="col s2 m2 l1 center" ng-hide="!proposta.interest_category" style="background-color: {{proposta.category.color}}">
-                                <span class="white-text">Troco por</span>
+                            <div class="col s5 m3 l2 center" ng-hide="!proposta.interest_category" style="background-color: {{proposta.category.color}}">
+                                <span class="white-text truncate">Troco por</span>
                                 <div class="divider white"></div>
                                 <img src="{{'http://localhost/sw_app/icons/'+proposta.category.icon}}" class="responsive-img" style="max-height: 43px;">
                             </div>
 
-                            <div class="col s2 m2 l1 valign center cyan" ng-hide="!proposta.priceCatInterest">
-                                <span class="white-text">Volta</span>
+                            <div class="col s5 m3 l2 valign center cyan offset-l1 offset-m1 offset-s1 category" ng-hide="!proposta.priceCatInterest">
+                                <span class="white-text truncate">E quero </span>
                                 <div class="divider white"></div>
-                                <p class="white-text center-align"><span>+ </span>R$ {{proposta.priceCatInterest}}</p>
+                                <p class="white-text center-align">+ R$ {{proposta.priceCatInterest}}</p>
                             </div>
 
-                            <div class="col s2 m2 l1 center" style="background-color: {{proposta.category.color}}">
+                            <div class="col s5 m3 l2 valign center right hide-on-small-and-down category" style="background-color: {{proposta.category.color}}">
                                 <span class="white-text">Categoria</span>
                                 <div class="divider white"></div>
                                 <img src="{{'http://localhost/sw_app/icons/'+proposta.category.icon}}" class="responsive-img" style="max-height: 43px;">
                             </div>
                         </div>
-                    </a>
+                    </div>
                 </div>
             </div>
             <div class="row">
