@@ -1126,9 +1126,8 @@ swApp.controller('propEditController', ['$scope','httpq','$http','propositionDet
             $scope.proposition.price = 0;
             $scope.proposition.priceCatInterest = 0;
         }
-
-        console.log('proposta ao enviar',$scope.proposition);
-       $http.put('http://localhost:8080/swapitws/rs/proposition/update', $scope.newProp)
+        
+       $http.put('http://localhost:8080/swapitws/rs/proposition/update', $scope.proposition)
 
             .success(function (result) {
 
