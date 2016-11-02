@@ -916,7 +916,9 @@ swApp.controller('propEditController', ['$scope','httpq','$http','propositionDet
                                 "categoryId":""
                             },
 
-                            "interest_category":"",
+                            "interest_category":{
+                                "categoryId":""
+                            },
 
                             "personReduce":{
                                 "personId":""
@@ -939,6 +941,7 @@ swApp.controller('propEditController', ['$scope','httpq','$http','propositionDet
     httpq.get('http://localhost:8080/swapitws/rs/proposition/getbyID/'+$scope.propositionId)
 
         .then(function (response) {
+            console.log(response)
             $scope.proposition.title = response.title;
             $scope.proposition.description = response.description;
             $scope.proposition.addressReduce.streetid = response.addressReduce.streetid;
@@ -946,8 +949,8 @@ swApp.controller('propEditController', ['$scope','httpq','$http','propositionDet
             $scope.proposition.priceCatInterest = response.priceCatInterest;
             $scope.proposition.totalPrice = response.totalPrice;
             $scope.proposition.category.categoryId = response.category.categoryId;
-            $scope.proposition.interest_category = response.interest_category.categoryId;
-            $scope.proposition.personReduce =  response.personReduce.personId;
+            $scope.proposition.interest_category.categoryId = response.interest_category.categoryId;
+            $scope.proposition.personReduce.personId =  response.personReduce.personId;
             $scope.proposition.image =  response.image;
             $scope.proposition.publish_date = response.publish_date;
             $scope.zipcode = response.addressReduce.zipcode;
@@ -1126,19 +1129,26 @@ swApp.controller('propEditController', ['$scope','httpq','$http','propositionDet
             $scope.proposition.price = 0;
             $scope.proposition.priceCatInterest = 0;
         }
-        
-       $http.put('http://localhost:8080/swapitws/rs/proposition/update', $scope.proposition)
 
+        var d = new Date($scope.proposition.publish_date);
+        var datestring = d.getFullYear()+ "-"  + (d.getMonth()+1) + "-" +d.getDate();
+        $scope.proposition.publish_date = datestring;
+
+
+       $http.put('http://localhost:8080/swapitws/rs/proposition/update', $scope.proposition)
             .success(function (result) {
+                console.log($scope.proposition)
 
                 var $toastContent = $('<span>' +
                     '<i class="material-icons green-text">check</i>Proposta atualizada com sucesso !' +
                     '</span>');
                 Materialize.toast($toastContent, 5000);
-                clearProp();
+
+                $location.path('/propManager')
 
             })
             .error(function (data, status) {
+                console.log($scope.proposition)
                 console.log(data,status);
                 console.log($scope.newProp);
                 var $toastContent = $('<span><i class="material-icons red-text">error_outline</i>  Algo deu errado!' +
