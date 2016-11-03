@@ -153,8 +153,6 @@ swApp.controller('personActivateController', ['$scope','$routeParams','$http','h
     $scope.unlock = function () {
 
         $scope.user.blocked =0
-        console.log($scope.user)
-        console.log('usuário',$scope.user);
         $http.put('http://localhost:8080/swapitws/rs/person/update',$scope.user)
             .success(function () {
                 $location.path('/start')
@@ -595,6 +593,7 @@ swApp.controller('newProposalController', ['$scope','Upload','$timeout','httpq',
 
         return rootElements;
     }
+    $scope.flatdata='';
     //CARREGANDO CATEGORIAS
         httpq.get('http://localhost:8080/swapitws/rs/category/getAll')
             .then(function (data) {
@@ -604,6 +603,7 @@ swApp.controller('newProposalController', ['$scope','Upload','$timeout','httpq',
 
                 //Monta a arvore
                 $scope.treedata = buildTree($scope.flatData, whereElementsIdIsInThisField, andTheReferenceToAParentIsInThisField, andSaveTheChildrenInThisField);
+                console.log($scope.treedata);
                 $scope.treedata2 = buildTree(angular.copy($scope.flatData), whereElementsIdIsInThisField, andTheReferenceToAParentIsInThisField, andSaveTheChildrenInThisField);
                 $scope.treedata3 = buildTree(angular.copy($scope.flatData3), whereElementsIdIsInThisField, andTheReferenceToAParentIsInThisField, andSaveTheChildrenInThisField);
             })
@@ -867,7 +867,6 @@ swApp.controller('proposalManagerController', ['$scope','httpq','$http','proposi
                  })
 
                  .error(function (response) {
-                 console.log(consolle);
                  console.log(response);
                  var $toastContent = $('<span>' +
                  '<i class="material-icons red-text">check</i>Não consegui remover a proposta!<p>Tente mais tarde :`(</p>' +
@@ -903,6 +902,7 @@ swApp.controller('propEditController', ['$scope','httpq','$http','propositionDet
     }
     $scope.propositionId = propositionDetails.propId;
     $scope.proposition = {
+                            "propositionId":"",
                             "title":"",
                             "description":"",
                             "addressReduce":{
@@ -921,7 +921,10 @@ swApp.controller('propEditController', ['$scope','httpq','$http','propositionDet
                             },
 
                             "personReduce":{
-                                "personId":""
+                                "personId":"",
+                                "addressReduce":{
+                                    "addressid":""
+                                }
                             },
 
                             "image":[],
@@ -942,6 +945,7 @@ swApp.controller('propEditController', ['$scope','httpq','$http','propositionDet
 
         .then(function (response) {
             console.log(response)
+            $scope.proposition.propositionId = response.propositionId;
             $scope.proposition.title = response.title;
             $scope.proposition.description = response.description;
             $scope.proposition.addressReduce.streetid = response.addressReduce.streetid;
@@ -951,6 +955,7 @@ swApp.controller('propEditController', ['$scope','httpq','$http','propositionDet
             $scope.proposition.category.categoryId = response.category.categoryId;
             $scope.proposition.interest_category.categoryId = response.interest_category.categoryId;
             $scope.proposition.personReduce.personId =  response.personReduce.personId;
+            $scope.proposition.personReduce.addressReduce.addressid =  response.personReduce.addressReduce.addressid;
             $scope.proposition.image =  response.image;
             $scope.proposition.publish_date = response.publish_date;
             $scope.zipcode = response.addressReduce.zipcode;
