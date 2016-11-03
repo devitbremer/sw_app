@@ -53,7 +53,7 @@
                                         <div class="input-field col s12 m8 l8 offset-l2 offset-m2">
                                             <h6>Em qual das categorias abaixo seu produto se encaixa? Clique no ícone
                                                 para expandir.</h6>
-                                            <div class="card grey lighten-1">
+                                            <!--<div class="card grey lighten-1">
                                                 <div class="card-content">
                                                     <div
                                                             data-angular-treeview="true"
@@ -65,7 +65,12 @@
                                                             data-node-collapsed="false">
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div>-->
+                                            <select class="browser-default">
+                                                <option>Categorias</option>
+                                                <option ng-repeat="cat in flatData " value="{{cat.categoryId}}">{{cat.categoryName}}</option>
+                                            </select>
+                                            <select class="browser-default" ng-options="c.c in flatData"></select>
                                         </div>
                                     </div>
                                 </div>

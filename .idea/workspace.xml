@@ -3,6 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="7a40145a-9ec8-4c8c-8067-e792f5e7db04" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/sw-app.js" afterPath="$PROJECT_DIR$/js/sw-app.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/newProposal.html" afterPath="$PROJECT_DIR$/pages/newProposal.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/propEdit.html" afterPath="$PROJECT_DIR$/pages/propEdit.html" />
     </list>
     <ignored path="sw_app.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -28,8 +30,8 @@
       <file leaf-file-name="sw-app.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/js/sw-app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="705">
-              <caret line="1146" column="44" selection-start-line="1146" selection-start-column="44" selection-end-line="1146" selection-end-column="44" />
+            <state relative-caret-position="1062">
+              <caret line="957" column="67" selection-start-line="957" selection-start-column="58" selection-end-line="957" selection-end-column="67" />
               <folding>
                 <element signature="e#0#42#0" expanded="false" />
               </folding>
@@ -40,8 +42,28 @@
       <file leaf-file-name="propEdit.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pages/propEdit.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="503">
-              <caret line="119" column="42" selection-start-line="119" selection-start-column="42" selection-end-line="119" selection-end-column="42" />
+            <state relative-caret-position="310">
+              <caret line="55" column="43" selection-start-line="55" selection-start-column="43" selection-end-line="55" selection-end-column="43" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="newProposal.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pages/newProposal.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="585">
+              <caret line="72" column="90" selection-start-line="72" selection-start-column="90" selection-end-line="72" selection-end-column="90" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="sideMenu.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pages/sideMenu.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1592">
+              <caret line="122" column="0" selection-start-line="122" selection-start-column="0" selection-end-line="122" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -130,7 +152,6 @@
         <option value="$PROJECT_DIR$/js/plugins/jquery-simple-treepicker-master/demo.html" />
         <option value="$PROJECT_DIR$/css/angular.treeview.css" />
         <option value="$PROJECT_DIR$/pages/teste.php" />
-        <option value="$PROJECT_DIR$/pages/newProposal.html" />
         <option value="$PROJECT_DIR$/pages/footer.html" />
         <option value="$USER_HOME$/Desktop/Trabalho PrÃ¡tico 1/index.html" />
         <option value="$USER_HOME$/Desktop/index.html" />
@@ -147,6 +168,7 @@
         <option value="$PROJECT_DIR$/pages/proposalManager.html" />
         <option value="$PROJECT_DIR$/pages/main.html" />
         <option value="$PROJECT_DIR$/pages/propEdit.html" />
+        <option value="$PROJECT_DIR$/pages/newProposal.html" />
         <option value="$PROJECT_DIR$/js/sw-app.js" />
       </list>
     </option>
@@ -391,12 +413,12 @@
       <workItem from="1477673767304" duration="66749000" />
       <workItem from="1478031341655" duration="243000" />
       <workItem from="1478086546522" duration="14474000" />
-      <workItem from="1478110627638" duration="11522000" />
+      <workItem from="1478110627638" duration="17399000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="435854000" />
+    <option name="totallyTimeSpent" value="441731000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -619,13 +641,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pages/sideMenu.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="747">
-          <caret line="122" column="0" selection-start-line="122" selection-start-column="0" selection-end-line="122" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pages/propDetails.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="614">
@@ -658,13 +673,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
           <caret line="18" column="49" selection-start-line="18" selection-start-column="49" selection-end-line="18" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/newProposal.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="49" column="46" selection-start-line="49" selection-start-column="46" selection-end-line="49" selection-end-column="46" />
         </state>
       </provider>
     </entry>
@@ -716,18 +724,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/pages/sideMenu.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1592">
+          <caret line="122" column="0" selection-start-line="122" selection-start-column="0" selection-end-line="122" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/pages/propEdit.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="503">
-          <caret line="119" column="42" selection-start-line="119" selection-start-column="42" selection-end-line="119" selection-end-column="42" />
+        <state relative-caret-position="310">
+          <caret line="55" column="43" selection-start-line="55" selection-start-column="43" selection-end-line="55" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/newProposal.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="585">
+          <caret line="72" column="90" selection-start-line="72" selection-start-column="90" selection-end-line="72" selection-end-column="90" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/js/sw-app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="705">
-          <caret line="1146" column="44" selection-start-line="1146" selection-start-column="44" selection-end-line="1146" selection-end-column="44" />
+        <state relative-caret-position="1062">
+          <caret line="957" column="67" selection-start-line="957" selection-start-column="58" selection-end-line="957" selection-end-column="67" />
           <folding>
             <element signature="e#0#42#0" expanded="false" />
           </folding>
