@@ -1,7 +1,7 @@
 /**
  * Created by devit on 03/10/2016.
  */
-var swApp = angular.module('swApp', ['ngRoute','ngAnimate', 'ngTouch','ngFileUpload','angularTreeview','ngMask','angular-md5','ngCookies','socialLogin']);
+var swApp = angular.module('swApp', ['ngRoute','ngAnimate', 'ngTouch','ngFileUpload','angularTreeview','ngMask','angular-md5','ngCookies','socialLogin', '720kb.tooltips']);
 
 
 swApp.config(function ($routeProvider) {
@@ -92,10 +92,17 @@ swApp.directive('ngFiles', ['$parse', function ($parse) {
     }
 } ]);
 
-swApp.service('propositionDetails' ,function () {
+swApp.service('propService' ,['httpq',function (httpq) {
 
-    this.propId ='';
-});
+        this.propId ='';
+        this.category = null;
+        this.city = null;
+        this.selectedState = '';
+        this.price_max = 9999999;
+        this.price_min = 0;
+        this.title = null;
+
+}]);
 
 swApp.service('loginService', ['$location','httpq',function ($location,httpq) {
 
@@ -347,72 +354,50 @@ swApp.controller('startController', ['$scope','$location','$cookies', function (
 
 
 }]);
-swApp.controller('mainController', ['$scope','httpq','$location','propositionDetails','$cookies',function ($scope,httpq,$location,propositionDetails,$cookies) {
+swApp.controller('mainController', ['$scope','httpq','$location','propService', function ($scope,httpq,$location,propService) {
 
 
     $scope.userLoged = false;
     $scope.userID = '3a09593e-3e2e-4c17-a2de-2f308776dbd7';
     $scope.propostas = [];
-    $scope.states=[];
-    $scope.cities=[];
-    $scope.selectedState='';
-    $scope.selectCity = '';
 
 
-
-    //BUSCA TODAS AS PROPOSTAS
-    httpq.get('http://localhost:8080/swapitws/rs/proposition/getPropPerson/'+$scope.userID)
-
-        .then(function (response) {
-            $scope.propostas = response;
-
-        })
-        .catch(function (response) {
-            console.log(response)
-        });
-
-    //BUSCA TODOS OS ESTADOS
-    httpq.get('http://localhost:8080/swapitws/rs/state/get')
-
-        .then(function (response) {
-            $scope.states = response;
-        })
-        .catch(function (response) {
-
-            console.log(response)
-        });
-
-    //BUSCA AS CIDADES DO ESTADO SELECIONADO
-    $scope.$watch('selectedState', function () {
-        httpq.get('http://localhost:8080/swapitws/rs/city/getCityState/'+$scope.selectedState)
-
+    $scope.getProps = function () {
+        httpq.get('http://localhost:8080/swapitws/rs/proposition/getPropLike/'+propService.title+'/'+propService.category+'/'+propService.city+'/'+propService.price_max+'/'+propService.price_min)
             .then(function (response) {
-                $scope.cities = response;
+                $scope.propostas = response;
             })
             .catch(function (response) {
-                console.log(response);
-            })
-    });
+
+            });
+    }
+
+
+    $scope.$watch(function () {return propService.city;},function () {
+        $scope.getProps();
+        console.log('mudou no main',propService.city);
+    })
+
+    
+
+
 
     //DIRECIONA PARA OS DETALHES DA PROPOSTA
     $scope.viewDetails = function (propositionId) {
-
-        propositionDetails.propId = propositionId;
+        propService.propId = propositionId;
         $location.path('/details');
-        console.log(propositionDetails.propId);
-        
     }
 
 }]);
 
-swApp.controller('detailsController', ['$scope','propositionDetails','httpq','$location', function ($scope, propositionDetails,httpq,$location) {
+swApp.controller('detailsController', ['$scope','propService','httpq','$location', function ($scope, propService,httpq,$location) {
 
     $scope.userLoged = false;
-    $scope.propositionId = propositionDetails.propId;
+    $scope.propositionId = propService.propId;
     $scope.proposition = {};
 
 
-    if (!propositionDetails.propId){
+    if (!propService.propId){
 
         $location.path('/main')
     }
@@ -492,7 +477,9 @@ swApp.controller('newProposalController', ['$scope','Upload','$timeout','httpq',
                      "categoryId":""
                      },
 
-                     "interest_category":"",
+                     "interest_category":{
+                         "categoryId":""
+                     },
 
                      "personReduce":{
                      "personId":$scope.userID
@@ -622,13 +609,13 @@ swApp.controller('newProposalController', ['$scope','Upload','$timeout','httpq',
 
     $scope.$watch( 'vt_category.currentNode', function( newObj, oldObj ) {
         if( $scope.vt_category && angular.isObject($scope.vt_category.currentNode) ) {
-            $scope.newProp.interest_category = $scope.vt_category.currentNode.categoryId;
+            $scope.newProp.interest_category.categoryId = $scope.vt_category.currentNode.categoryId;
         }
     }, false);
 
     $scope.$watch( 't_category.currentNode', function( newObj, oldObj ) {
         if( $scope.t_category && angular.isObject($scope.t_category.currentNode) ) {
-            $scope.newProp.interest_category = $scope.t_category.currentNode.categoryId;
+            $scope.newProp.interest_category.categoryId = $scope.t_category.currentNode.categoryId;
         }
     }, false);
 
@@ -807,7 +794,7 @@ swApp.controller('profileController', ['$scope','httpq','$http', function ($scop
 
 }]);
 
-swApp.controller('proposalManagerController', ['$scope','httpq','$http','propositionDetails','$location', function ($scope,httpq,$http,propositionDetails,$location) {
+swApp.controller('proposalManagerController', ['$scope','httpq','$http','propService','$location', function ($scope,httpq,$http,propService,$location) {
 
     $scope.userLoged = true;
     $scope.userID = '3a09593e-3e2e-4c17-a2de-2f308776dbd7';
@@ -886,7 +873,7 @@ swApp.controller('proposalManagerController', ['$scope','httpq','$http','proposi
 
     $scope.editProp = function (propositionId) {
 
-        propositionDetails.propId = propositionId
+        propService.propId = propositionId
 
         $location.path('/propEdit');
 
@@ -895,17 +882,18 @@ swApp.controller('proposalManagerController', ['$scope','httpq','$http','proposi
 
 }])
 
-swApp.controller('propEditController', ['$scope','httpq','$http','propositionDetails','$location', function ($scope,httpq,$http,propositionDetails,$location) {
+swApp.controller('propEditController', ['$scope','httpq','$http','propService','$location', function ($scope,httpq,$http,propService,$location) {
 
-    if(!propositionDetails.propId){
+    if(!propService.propId){
         $location.path('/propManager')
     }
-    $scope.propositionId = propositionDetails.propId;
+    $scope.propositionId = propService.propId;
     $scope.proposition = {
                             "propositionId":"",
                             "title":"",
                             "description":"",
                             "addressReduce":{
+                                "addressid":"",
                                 "streetid":""
                             },
                             "price": 0,
@@ -949,6 +937,7 @@ swApp.controller('propEditController', ['$scope','httpq','$http','propositionDet
             $scope.proposition.title = response.title;
             $scope.proposition.description = response.description;
             $scope.proposition.addressReduce.streetid = response.addressReduce.streetid;
+            $scope.proposition.addressReduce.addressid = response.addressReduce.addressid;
             $scope.proposition.price = response.price;
             $scope.proposition.priceCatInterest = response.priceCatInterest;
             $scope.proposition.totalPrice = response.totalPrice;
@@ -1099,13 +1088,13 @@ swApp.controller('propEditController', ['$scope','httpq','$http','propositionDet
 
     $scope.$watch( 'vt_category.currentNode', function( newObj, oldObj ) {
         if( $scope.vt_category && angular.isObject($scope.vt_category.currentNode) ) {
-            $scope.proposition.interest_category = $scope.vt_category.currentNode.categoryId;
+            $scope.proposition.interest_category.categoryId = $scope.vt_category.currentNode.categoryId;
         }
     }, false);
 
     $scope.$watch( 't_category.currentNode', function( newObj, oldObj ) {
         if( $scope.t_category && angular.isObject($scope.t_category.currentNode) ) {
-            $scope.proposition.interest_category = $scope.t_category.currentNode.categoryId;
+            $scope.proposition.interest_category.categoryId = $scope.t_category.currentNode.categoryId;
         }
     }, false);
 
@@ -1163,6 +1152,90 @@ swApp.controller('propEditController', ['$scope','httpq','$http','propositionDet
 
             });
     };
+
+}])
+
+swApp.controller('sideMenuController', ['$scope','$routeParams','$http','httpq','$location','propService', function ($scope,$routeParams,$http,httpq,$location,propService) {
+
+
+
+    $scope.cities = '';
+    $scope.states = '';
+    $scope.categories = '';
+
+    $scope.selectedState = '00D9B42B-28B3-4FA3-B149-DCB3147BB0B8';
+    $scope.selectedCity = null;
+
+    $scope.title=null;
+    $scope.category=propService.categoryId;
+    $scope.city=null;
+    $scope.price_max=99999999;
+    $scope.price_min=0;
+
+
+    //BUSCA TODOS OS ESTADOS
+    httpq.get('http://localhost:8080/swapitws/rs/state/get')
+
+        .then(function (response) {
+            $scope.states = response;
+        })
+        .catch(function (response) {
+
+            console.log(response)
+        });
+
+    //BUSCA AS CIDADES DO ESTADO SELECIONADO
+    $scope.$watch('selectedState', function () {
+        httpq.get('http://localhost:8080/swapitws/rs/city/getCityState/'+$scope.selectedState)
+
+            .then(function (response) {
+                $scope.cities = response;
+            })
+            .catch(function (response) {
+                console.log(response);
+            })
+    });
+
+    $scope.$watch('selectedCity', function () {
+        propService.city = $scope.selectedCity;
+        propService.selectedState = $scope.selectedState;
+        console.log('foi pro service',propService.city);
+    });
+
+
+    $scope.$watch('category',function () {
+        if($scope.category == null){
+
+            httpq.get('http://localhost:8080/swapitws/rs/category/getParent/e1408c61-98bc-11e6-a3ce-80fa5b2affba')
+                .then(function (response) {
+                    $scope.categories = response;
+                })
+                .catch(function () {
+
+                })
+        }
+        else {
+
+            httpq.get('http://localhost:8080/swapitws/rs/category/getParent/'+$scope.category)
+                .then(function (response) {
+                    $scope.categories = response;
+                })
+                .catch(function () {
+
+                })
+        }
+    })
+    
+    $scope.setCategory = function (categoryid) {
+        $scope.category = categoryid;
+        propService.category = categoryid;
+    }
+    $scope.resetCategories = function () {
+        $scope.category = 'e1408c61-98bc-11e6-a3ce-80fa5b2affba';
+        propService.category = null;
+    }
+
+
 
 }])
 
