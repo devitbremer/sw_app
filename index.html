@@ -65,7 +65,7 @@
 
 </head>
 
-<body class="grey lighten-2">
+<body class="grey lighten-2" ng-controller="indexController">
 <!-- Start Page Loading -->
 <div id="loader-wrapper">
     <div id="loader"></div>
@@ -74,9 +74,17 @@
 </div>
 <!-- End Page Loading -->
 
+<!--INSERE TOPO-->
+<ng-include src="'pages/topnavbar.html'" ng-hide=""></ng-include>
 
-<div ng-view></div>
-
+<!-- INICIO MAIN -->
+<div id="{{mainId}}">
+    <div class="wrapper">
+        <!-- INSERE SIDE MENU-->
+        <ng-include src="'pages/sideMenu.html'"></ng-include>
+        <div ng-view></div>
+    </div>
+</div>
 
 </body>
 

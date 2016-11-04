@@ -1,5 +1,6 @@
 <!-- LEFT SIDEBAR NAV-->
-<aside id="left-sidebar-nav" ng-controller="sideMenuController">
+<aside id="left-sidebar-nav" ng-controller="sideMenuController" ng-if="showSideBar">
+    {{hideSideBar}}
     <ul id="slide-out" class="side-nav fixed leftside-navigation blue-grey darken-4">
 
         <!--GERENCIADOR DE PERFIL APENAS MOBILE-->
@@ -63,7 +64,7 @@
             <a ng-click="resetCategories()" class="btn waves-effect waves-light blue white-text" style="margin-bottom: 30px;"><i class="material-icons left">refresh</i> Todas as categorias</a>
             <div class="col l3 center white-text" style="padding-right: 5px; margin-bottom: 10px;"  ng-repeat="category in categories">
                 <div class="hoverable" style="background-color: {{category.color}}" ng-click="setCategory(category.categoryId)" tooltips tooltip-template="{{category.categoryName}}">
-                    <img class="responsive-img" ng-src="{{'http://localhost/sw_app/icons/'+category.icon}}" style="height:50px;width: 96px">
+                    <img class="responsive-img" ng-src="{{'http://localhost/sw_app/icons/'+category.icon}}" style="height:50px;width: 96px;">
                 </div>
             </div>
 

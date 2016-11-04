@@ -350,7 +350,9 @@ swApp.controller('startController', ['$scope','$location','$cookies', function (
     if($scope.user.personId){
         $scope.userLoged = true;
     }
+
 */
+
 
 
 }]);
@@ -368,14 +370,18 @@ swApp.controller('mainController', ['$scope','httpq','$location','propService', 
                 $scope.propostas = response;
             })
             .catch(function (response) {
-
+                $scope.propostas = [];
+                var $toastContent = $('<span><i class="material-icons red-text">search</i> Desculpe!' +
+                    '<p class="center">Não conseguimos encontar nenhuma proposta...</p>' +
+                    '</span>');
+                Materialize.toast($toastContent, 5000);
             });
     }
 
 
-    $scope.$watch(function () {return propService.city;},function () {
+    $scope.$watch(function () {return propService.city, propService.category;},function () {
         $scope.getProps();
-        console.log('mudou no main',propService.city);
+        console.log('rodou a busca',propService.category)
     })
 
     
@@ -1158,7 +1164,6 @@ swApp.controller('propEditController', ['$scope','httpq','$http','propService','
 swApp.controller('sideMenuController', ['$scope','$routeParams','$http','httpq','$location','propService', function ($scope,$routeParams,$http,httpq,$location,propService) {
 
 
-
     $scope.cities = '';
     $scope.states = '';
     $scope.categories = '';
@@ -1181,7 +1186,6 @@ swApp.controller('sideMenuController', ['$scope','$routeParams','$http','httpq',
         })
         .catch(function (response) {
 
-            console.log(response)
         });
 
     //BUSCA AS CIDADES DO ESTADO SELECIONADO
@@ -1192,14 +1196,12 @@ swApp.controller('sideMenuController', ['$scope','$routeParams','$http','httpq',
                 $scope.cities = response;
             })
             .catch(function (response) {
-                console.log(response);
             })
     });
 
     $scope.$watch('selectedCity', function () {
         propService.city = $scope.selectedCity;
         propService.selectedState = $scope.selectedState;
-        console.log('foi pro service',propService.city);
     });
 
 
@@ -1234,6 +1236,32 @@ swApp.controller('sideMenuController', ['$scope','$routeParams','$http','httpq',
         $scope.category = 'e1408c61-98bc-11e6-a3ce-80fa5b2affba';
         propService.category = null;
     }
+
+
+
+}])
+
+swApp.controller('indexController',['$scope','$location',function ($scope,$location) {
+
+
+    $scope.$watch(function () {return $location.path();},function () {
+        if (
+            $location.path() === ('/') ||
+            $location.path() === ('/start') ||
+            $location.path() === ('/login') ||
+            $location.path() === ('/register') ||
+            $location.path() ===('/forgot') ||
+            $location.path() === ('/activate') ||
+            $location.path() === ('/terms')
+        ){
+            $scope.showSideBar = false;
+            $scope.mainId = '';
+        }
+        else {
+            $scope.showSideBar = true;
+            $scope.mainId = 'main';
+        }
+    })
 
 
 
