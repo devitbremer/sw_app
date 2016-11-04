@@ -344,14 +344,18 @@ swApp.controller('forgotController', ['$scope', function ($scope) {
 
 }]);
 
-swApp.controller('startController', ['$scope','$location','$cookies', function ($scope, $location,$cookies) {
+swApp.controller('startController', ['$scope','$location','$cookies','propService', function ($scope, $location,$cookies,propService) {
 
     /*$scope.user = JSON.parse($cookies.get('loginData'));
     if($scope.user.personId){
         $scope.userLoged = true;
     }
-
 */
+
+    $scope.selectCategory = function (categoryId) {
+        propService.category = categoryId;
+        $location.path('/main');
+    }
 
 
 
@@ -1260,6 +1264,21 @@ swApp.controller('indexController',['$scope','$location',function ($scope,$locat
         else {
             $scope.showSideBar = true;
             $scope.mainId = 'main';
+        }
+    })
+
+    $scope.$watch(function () {return $location.path();},function () {
+        if (
+            $location.path() === ('/login') ||
+            $location.path() === ('/register') ||
+            $location.path() ===('/forgot') ||
+            $location.path() === ('/activate') ||
+            $location.path() === ('/terms')
+        ){
+            $scope.showTopMenu = false;
+        }
+        else {
+            $scope.showTopMenu = true;
         }
     })
 
