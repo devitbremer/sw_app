@@ -89,8 +89,25 @@ footer {
   opacity:1;
 }
 
+.hoverable-ligth:hover {
+  transition: box-shadow .25s;
+  box-shadow: 0 8px 17px 0 rgba(239, 239, 239, 0.2), 0 6px 20px 0 rgba(255, 255, 255, 0.19);
+}
 .arrow.next:hover{
   opacity:1;
+}
+
+.input-field-side-nav label {
+  color: #ffffff;
+  position: absolute;
+  top: 0.8rem;
+  font-size: 1rem;
+  cursor: text;
+  transition: .2s ease-out;
+}
+
+.input-field-sw .prefix.active {
+  color: #26a69a;
 }
 
 .nav {
