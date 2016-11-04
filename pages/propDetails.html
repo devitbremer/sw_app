@@ -1,144 +1,139 @@
-<!--INSERE TOPO-->
-<ng-include src="'pages/topnavbar.html'"></ng-include>
+<!-- INICIA CONTEUDO -->
+<section id="content">
 
-<!-- INICIO MAIN -->
-<div id="main">
+    <!--start container-->
 
-    <div class="wrapper">
-
-        <!-- INSERE SIDE MENU-->
-        <ng-include src="'pages/sideMenu.html'"></ng-include>
-
-        <!-- INICIA CONTEUDO -->
-        <section id="content">
-
-            <!--start container-->
-
-            <div class="container">
-                <div class="row">
-                    <div class="col s12 m10 l9 offset-m1" style="margin-top: 20px;margin-bottom: 20px;">
-                        <nav>
-                            <div class="nav-wrapper blue-grey darken-4">
-                                <form>
-                                    <div class="input-field">
-                                        <input id="search" type="search" required>
-                                        <label for="search"><i class="material-icons white-text">search</i></label>
-                                        <i class="material-icons">close</i>
-                                    </div>
-                                </form>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m10 l9 offset-m1" style="margin-top: 20px;margin-bottom: 20px;">
+                <nav>
+                    <div class="nav-wrapper blue-grey darken-4">
+                        <form>
+                            <div class="input-field">
+                                <input id="search" type="search" required>
+                                <label for="search"><i class="material-icons white-text">search</i></label>
+                                <i class="material-icons">close</i>
                             </div>
-                        </nav>
+                        </form>
                     </div>
-                </div>
+                </nav>
+            </div>
+        </div>
 
 
-                <div class="container">
+        <div class="container">
 
-                    <div class="row">
-                        <div class="col l9 m10 s12 offset-m1">
-                            <div class="card">
-                                <div class="card-content center">
-                                    <i class="material-icons">star</i>
-                                    <span class="card-title bold">{{proposition.title}}</span>
-                                    <div class="divider"></div>
-                                    <br>
-                                    <div class="row">
-                                        <div class="col l6 m6 s12">
-                                            <div class="container slider-carousel">
-                                                <!-- LISTA AS FOTOS -->
-                                                <img  ng-repeat="photo in photos"
-                                                     class="slider-carousel responsive-img"
-                                                      ng-swipe-right="showPrev()"
-                                                      ng-swipe-left="showNext()"
-                                                      ng-show="isActive($index)"
-                                                      ng-src="{{'http://localhost:8080/swapitws/rs/propositionIMG/download/'+photo.imageid}}"
-                                                      style="max-height: 300px"
+            <div class="row">
+                <div class="col l9 m10 s12 offset-m1">
+                    <div class="card">
+                        <div class="card-content center">
+                            <i class="material-icons">star</i>
+                            <span class="card-title bold">{{proposition.title}}</span>
+                            <div class="divider"></div>
+                            <br>
+                            <div class="row">
+                                <div class="col l6 m6 s12">
+                                    <div class="container slider-carousel">
+                                        <!-- LISTA AS FOTOS -->
+                                        <img ng-repeat="photo in photos"
+                                             class="slider-carousel responsive-img"
+                                             ng-swipe-right="showPrev()"
+                                             ng-swipe-left="showNext()"
+                                             ng-show="isActive($index)"
+                                             ng-src="{{'http://localhost:8080/swapitws/rs/propositionIMG/download/'+photo.imageid}}"
+                                             style="max-height: 300px"
+                                        />
+                                        <!-- THUMBS -->
+                                        <ul class="nav">
+                                            <li ng-repeat="photo in photos" ng-class="{'active':isActive($index)}">
+                                                <img src="{{'http://localhost:8080/swapitws/rs/propositionIMG/download/'+photo.imageid}}"
+                                                     ng-click="showPhoto($index);"
+                                                     style="height: 50px"
+                                                     class="responsive-img"
                                                 />
-                                                <!-- THUMBS -->
-                                                <ul class="nav">
-                                                    <li ng-repeat="photo in photos" ng-class="{'active':isActive($index)}">
-                                                        <img src="{{'http://localhost:8080/swapitws/rs/propositionIMG/download/'+photo.imageid}}"
-                                                             ng-click="showPhoto($index);"
-                                                             style="height: 50px"
-                                                             class="responsive-img"
-                                                        />
-                                                    </li>
-                                                </ul>
-                                            </div>
+                                            </li>
+                                        </ul>
+                                    </div>
 
-                                        </div>
-                                        <div id="description" class="col l6 m6 s12">
-                                            <div class="card">
-                                                <div class="card-content">
-                                                    <span class="card-title">Detalhes</span>
-                                                    <div class="divider"></div>
-                                                    <br>
-                                                    <p class="center-align">{{proposition.description}}</p>
-                                                </div>
-                                            </div>
+                                </div>
+                                <div id="description" class="col l6 m6 s12">
+                                    <div class="card">
+                                        <div class="card-content">
+                                            <span class="card-title">Detalhes</span>
+                                            <div class="divider"></div>
+                                            <br>
+                                            <p class="center-align">{{proposition.description}}</p>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col l6 m6 s12">
-                                            <!--Botões de ação telas grandes-->
-                                            <br>
-                                            <br>
-                                            <br>
-                                            <div id="actions"class="hide-on-small-and-down">
-                                                <button class="waves-effect btn-flat btn-large waves-red waves-light"><i class="material-icons left red-text">favorite</i>Favorito</button>
-                                                <button class="waves-effect btn-flat btn-large waves-orange waves-light"><i class="material-icons left orange-text">block</i>Denunciar</button>
-                                            </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col l6 m6 s12">
+                                    <!--Botões de ação telas grandes-->
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <div id="actions" class="hide-on-small-and-down">
+                                        <button class="waves-effect btn-flat btn-large waves-red waves-light"><i
+                                                class="material-icons left red-text">favorite</i>Favorito
+                                        </button>
+                                        <button class="waves-effect btn-flat btn-large waves-orange waves-light"><i
+                                                class="material-icons left orange-text">block</i>Denunciar
+                                        </button>
+                                    </div>
 
-                                            <!--Botões popup de ação tela pequena-->
-                                            <div id="actionsSmall" class="hide-on-med-and-up">
-                                                <div class="fixed-action-btn horizontal" style="bottom: 80px; right: 24px;">
-                                                    <a class="btn-floating btn-large red">
-                                                        <i class="large material-icons">more_horiz</i>
-                                                    </a>
-                                                    <ul>
-                                                        <li>
-                                                            <a class="btn-floating red"><i class="material-icons">favorite</i></a>
-                                                        </li>
-                                                        <li>
-                                                            <a class="btn-floating orange darken-1"><i class="material-icons">block</i></a>
-                                                        </li>
+                                    <!--Botões popup de ação tela pequena-->
+                                    <div id="actionsSmall" class="hide-on-med-and-up">
+                                        <div class="fixed-action-btn horizontal" style="bottom: 80px; right: 24px;">
+                                            <a class="btn-floating btn-large red">
+                                                <i class="large material-icons">more_horiz</i>
+                                            </a>
+                                            <ul>
+                                                <li>
+                                                    <a class="btn-floating red"><i
+                                                            class="material-icons">favorite</i></a>
+                                                </li>
+                                                <li>
+                                                    <a class="btn-floating orange darken-1"><i class="material-icons">block</i></a>
+                                                </li>
 
-                                                    </ul>
-                                                </div>
-                                            </div>
+                                            </ul>
                                         </div>
-                                        <div id="contact" class="col s12 m6 l6">
-                                            <div class="card green">
-                                                <div class="card-content white-text">
-                                                    <span class="card-title">Contato</span>
-                                                    <div class="divider white"></div>
-                                                    <br>
-                                                    <p class="left-align"><i class="material-icons">person</i> {{proposition.personReduce.personName}}</p>
-                                                    <p class="left-align"><i class="material-icons">send</i> {{proposition.personReduce.email}}</p>
-                                                    <p class="left-align"><i class="material-icons">phone</i> {{proposition.personReduce.phone}}</p>
-                                                    <p class="left-align"><i class="material-icons">location_on</i> {{proposition.addressReduce.cityName}} - {{proposition.addressReduce.stateAcronym}}</p>
-                                                </div>
-                                            </div>
+                                    </div>
+                                </div>
+                                <div id="contact" class="col s12 m6 l6">
+                                    <div class="card green">
+                                        <div class="card-content white-text">
+                                            <span class="card-title">Contato</span>
+                                            <div class="divider white"></div>
+                                            <br>
+                                            <p class="left-align"><i class="material-icons">person</i>
+                                                {{proposition.personReduce.personName}}</p>
+                                            <p class="left-align"><i class="material-icons">send</i>
+                                                {{proposition.personReduce.email}}</p>
+                                            <p class="left-align"><i class="material-icons">phone</i>
+                                                {{proposition.personReduce.phone}}</p>
+                                            <p class="left-align"><i class="material-icons">location_on</i>
+                                                {{proposition.addressReduce.cityName}} -
+                                                {{proposition.addressReduce.stateAcronym}}</p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-
                     </div>
-
-
                 </div>
 
-                <!--end container-->
-        </section>
-        <!--FIM CONTEUDO -->
+
+            </div>
 
 
+        </div>
     </div>
+    <!--end container-->
+</section>
+<!--FIM CONTEUDO -->
 
-</div>
 <!-- FIM MAIN -->
 
 

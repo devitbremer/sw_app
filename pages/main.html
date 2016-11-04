@@ -1,13 +1,4 @@
-<!--INSERE TOPO-->
-<ng-include src="'pages/topnavbar.html'"></ng-include>
 
-<!-- INICIO MAIN -->
-<div id="main">
-
-    <div class="wrapper">
-
-        <!-- INSERE SIDE MENU-->
-        <ng-include src="'pages/sideMenu.html'"></ng-include>
 
         <!-- INICIA CONTEUDO -->
         <section id="content">
@@ -33,10 +24,11 @@
                 </div>
             </div>
 
-            <div class="row" ng-repeat="proposta in propostas">
+            <div class="row" ng-repeat="proposta in propostas track by $index">
                 <div class="col s12 m10 l9 card hoverable valign-wrapper offset-m1" ng-click="viewDetails(proposta.propositionId)">
                     <div class="col s4 m3 l2 valign card">
-                        <img ng-src="{{'http://localhost:8080/swapitws/rs/propositionIMG/download/'+proposta.image[0].imageid}}" class="responsive-img left" style="height: 180px;">
+                        <img ng-src="{{'http://localhost:8080/swapitws/rs/propositionIMG/download/'+proposta.image[0].imageid}}" ng-hide="!proposta.image[0].imageid" class="responsive-img left" style="height: 180px;">
+                        <img src="http://localhost/sw_app/images/sem-foto.jpg" ng-hide="proposta.image[0].imageid" class="responsive-img left" style="height: 180px;">
                     </div>
 
                     <div class="col s8 m9 l10">
@@ -54,7 +46,7 @@
                                 <p class="white-text center-align">R$ {{proposta.price}}</p>
                             </div>
 
-                            <div class="col s5 m3 l2 center" ng-hide="!proposta.interest_category" style="background-color: {{proposta.interest_category.color}}">
+                            <div class="col s5 m3 l2 center" ng-hide="!proposta.interest_category" style="background-color: {{proposta.interest_category.color}}" >
                                 <span class="white-text truncate">Troco por</span>
                                 <div class="divider white"></div>
                                 <img ng-src="{{'http://localhost/sw_app/icons/'+proposta.interest_category.icon}}" class="responsive-img" style="max-height: 43px;">
@@ -92,10 +84,6 @@
         </section>
     <!-- FIM CONTEUDO -->
 
-
-</div>
-
-</div>
 <!-- FIM MAIN -->
 
 
