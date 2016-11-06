@@ -92,7 +92,7 @@ swApp.directive('ngFiles', ['$parse', function ($parse) {
     }
 } ]);
 
-swApp.service('propService' ,['httpq',function (httpq) {
+swApp.service('propService' ,[function () {
 
         this.propId ='';
         this.category = null;
@@ -104,10 +104,23 @@ swApp.service('propService' ,['httpq',function (httpq) {
 
 }]);
 
-swApp.service('loginService', ['$location','httpq',function ($location,httpq) {
+swApp.service('loginService', ['$cookies',function ($cookies) {
 
-    this.rememberMe = '';
+    if($cookies.get('loginData')) {
+        this.user =  JSON.parse($cookies.get('loginData'));
+        this.userLoged = true;
+    }
+    else {
+        this.userLoged = false;
+    }
+
+    this.path = '/start';
+
+    this.refreshUser = function () {
+        this.user =  JSON.parse($cookies.get('loginData'));
+    }
 }]);
+
 
 swApp.config(function(socialProvider){
     socialProvider.setGoogleKey("194841814966-te2iendhb3kjprk5d8gmooa5r4gma4j3.apps.googleusercontent.com");
@@ -223,14 +236,14 @@ swApp.controller('registerController', ['$scope', '$filter', '$http', '$location
 
 }]);
 
-swApp.controller('loginController', ['$scope','$http','md5','$location','$cookies','$rootScope','httpq', function ($scope,$http,md5,$location,$cookies,$rootScope,httpq) {
+swApp.controller('loginController', ['$scope','$http','md5','$location','$cookies','$rootScope','httpq','loginService', function ($scope,$http,md5,$location,$cookies,$rootScope,httpq,loginService) {
 
     //VERIFICA SE EXISTE LOGIN
 
-    if($cookies.get('loginData')){
-        $scope.user = JSON.parse($cookies.get('loginData'));
-        $scope.userLoged = true;
-        $location.path('/start');
+    console.log('from login',loginService)
+
+    if(loginService.userLoged == true){
+        $location.path(loginService.path);
     }
     else {
         //BUSCA DADOS NA VIEW
@@ -253,7 +266,9 @@ swApp.controller('loginController', ['$scope','$http','md5','$location','$cookie
                             expires: exp
                         })
                     }
-                    $location.path('/start');
+                    loginService.userLoged = true;
+                    loginService.refreshUser();
+                    $location.path(loginService.path);
                 })
                 .error(function (data) {
 
@@ -303,7 +318,9 @@ swApp.controller('loginController', ['$scope','$http','md5','$location','$cookie
                                     expires: exp
                                 })
                             }
-                            $location.path('/start');
+                            loginService.userLoged = true;
+                            loginService.refreshUser();
+                            $location.path(loginService.path);
                         })
                         .catch(function () {
                         })
@@ -329,7 +346,9 @@ swApp.controller('loginController', ['$scope','$http','md5','$location','$cookie
                                     expires: exp
                                 })
                             }
-                            $location.path('/start');
+                            loginService.userLoged = true;
+                            loginService.refreshUser();
+                            $location.path(loginService.path);
                         })
                         .catch(function () {
                         })
@@ -344,14 +363,9 @@ swApp.controller('forgotController', ['$scope', function ($scope) {
 
 }]);
 
-swApp.controller('startController', ['$scope','$location','$cookies','propService', function ($scope, $location,$cookies,propService) {
+swApp.controller('startController', ['$scope','$location','$cookies','propService','loginService', function ($scope, $location,$cookies,propService,loginService) {
 
-    /*$scope.user = JSON.parse($cookies.get('loginData'));
-    if($scope.user.personId){
-        $scope.userLoged = true;
-    }
-*/
-
+    console.log('from start',loginService)
     $scope.selectCategory = function (categoryId) {
         propService.category = categoryId;
         $location.path('/main');
@@ -362,9 +376,6 @@ swApp.controller('startController', ['$scope','$location','$cookies','propServic
 }]);
 swApp.controller('mainController', ['$scope','httpq','$location','propService', function ($scope,httpq,$location,propService) {
 
-
-    $scope.userLoged = false;
-    $scope.userID = '3a09593e-3e2e-4c17-a2de-2f308776dbd7';
     $scope.propostas = [];
 
 
@@ -382,14 +393,25 @@ swApp.controller('mainController', ['$scope','httpq','$location','propService', 
             });
     }
 
-
-    $scope.$watch(function () {return propService.city, propService.category;},function () {
+    $scope.$watch(function () {return propService.title;},function () {
         $scope.getProps();
-        console.log('rodou a busca',propService.category)
     })
 
-    
+    $scope.$watch(function () {return propService.city;},function () {
+        $scope.getProps();
+    })
 
+    $scope.$watch(function () {return propService.category;},function () {
+        $scope.getProps();
+    })
+
+    $scope.$watch(function () {return propService.price_max;},function () {
+        $scope.getProps();
+    })
+
+    $scope.$watch(function () {return propService.price_min;},function () {
+        $scope.getProps();
+    })
 
 
     //DIRECIONA PARA OS DETALHES DA PROPOSTA
@@ -457,141 +479,142 @@ swApp.controller('detailsController', ['$scope','propService','httpq','$location
 
 }]);
 
-swApp.controller('newProposalController', ['$scope','Upload','$timeout','httpq','$http', function ($scope, Upload, $timeout,httpq,$http) {
+swApp.controller('newProposalController', ['$scope','Upload','$timeout','httpq','$http','loginService','$location',function ($scope, Upload, $timeout,httpq,$http,loginService,$location) {
 
-    $scope.userID = '3a09593e-3e2e-4c17-a2de-2f308776dbd7';
-    $scope.userLoged = true;
+    console.log('from new',loginService)
+    if(loginService.userLoged == true) {
+        $scope.userID = loginService.user.personId;
+        $scope.zipcode = '';
+        $scope.city = '';
+        $scope.district = '';
 
-    $scope.zipcode='';
-    $scope.city = '';
-    $scope.district='';
+        //CHECKBOXES
+        $scope.sell = '';
+        $scope.swap = '';
+        $scope.sw_sell = '';
 
-    //CHECKBOXES
-    $scope.sell ='';
-    $scope.swap ='';
-    $scope.sw_sell='';
+        //CAMPOS DE VALOR
 
-    //CAMPOS DE VALOR
+        $scope.newProp = {
+            "title": "",
+            "description": "",
+            "addressReduce": {
+                "streetid": ""
+            },
+            "price": 0,
+            "priceCatInterest": 0,
+            "totalPrice": 0,
 
-    $scope.newProp={
-                     "title":"",
-                     "description":"",
-                     "addressReduce":{
-                     "streetid":""
-                     },
-                     "price": 0,
-                     "priceCatInterest":0,
-                     "totalPrice":0,
+            "category": {
+                "categoryId": ""
+            },
 
-                     "category":{
-                     "categoryId":""
-                     },
+            "interest_category": {
+                "categoryId": ""
+            },
 
-                     "interest_category":{
-                         "categoryId":""
-                     },
+            "personReduce": {
+                "personId": $scope.userID
+            },
 
-                     "personReduce":{
-                     "personId":$scope.userID
-                     },
-
-                     "image":[],
-                     "publish_date":"",
-                     "removel_date":""
-                    };
-
-
-    //Função de Upload de imagens
-
-    var formdata = new FormData();
-    $scope.getTheFiles = function ($files) {
-        angular.forEach($files, function (value, key) {
-            formdata.append(key, value);
-        });
-    };
-
-    // NOW UPLOAD THE FILES.
-    $scope.uploadFiles = function () {
-
-        var request = {
-            method: 'POST',
-            url: 'http://localhost:8080/swapitws/rs/propositionIMG/upload',
-            data: formdata,
-            headers: {
-                'Content-Type': undefined
-            }
+            "image": [],
+            "publish_date": "",
+            "removel_date": ""
         };
 
-        // SEND THE FILES.
-        $http(request)
-            .success(function (response) {
 
-                $scope.newProp.image = response;
+        //Função de Upload de imagens
 
-                var $toastContent = $('<span>' +
-                    '<i class="material-icons green-text">check</i>Ok! ;-)' +
-                    '</span>');
-                Materialize.toast($toastContent, 5000);
-
-            })
-            .error(function (response) {
-
-                var $toastContent = $('<span>' +
-                    '<i class="material-icons red-text">error</i>response' +'Algo deu errado :('+
-                    '</span>');
-                Materialize.toast($toastContent, 5000);
-
+        var formdata = new FormData();
+        $scope.getTheFiles = function ($files) {
+            angular.forEach($files, function (value, key) {
+                formdata.append(key, value);
             });
-    };
+        };
+
+        // NOW UPLOAD THE FILES.
+        $scope.uploadFiles = function () {
+
+            var request = {
+                method: 'POST',
+                url: 'http://localhost:8080/swapitws/rs/propositionIMG/upload',
+                data: formdata,
+                headers: {
+                    'Content-Type': undefined
+                }
+            };
+
+            // SEND THE FILES.
+            $http(request)
+                .success(function (response) {
+
+                    $scope.newProp.image = response;
+
+                    var $toastContent = $('<span>' +
+                        '<i class="material-icons green-text">check</i>Ok! ;-)' +
+                        '</span>');
+                    Materialize.toast($toastContent, 5000);
+
+                })
+                .error(function (response) {
+
+                    var $toastContent = $('<span>' +
+                        '<i class="material-icons red-text">error</i>response' + 'Algo deu errado :(' +
+                        '</span>');
+                    Materialize.toast($toastContent, 5000);
+
+                });
+        };
 
 
-    //Criando Hierarquia de Categorias
+        //Criando Hierarquia de Categorias
 
-    var whereElementsIdIsInThisField = 'categoryId';
-    var andTheReferenceToAParentIsInThisField =  'parentId';
-    var andSaveTheChildrenInThisField  = 'children';
+        var whereElementsIdIsInThisField = 'categoryId';
+        var andTheReferenceToAParentIsInThisField = 'parentId';
+        var andSaveTheChildrenInThisField = 'children';
 
 
 //Função que monta a arvore
-    function buildTree(flatList, idFieldName, parentKeyFieldName, fieldNameForChildren) {
-        var rootElements = [];
-        var lookup = {};
+        function buildTree(flatList, idFieldName, parentKeyFieldName, fieldNameForChildren) {
+            var rootElements = [];
+            var lookup = {};
 
-        // Take the flat list and transform it into a dictionary of key/values.
-        // This will allow us to quickly get the reference of an object like a lookup table.
-        flatList.forEach(function (flatItem) {
-            var itemId = flatItem[idFieldName];
-            lookup[itemId] = flatItem;
-            flatItem[fieldNameForChildren] = [];
-        });
+            // Take the flat list and transform it into a dictionary of key/values.
+            // This will allow us to quickly get the reference of an object like a lookup table.
+            flatList.forEach(function (flatItem) {
+                var itemId = flatItem[idFieldName];
+                lookup[itemId] = flatItem;
+                flatItem[fieldNameForChildren] = [];
+            });
 
-        flatList.forEach(function (flatItem) {
+            flatList.forEach(function (flatItem) {
 
-            var parentKey = flatItem[parentKeyFieldName];
+                var parentKey = flatItem[parentKeyFieldName];
 
-            if (parentKey != null) {
+                if (parentKey != null) {
 
-                // Item is linked to a parent, retrieve the parent.
-                var parentObject = lookup[flatItem[parentKeyFieldName]];
+                    // Item is linked to a parent, retrieve the parent.
+                    var parentObject = lookup[flatItem[parentKeyFieldName]];
 
-                if(parentObject){
-                    // Parent found, add the item as a child.
-                    parentObject[fieldNameForChildren].push(flatItem);
-                }else{
-                    // No parent found, add the item as a root element.
+                    if (parentObject) {
+                        // Parent found, add the item as a child.
+                        parentObject[fieldNameForChildren].push(flatItem);
+                    } else {
+                        // No parent found, add the item as a root element.
+                        rootElements.push(flatItem);
+                    }
+                } else {
+                    // No parent, add the item as a root element.
                     rootElements.push(flatItem);
                 }
-            } else {
-                // No parent, add the item as a root element.
-                rootElements.push(flatItem);
-            }
 
-        });
+            });
 
-        return rootElements;
-    }
-    $scope.flatdata='';
-    //CARREGANDO CATEGORIAS
+            return rootElements;
+        }
+
+        $scope.flatdata = '';
+        //CARREGANDO CATEGORIAS
         httpq.get('http://localhost:8080/swapitws/rs/category/getAll')
             .then(function (data) {
 
@@ -600,7 +623,6 @@ swApp.controller('newProposalController', ['$scope','Upload','$timeout','httpq',
 
                 //Monta a arvore
                 $scope.treedata = buildTree($scope.flatData, whereElementsIdIsInThisField, andTheReferenceToAParentIsInThisField, andSaveTheChildrenInThisField);
-                console.log($scope.treedata);
                 $scope.treedata2 = buildTree(angular.copy($scope.flatData), whereElementsIdIsInThisField, andTheReferenceToAParentIsInThisField, andSaveTheChildrenInThisField);
                 $scope.treedata3 = buildTree(angular.copy($scope.flatData3), whereElementsIdIsInThisField, andTheReferenceToAParentIsInThisField, andSaveTheChildrenInThisField);
             })
@@ -610,209 +632,212 @@ swApp.controller('newProposalController', ['$scope','Upload','$timeout','httpq',
             });
 
 
-    //Watcher para setar as categorias da roposta
-    $scope.$watch( 'categorias.currentNode', function( newObj, oldObj ) {
-        if( $scope.categorias && angular.isObject($scope.categorias.currentNode) ) {
-            $scope.newProp.category.categoryId = $scope.categorias.currentNode.categoryId;
-        }
-    }, false);
+        //Watcher para setar as categorias da roposta
+        $scope.$watch('categorias.currentNode', function (newObj, oldObj) {
+            if ($scope.categorias && angular.isObject($scope.categorias.currentNode)) {
+                $scope.newProp.category.categoryId = $scope.categorias.currentNode.categoryId;
+            }
+        }, false);
 
-    $scope.$watch( 'vt_category.currentNode', function( newObj, oldObj ) {
-        if( $scope.vt_category && angular.isObject($scope.vt_category.currentNode) ) {
-            $scope.newProp.interest_category.categoryId = $scope.vt_category.currentNode.categoryId;
-        }
-    }, false);
+        $scope.$watch('vt_category.currentNode', function (newObj, oldObj) {
+            if ($scope.vt_category && angular.isObject($scope.vt_category.currentNode)) {
+                $scope.newProp.interest_category.categoryId = $scope.vt_category.currentNode.categoryId;
+            }
+        }, false);
 
-    $scope.$watch( 't_category.currentNode', function( newObj, oldObj ) {
-        if( $scope.t_category && angular.isObject($scope.t_category.currentNode) ) {
-            $scope.newProp.interest_category.categoryId = $scope.t_category.currentNode.categoryId;
-        }
-    }, false);
-
-
-
-    //CAREGANDO O ENDEREÇO DA PROPOSTA
-    $scope.getAddress = function () {
-        httpq.get('http://localhost:8080/swapitws/rs/street/getbycep/'+$scope.zipcode)
-            .then(function (data) {
-                $scope.newProp.addressReduce.streetid = data.streetid;
-                $scope.city = data.district.city.name;
-                $scope.district = data.district.name;
-
-            })
-            .catch(function (response) {
-                console.error('Xabu na consulta',response.status, response.data);
-            })
-    };
+        $scope.$watch('t_category.currentNode', function (newObj, oldObj) {
+            if ($scope.t_category && angular.isObject($scope.t_category.currentNode)) {
+                $scope.newProp.interest_category.categoryId = $scope.t_category.currentNode.categoryId;
+            }
+        }, false);
 
 
+        //CAREGANDO O ENDEREÇO DA PROPOSTA
+        $scope.getAddress = function () {
+            httpq.get('http://localhost:8080/swapitws/rs/street/getbycep/' + $scope.zipcode)
+                .then(function (data) {
+                    $scope.newProp.addressReduce.streetid = data.streetid;
+                    $scope.city = data.district.city.name;
+                    $scope.district = data.district.name;
 
-    $scope.saveProp = function(){
+                })
+                .catch(function (response) {
+                    console.error(response.status, response.data);
+                })
+        };
 
-        //GERA DATA E ATUALIZA MODEL
-        var d = new Date();
-        var datestring = d.getFullYear()+ "-"  + (d.getMonth()+1) + "-" +d.getDate();
-        $scope.newProp.publish_date = datestring;
 
-        //ENVIA IMAGENS E ATUALIZA MODEL
+        $scope.saveProp = function () {
 
-        console.log('proposta ao enviar',$scope.newProp);
-        $http.post('http://localhost:8080/swapitws/rs/proposition/save', $scope.newProp)
+            //GERA DATA E ATUALIZA MODEL
+            var d = new Date();
+            var datestring = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
+            $scope.newProp.publish_date = datestring;
 
-            .success(function (result) {
+            //ENVIA IMAGENS E ATUALIZA MODEL
 
-                var $toastContent = $('<span>' +
-                    '<i class="material-icons green-text">check</i>Proposta Salva!' +
-                    '</span>');
-                Materialize.toast($toastContent, 5000);
-                clearProp();
+            console.log('proposta ao enviar', $scope.newProp);
+            $http.post('http://localhost:8080/swapitws/rs/proposition/save', $scope.newProp)
 
-            })
-            .error(function (data, status) {
+                .success(function (result) {
+                    var $toastContent = $('<span>' +
+                        '<i class="material-icons green-text">check</i>Proposta Salva!' +
+                        '</span>');
+                    Materialize.toast($toastContent, 5000);
+                    clearProp();
 
-                console.log(data,status);
-                console.log($scope.newProp);
-                var $toastContent = $('<span><i class="material-icons red-text">error_outline</i>  Algo deu errado!' +
-                    '<p class="center">Tente novamente daqui a pouco...</p>' +
-                    '</span>');
-                Materialize.toast($toastContent, 5000);
+                })
+                .error(function (data, status) {
+                    var $toastContent = $('<span><i class="material-icons red-text">error_outline</i>  Algo deu errado!' +
+                        '<p class="center">Tente novamente daqui a pouco...</p>' +
+                        '</span>');
+                    Materialize.toast($toastContent, 5000);
 
-            });
-    };
+                });
 
-    $scope.clearProp = function () {
-        $scope.newProp ={
-            "title":"",
-            "description":"",
-            "addressReduce":{
-                "streetid":""
-            },
-            "price": 0,
-            "priceCatInterest":0,
-            "totalPrice":0,
+        };
 
-            "category":{
-                "categoryId":""
-            },
+        $scope.clearProp = function () {
+            $scope.newProp = {
+                "title": "",
+                "description": "",
+                "addressReduce": {
+                    "streetid": ""
+                },
+                "price": 0,
+                "priceCatInterest": 0,
+                "totalPrice": 0,
 
-            "interest_category":"",
+                "category": {
+                    "categoryId": ""
+                },
 
-            "personReduce":{
-                "personId":""
-            },
+                "interest_category": "",
 
-            "image":[],
-            "publish_date":"",
-            "removel_date":""
+                "personReduce": {
+                    "personId": ""
+                },
+
+                "image": [],
+                "publish_date": "",
+                "removel_date": ""
+            }
         }
     }
 
+    else {
+        loginService.path = '/new';
+        $location.path('/login')
+    }
 
 }]);
 
 
-swApp.controller('profileController', ['$scope','httpq','$http', function ($scope,httpq,$http) {
+swApp.controller('profileController', ['$scope','httpq','$http','loginService','$location', function ($scope,httpq,$http,loginService,$location) {
 
-    //DEFININDO SE O USUÄRIO ESTÁ LOGADO
-    $scope.userLoged = true;
-    $scope.userID = '3a09593e-3e2e-4c17-a2de-2f308776dbd7';
-    //MONTANDO A PESSOA COMPLETA
-    $scope.person = [{
-        "personId": "",
-        "personName":"",
-        "email": "",
-        "phone": "",
-        "password": "",
-        "sex": "",
-        "blocked": "",
-        "level": "",
-        "favorite": [],
-        "addressReduce": {
-            "streetid": "",
-            "zipcode": "",
-            "streetName": "",
-            "complement": "",
-            "number": "",
-            "districtName": "",
-            "cityName": "",
-            "stateAcronym": "",
-            "stateName": "",
-            "countryAcronym": "",
-            "countryName": ""
-        }
-     }];
+    if(loginService.userLoged) {
+        $scope.userID = loginService.user.personId
+        //MONTANDO A PESSOA COMPLETA
+        $scope.person = [{
+            "personId": "",
+            "personName": "",
+            "email": "",
+            "phone": "",
+            "password": "",
+            "sex": "",
+            "blocked": "",
+            "level": "",
+            "favorite": [],
+            "addressReduce": {
+                "streetid": "",
+                "zipcode": "",
+                "streetName": "",
+                "complement": "",
+                "number": "",
+                "districtName": "",
+                "cityName": "",
+                "stateAcronym": "",
+                "stateName": "",
+                "countryAcronym": "",
+                "countryName": ""
+            }
+        }];
 
-    //OS DADOS ABAIXO SÃO CARREGADOS AO ACESSAR A PÁGINA
-    httpq.get('http://localhost:8080/swapitws/rs/person/getbyID/'+ $scope.userID)
-        .then(function (data) {
-
-            //ATUALIZA MODEL
-            $scope.person = data;
-        })
-        .catch(function (response) {
-            console.error('Xabu na consulta',response.status, response.data);
-        });
-
-    //OS DADOS ABAIXO SÃO CARREGADOS AO BUSCAR CEP
-    $scope.getAddress = function () {
-        httpq.get('http://localhost:8080/swapitws/rs/street/getbycep/'+$scope.person.addressReduce.zipcode)
+        //OS DADOS ABAIXO SÃO CARREGADOS AO ACESSAR A PÁGINA
+        httpq.get('http://localhost:8080/swapitws/rs/person/getbyID/' + $scope.userID)
             .then(function (data) {
 
-                //ATUALIZA MODEL COM
-                $scope.person.addressReduce.streetid = data.streetid;
-                $scope.person.addressReduce.streetName = data.name;
-                $scope.person.addressReduce.complement = data.complement;
-                $scope.person.addressReduce.number = '';
-                $scope.person.addressReduce.districtName = data.district.name;
-                $scope.person.addressReduce.cityName = data.district.city.name;
-                $scope.person.addressReduce.stateAcronym= data.district.city.state.acronym;
-                $scope.person.addressReduce.stateName = data.district.city.state.name;
-                $scope.person.addressReduce.countryAcronym= data.district.city.state.country.acronym;
-                $scope.person.addressReduce.countryName = data.district.city.state.country.name;
-
+                //ATUALIZA MODEL
+                $scope.person = data;
             })
             .catch(function (response) {
-                console.error('Xabu na consulta',response.status, response.data);
-            })
-    };
-
-    $scope.updatePerson = function(){
-        $http.put('http://localhost:8080/swapitws/rs/person/update', $scope.person)
-
-            .success(function (result) {
-
-                console.log(result);
-                console.log($scope.person);
-
-                var $toastContent = $('<span>' +
-                    '<i class="material-icons green-text">check</i>Cadastro Atualizado!' +
-                    '</span>');
-                Materialize.toast($toastContent, 5000);
-
-            })
-            .error(function (data, status) {
-
-                console.log(data);
-                var $toastContent = $('<span><i class="material-icons red-text">error_outline</i>  Algo deu errado!' +
-                    '<p class="center">Tente novamente daqui a pouco...</p>' +
-                    '</span>');
-                Materialize.toast($toastContent, 5000);
-
+                console.error('Xabu na consulta', response.status, response.data);
             });
+
+        //OS DADOS ABAIXO SÃO CARREGADOS AO BUSCAR CEP
+        $scope.getAddress = function () {
+            httpq.get('http://localhost:8080/swapitws/rs/street/getbycep/' + $scope.person.addressReduce.zipcode)
+                .then(function (data) {
+
+                    //ATUALIZA MODEL COM
+                    $scope.person.addressReduce.streetid = data.streetid;
+                    $scope.person.addressReduce.streetName = data.name;
+                    $scope.person.addressReduce.complement = data.complement;
+                    $scope.person.addressReduce.number = '';
+                    $scope.person.addressReduce.districtName = data.district.name;
+                    $scope.person.addressReduce.cityName = data.district.city.name;
+                    $scope.person.addressReduce.stateAcronym = data.district.city.state.acronym;
+                    $scope.person.addressReduce.stateName = data.district.city.state.name;
+                    $scope.person.addressReduce.countryAcronym = data.district.city.state.country.acronym;
+                    $scope.person.addressReduce.countryName = data.district.city.state.country.name;
+
+                })
+                .catch(function (response) {
+                    console.error('Xabu na consulta', response.status, response.data);
+                })
+        };
+
+        $scope.updatePerson = function () {
+            $http.put('http://localhost:8080/swapitws/rs/person/update', $scope.person)
+
+                .success(function (result) {
+
+                    console.log(result);
+                    console.log($scope.person);
+
+                    var $toastContent = $('<span>' +
+                        '<i class="material-icons green-text">check</i>Cadastro Atualizado!' +
+                        '</span>');
+                    Materialize.toast($toastContent, 5000);
+
+                })
+                .error(function (data, status) {
+
+                    console.log(data);
+                    var $toastContent = $('<span><i class="material-icons red-text">error_outline</i>  Algo deu errado!' +
+                        '<p class="center">Tente novamente daqui a pouco...</p>' +
+                        '</span>');
+                    Materialize.toast($toastContent, 5000);
+
+                });
+        }
+
     }
-
-
+    else {
+        loginService.path = '/profile';
+        $location.path('/login');
+    }
 }]);
 
-swApp.controller('proposalManagerController', ['$scope','httpq','$http','propService','$location', function ($scope,httpq,$http,propService,$location) {
+swApp.controller('proposalManagerController', ['$scope','httpq','$http','propService','$location','loginService', function ($scope,httpq,$http,propService,$location,loginService) {
 
-    $scope.userLoged = true;
-    $scope.userID = '3a09593e-3e2e-4c17-a2de-2f308776dbd7';
-    $scope.userProps = [];
-    $scope.singleProp = {};
+    if(loginService.userLoged) {
+        $scope.userID = loginService.user.personId
+        $scope.userProps = [];
+        $scope.singleProp = {};
 
-    //BUSCA TODAS AS PROPOSTA DO USUÄRIO
-        httpq.get('http://localhost:8080/swapitws/rs/proposition/getPropPerson/'+$scope.userID)
+        //BUSCA TODAS AS PROPOSTA DO USUÄRIO
+        httpq.get('http://localhost:8080/swapitws/rs/proposition/getPropPerson/' + $scope.userID)
 
             .then(function (response) {
                 $scope.userProps = response;
@@ -822,74 +847,77 @@ swApp.controller('proposalManagerController', ['$scope','httpq','$http','propSer
             });
 
 
+        $scope.deleteProp = function (propositionId) {
 
-    $scope.deleteProp = function (propositionId) {
+            console.log(propositionId)
 
-        console.log(propositionId)
+            //BUSCA A PROPOSTA
+            httpq.get('http://localhost:8080/swapitws/rs/proposition/getbyID/' + propositionId)
 
-        //BUSCA A PROPOSTA
-        httpq.get('http://localhost:8080/swapitws/rs/proposition/getbyID/'+propositionId)
+                .then(function (response) {
+                    $scope.singleProp = response;
 
-            .then(function (response) {
-                $scope.singleProp = response;
+                    var d = new Date();
+                    var e = new Date($scope.singleProp.publish_date);
 
-                var d = new Date();
-                var e = new Date($scope.singleProp.publish_date);
+                    var datestring = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
+                    var datestring2 = e.getFullYear() + "-" + (e.getMonth() + 1) + "-" + e.getDate();
 
-                var datestring = d.getFullYear()+ "-"  + (d.getMonth()+1) + "-" +d.getDate();
-                var datestring2 = e.getFullYear()+ "-" + (e.getMonth()+1) + "-" +e.getDate();
-
-                $scope.singleProp.publish_date = datestring2;
-                $scope.singleProp.removel_date = datestring;
-
-
-                //ATUALIZA A PROPOSTA
-                 $http.put('http://localhost:8080/swapitws/rs/proposition/update',$scope.singleProp)
-
-                 .success(function (response) {
-                     var $toastContent = $('<span>' +
-                     '<i class="material-icons green-text">check</i>Feito! :)' +
-                     '</span>');
-                     Materialize.toast($toastContent, 5000);
-
-                     //ATUALIZA O ESCOPO DE PROPOSTAS DO USUÄRIO
-                     httpq.get('http://localhost:8080/swapitws/rs/proposition/getPropPerson/'+$scope.userID)
-
-                         .then(function (response) {
-                             $scope.userProps = response;
-                         })
-                         .catch(function (response) {
-
-                         });
-                 })
-
-                 .error(function (response) {
-                 console.log(response);
-                 var $toastContent = $('<span>' +
-                 '<i class="material-icons red-text">check</i>Não consegui remover a proposta!<p>Tente mais tarde :`(</p>' +
-                 '</span>');
-                 Materialize.toast($toastContent, 5000);
-                 })
-
-            })
-
-            .catch(function () {
-                var $toastContent = $('<span>' +
-                    '<i class="material-icons red-text">check</i>O sistema está indisponível!<p>Tente mais tarde :`(</p>' +
-                    '</span>');
-                Materialize.toast($toastContent, 5000);
-            })
-    };
-
-    $scope.editProp = function (propositionId) {
-
-        propService.propId = propositionId
-
-        $location.path('/propEdit');
+                    $scope.singleProp.publish_date = datestring2;
+                    $scope.singleProp.removel_date = datestring;
 
 
+                    //ATUALIZA A PROPOSTA
+                    $http.put('http://localhost:8080/swapitws/rs/proposition/update', $scope.singleProp)
+
+                        .success(function (response) {
+                            var $toastContent = $('<span>' +
+                                '<i class="material-icons green-text">check</i>Feito! :)' +
+                                '</span>');
+                            Materialize.toast($toastContent, 5000);
+
+                            //ATUALIZA O ESCOPO DE PROPOSTAS DO USUÄRIO
+                            httpq.get('http://localhost:8080/swapitws/rs/proposition/getPropPerson/' + $scope.userID)
+
+                                .then(function (response) {
+                                    $scope.userProps = response;
+                                })
+                                .catch(function (response) {
+
+                                });
+                        })
+
+                        .error(function (response) {
+                            console.log(response);
+                            var $toastContent = $('<span>' +
+                                '<i class="material-icons red-text">check</i>Não consegui remover a proposta!<p>Tente mais tarde :`(</p>' +
+                                '</span>');
+                            Materialize.toast($toastContent, 5000);
+                        })
+
+                })
+
+                .catch(function () {
+                    var $toastContent = $('<span>' +
+                        '<i class="material-icons red-text">check</i>O sistema está indisponível!<p>Tente mais tarde :`(</p>' +
+                        '</span>');
+                    Materialize.toast($toastContent, 5000);
+                })
+        };
+
+        $scope.editProp = function (propositionId) {
+
+            propService.propId = propositionId
+
+            $location.path('/propEdit');
+
+
+        }
     }
-
+    else {
+        loginService.path = '/propManager'
+        $location.path('/login')
+    }
 }])
 
 swApp.controller('propEditController', ['$scope','httpq','$http','propService','$location', function ($scope,httpq,$http,propService,$location) {
@@ -1178,8 +1206,8 @@ swApp.controller('sideMenuController', ['$scope','$routeParams','$http','httpq',
     $scope.title=null;
     $scope.category=propService.categoryId;
     $scope.city=null;
-    $scope.price_max=99999999;
-    $scope.price_min=0;
+    $scope.price_max='';
+    $scope.price_min='';
 
 
     //BUSCA TODOS OS ESTADOS
@@ -1209,7 +1237,7 @@ swApp.controller('sideMenuController', ['$scope','$routeParams','$http','httpq',
     });
 
 
-    $scope.$watch('category',function () {
+    $scope.$watch(function () {return propService.category},function () {
         if($scope.category == null){
 
             httpq.get('http://localhost:8080/swapitws/rs/category/getParent/e1408c61-98bc-11e6-a3ce-80fa5b2affba')
@@ -1231,6 +1259,9 @@ swApp.controller('sideMenuController', ['$scope','$routeParams','$http','httpq',
                 })
         }
     })
+    $scope.$watch(function () {return propService.category},function () {
+        $scope.category = propService.category
+    })
     
     $scope.setCategory = function (categoryid) {
         $scope.category = categoryid;
@@ -1239,6 +1270,33 @@ swApp.controller('sideMenuController', ['$scope','$routeParams','$http','httpq',
     $scope.resetCategories = function () {
         $scope.category = 'e1408c61-98bc-11e6-a3ce-80fa5b2affba';
         propService.category = null;
+    }
+    $scope.searchByTitle = function () {
+
+        if($scope.title == ''){
+            propService.title = null;
+        }
+        else {
+            propService.title = $scope.title;
+        }
+
+    }
+
+    $scope.searchByPrice = function () {
+        if ($scope.price_max == ''){
+            propService.price_max = 99999999999;
+        }
+        else {
+            propService.price_max =$scope.price_max;
+        }
+
+        if ($scope.price_min == ''){
+            propService.price_min = 0;
+        }
+        else {
+            propService.price_min =$scope.price_min;
+        }
+
     }
 
 
@@ -1282,8 +1340,33 @@ swApp.controller('indexController',['$scope','$location',function ($scope,$locat
         }
     })
 
+}])
 
+swApp.controller('topNavController',['$scope','$cookies','$location','loginService',function ($scope,$cookies,$location,loginService) {
 
+    $scope.$watch(function () {return loginService.userLoged},function () {
+        $scope.userLoged = loginService.userLoged;
+    })
+
+    $scope.logout = function () {
+
+        $cookies.remove('loginData');
+        loginService.userLoged = false;
+        loginService.user = {};
+        $location.path('/start');
+
+    }
+
+    $('.button-collapse').sideNav('show');
+
+    $('.button-collapse').sideNav({
+            menuWidth: 320, // Default is 240
+            edge: 'left', // Choose the horizontal origin
+            closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
+            draggable: true // Choose whether you can drag to open on touch screens
+        }
+    );
+    $('.collapsible').collapsible();
 }])
 
 

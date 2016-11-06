@@ -1,6 +1,6 @@
 <!--Top toolbar-->
 
-<header id="header" class="page-topbar">
+<header id="header" class="page-topbar" ng-controller="topNavController">
     <div class="navbar-fixed">
         <nav>
             <div class="nav-wrapper amber">
@@ -22,13 +22,13 @@
 
                 <!-- Opções Dropdown -->
                 <ul id='dropdown1' class='dropdown-content'>
-                    <li><a href="#!"><i class="material-icons left">person</i> Meu perfil</a></li>
+                    <li><a href="#/profile"><i class="material-icons left">person</i> Meu perfil</a></li>
                     <li class="divider"></li>
                     <li><a href="#/propManager"><i class="material-icons left">attach_money</i>Minhas propostas</a></li>
                     <li class="divider"></li>
                     <li><a href="#/login"><i class="material-icons left">home</i> Favoritos</a></li>
                     <li class="divider"></li>
-                    <li><a href="#!" class="blue-grey-text darken-3 text-darken-3">Sair</a></li>
+                    <li><a href="" ng-click="logout()"><i class="material-icons left">exit_to_app</i> Sair</a></li>
                 </ul>
 
                 <ul id='dropdown2' class='dropdown-content'>

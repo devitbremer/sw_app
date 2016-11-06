@@ -1,51 +1,52 @@
 <!-- LEFT SIDEBAR NAV-->
 <aside id="left-sidebar-nav" ng-controller="sideMenuController" ng-if="showSideBar">
-    {{hideSideBar}}
     <ul id="slide-out" class="side-nav fixed leftside-navigation blue-grey darken-4">
 
         <!--GERENCIADOR DE PERFIL APENAS MOBILE-->
-        <li class="user-details cyan darken-2 hide-on-med-and-up">
+        <li class="no-padding hide-on-med-and-up">
             <div class="row">
-                <div class="col col s4 m4 l4">
-                    <img src="images/avatar.jpg" alt="" class="circle responsive-img valign profile-image">
-                </div>
-                <div class="col col s10 m10 l10">
-                    <ul id="profile-dropdown" class="dropdown-content">
+                <div class="col col s12 m12 l10">
+                    <ul class="collapsible collaps  ible-accordion">
                         <li>
-                            <a href="#" class="green-text">
-                                <i class="material-icons left orange-text">face</i> Perfil
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="material-icons left black-text">settings</i> Config
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="material-icons left green-text">notifications</i> Notificações
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="material-icons left blue-text">inbox</i> Propostas
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="material-icons left red-text">favorite</i> Favoritos
-                            </a>
+                        <a class="collapsible-header white-text"
+                           data-activates="profile-dropdown"> <i class="material-icons white-text">arrow_drop_down</i>Minha
+                            Conta</a>
+                        <div class="collapsible-body">
+                            <ul>
+                                <li><a href="#/profile"><i class="material-icons left">person</i> Meu perfil</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#/propManager"><i class="material-icons left">attach_money</i>Minhas propostas</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#/login"><i class="material-icons left">home</i> Favoritos</a></li>
+                                <li class="divider"></li>
+                                <li><a href="" ng-click="logout()"><i class="material-icons left">exit_to_app</i> Sair</a></li>
+                            </ul>
+                        </div>
                         </li>
                     </ul>
-                    <a class="btn-flat dropdown-button waves-effect waves-light white-text profile-btn" data-activates="profile-dropdown">John Doe<i class="mdi-navigation-arrow-drop-down right"></i></a>
+
                 </div>
             </div>
+            <div class="divider white"></div>
         </li>
 
         <!--Opções do Painel-->
+        <div class="container" style="margin-top: 8%">
+            <div class="row">
+                <div class="input-field col s6 m7 l8 white-text input-field-side-nav">
+                    <input  id="searchTitle" type="text" ng-model="title">
+                    <label for="searchTitle">O que você procura?</label>
+                </div>
+                <div class="input-field col s4 m3 l1">
+                    <button class="btn waves-light green" ng-click="searchByTitle()">
+                        <i class="material-icons left">search</i>
+                    </button>
+                </div>
+            </div>
+        </div>
         <!--Select de cidades-->
-        <div id="cityFilter" class="container" style="margin-top: 30px;">
-            <span class="strong white-text">Busca por cidade</span>
+        <div id="cityFilter" class="container" style="margin-top: 8%">
+            <span class="strong white-text">Filtrar por cidade</span>
             <div class="divider"></div>
             <form>
                 <select class="browser-default" ng-model="selectedState">
@@ -58,8 +59,8 @@
         </div>
         <br>
         <!--Seleciona categoria-->
-        <div id="chCategories" class="row container">
-            <span class="strong white-text">Categorias</span>
+        <div id="chCategories" class="row container" style="margin-top: 8%">
+            <span class="strong white-text">Filtrar por categorias</span>
             <div class="divider" style="margin-bottom: 10px;"></div>
             <a ng-click="resetCategories()" class="btn waves-effect waves-light blue white-text" style="margin-bottom: 30px;"><i class="material-icons left">refresh</i> Todas as categorias</a>
             <div class="col l3 center white-text" style="padding-right: 5px; margin-bottom: 10px;"  ng-repeat="category in categories">
@@ -71,20 +72,29 @@
         </div>
 
         <br>
-        <div class="row container">
-            <span class="strong white-text">Valor</span>
+        <div class="container" style="margin-top: 8%">
+            <span class="strong white-text">Filtrar por valor</span>
             <div class="divider" style="margin-bottom: 20px;"></div>
-            <div class="input-field input-field-side-nav col s6 white-text">
-                <input id="minPrice" type="text" class="validate browser-default" ng-model="minPrice">
-                <label for="minPrice" class="active"> Valor Mínimo</label>
+            <div class="row">
+                <div class="input-field input-field-side-nav col s6 white-text">
+                    <input id="minPrice" type="text"  ng-model="price_min">
+                    <label for="minPrice" > Valor Mínimo</label>
+                </div>
+                <div class="input-field input-field-side-nav col s6 white-text">
+                    <input id="maxPrice" type="text" ng-model="price_max">
+                    <label for="maxPrice">Valor Máximo</label>
+                </div>
+                <button class="btn waves-effect waves-light amber col s10 offset-s1" ng-click="searchByPrice()">
+                    <i class="material-icons left">attach_money</i>Definir Valor
+                </button>
             </div>
-            <div class="input-field input-field-side-nav col s6 white-text">
-                <input id="maxPrice" type="text" ng-model="maxPrice">
-                <label for="maxPrice" class="active">Valor Máximo</label>
+            <div class="input-field ">
+
             </div>
         </div>
     </ul>
-    <a data-activates="slide-out" class="sidebar-collapse btn-floating btn-medium waves-effect waves-light hide-on-large-only blue-grey darken-3"><i class="material-icons">menu</i></a>
+    <a data-activates="slide-out" class="button-collapse sidebar-collapse btn-floating btn-medium waves-effect waves-light hide-on-large-only blue-grey darken-4"><i class="material-icons">menu</i></a>
 </aside>
 
 <!-- END LEFT SIDEBAR NAV-->
+
