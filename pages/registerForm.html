@@ -36,7 +36,7 @@
                     <i class="material-icons prefix">lock</i>
                     <input name="pswd" id="password" type="password" ng-required="true" ng-model="pswd1"
                            ng-minlength="8"
-                           ng-pattern="/^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.*[!@#\$%\^&\*])/">
+                           ng-pattern="/^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.*[!@#\$%-_\^&\*])/">
                     <label for="password" class="center-align">Senha</label>
                     <li ng-show="registerForm.pswd.$error.minlength" class="red-text medium-small">Mínimo 8
                         caracteres.
