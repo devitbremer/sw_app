@@ -1,0 +1,94 @@
+<!-- INICIA CONTEUDO -->
+        <section id="content" class="-">
+            <div class="row" ng-repeat="prop in denuncedProps">
+                <div class="col s12 m10 l9 card hoverable valign-wrapper offset-m1">
+                    <div class="col s4 m3 l2 valign card">
+                        <img ng-src="{{'http://localhost:8080/swapitws/rs/propositionIMG/download/'+prop.image[0].imageid}}" class="responsive-img left" style="height: 180px;">
+                    </div>
+
+                    <div class="col s8 m9 l10">
+                        <div class="row">
+                            <span class="badge red white-text" data-badge-caption="Denúncias">{{prop.denunce}}</span>
+                            <div class="col s12" id="propText">
+                                <h5 class="title truncate">{{prop.title}}</h5>
+                                <p class="black-text left-align truncate">{{prop.description}}</p>
+                            </div>
+                        </div>
+
+                        <div class="card-action">
+                            <div class="row">
+                                <div class="col m4 s4 center hide-on-small-and-down">
+                                    <a class=" btn-large waves-effect waves-light white green-text" ng-click="allowProposal(prop.propositionId)">
+                                        <i class="material-icons left">check</i>Liberar Proposta
+                                    </a>
+                                </div>
+                                <div class="col m4 s4 center hide-on-small-and-down">
+                                    <a class=" btn-large waves-effect waves-light white red-text" ng-click="removeProposal(prop.propositionId)">
+                                        <i class="material-icons left">delete</i>Apagar Proposta
+                                    </a>
+                                </div>
+                                <div class="col m4 s4 center hide-on-small-and-down">
+                                    <a class="btn-large waves-effect waves-light white deep-orange-text text-accent-4" ng-click="blockUser(prop.personReduce.personId)">
+                                        <i class="material-icons left">block</i>Bloquear Usuário
+                                    </a>
+                                </div>
+                                <div class="col s6 hide-on-med-and-up">
+                                    <a class="btn-floating btn-large waves-effect waves-light green" ng-click="allowProposal(prop.propositionId)">
+                                        <i class="material-icons">check</i>
+                                    </a>
+                                </div>
+                                <div class="col s6 hide-on-med-and-up">
+                                    <a class="btn-floating btn-large waves-effect waves-light red" ng-click="removeProposal(prop.propositionId)">
+                                        <i class="material-icons">delete</i>
+                                    </a>
+                                </div>
+                                <div class="col s6  hide-on-med-and-up">
+                                    <a class="btn-floating btn-large waves-effect waves-light deep-orange" ng-click="blockUser(prop.personReduce.personId)">
+                                        <i class="material-icons">block</i>
+                                    </a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </section>
+
+        <!-- Opções Dropdown -->
+        <ul id='options' class='dropdown-content'>
+            <li><a href="#!"><i class="material-icons left">person</i> Meu perfil</a></li>
+            <li class="divider"></li>
+            <li><a href="#/propManager"><i class="material-icons left">attach_money</i>Minhas propostas</a></li>
+            <li class="divider"></li>
+            <li><a href="#/login"><i class="material-icons left">home</i> Favoritos</a></li>
+            <li class="divider"></li>
+            <li><a href="#!" class="blue-grey-text darken-3 text-darken-3">Sair</a></li>
+        </ul>
+
+
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('.tooltipped').tooltip({delay: 50});
+    });
+</script>
+
+<script type="text/javascript">
+    $('.dropdown-button').dropdown({
+                inDuration: 300,
+                outDuration: 225,
+                constrain_width: false, // Does not change width of dropdown to that of the activator
+                hover: true, // Activate on hover
+                gutter: 0, // Spacing from edge
+                belowOrigin: false, // Displays dropdown below the button
+                alignment: 'left' // Displays dropdown with edge aligned to the left of button
+            }
+    );
+</script>
+<!-- //////////////////////////////////////////////////////////////////////////// -->
+
+<!-- INSERE FOOTER -->
+<ng-include src="'pages/footer.html'"></ng-include>

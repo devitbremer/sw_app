@@ -2,27 +2,7 @@
 <section id="content">
 
     <!--start container-->
-
-    <div class="container">
-        <div class="row">
-            <div class="col s12 m10 l9 offset-m1" style="margin-top: 20px;margin-bottom: 20px;">
-                <nav>
-                    <div class="nav-wrapper blue-grey darken-4">
-                        <form>
-                            <div class="input-field">
-                                <input id="search" type="search" required>
-                                <label for="search"><i class="material-icons white-text">search</i></label>
-                                <i class="material-icons">close</i>
-                            </div>
-                        </form>
-                    </div>
-                </nav>
-            </div>
-        </div>
-
-
         <div class="container">
-
             <div class="row">
                 <div class="col l9 m10 s12 offset-m1">
                     <div class="card">
@@ -46,7 +26,7 @@
                                         <!-- THUMBS -->
                                         <ul class="nav">
                                             <li ng-repeat="photo in photos" ng-class="{'active':isActive($index)}">
-                                                <img src="{{'http://localhost:8080/swapitws/rs/propositionIMG/download/'+photo.imageid}}"
+                                                <img ng-src="{{'http://localhost:8080/swapitws/rs/propositionIMG/download/'+photo.imageid}}"
                                                      ng-click="showPhoto($index);"
                                                      style="height: 50px"
                                                      class="responsive-img"
@@ -74,10 +54,10 @@
                                     <br>
                                     <br>
                                     <div id="actions" class="hide-on-small-and-down">
-                                        <button class="waves-effect btn-flat btn-large waves-red waves-light"><i
+                                        <button class="waves-effect btn-flat btn-large waves-red waves-light"  ng-click="addFavorite(proposition.propositionId)"><i
                                                 class="material-icons left red-text">favorite</i>Favorito
                                         </button>
-                                        <button class="waves-effect btn-flat btn-large waves-orange waves-light"><i
+                                        <button class="waves-effect btn-flat btn-large waves-orange waves-light" ng-click="addDenunce(proposition.propositionId)"><i
                                                 class="material-icons left orange-text">block</i>Denunciar
                                         </button>
                                     </div>
@@ -89,12 +69,12 @@
                                                 <i class="large material-icons">more_horiz</i>
                                             </a>
                                             <ul>
-                                                <li>
-                                                    <a class="btn-floating red"><i
+                                                <li ng-hide="userLoged == false">
+                                                    <a class="btn-floating red"  ng-click="addFavorite(proposition.propositionId)"><i
                                                             class="material-icons">favorite</i></a>
                                                 </li>
                                                 <li>
-                                                    <a class="btn-floating orange darken-1"><i class="material-icons">block</i></a>
+                                                    <a class="btn-floating orange darken-1" ng-click="addDenunce()"><i class="material-icons">block</i></a>
                                                 </li>
 
                                             </ul>

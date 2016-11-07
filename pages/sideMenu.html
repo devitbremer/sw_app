@@ -3,7 +3,7 @@
     <ul id="slide-out" class="side-nav fixed leftside-navigation blue-grey darken-4">
 
         <!--GERENCIADOR DE PERFIL APENAS MOBILE-->
-        <li class="no-padding hide-on-med-and-up">
+        <li class="no-padding hide-on-large-only">
             <div class="row">
                 <div class="col col s12 m12 l10">
                     <ul class="collapsible collaps  ible-accordion">
@@ -17,9 +17,18 @@
                                 <li class="divider"></li>
                                 <li><a href="#/propManager"><i class="material-icons left">attach_money</i>Minhas propostas</a></li>
                                 <li class="divider"></li>
-                                <li><a href="#/login"><i class="material-icons left">home</i> Favoritos</a></li>
+                                <li><a href="#/favorites"><i class="material-icons left">home</i> Favoritos</a></li>
+                                <li ng-hide="user.level !== 'admin'"><a href="#/adm"><i class="material-icons left">home</i> Admin</a></li>
                                 <li class="divider"></li>
                                 <li><a href="" ng-click="logout()"><i class="material-icons left">exit_to_app</i> Sair</a></li>
+                            </ul>
+                        </div>
+                        <div ng-hide="userLoged == true" class="collapsible-body">
+                            <ul>
+                                <li><a href="#/register"><i class="material-icons left">person_add</i> Nova Conta</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#/login"><i class="material-icons left">home</i> Entrar</a></li>
+
                             </ul>
                         </div>
                         </li>

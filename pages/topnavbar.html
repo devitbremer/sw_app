@@ -4,7 +4,7 @@
     <div class="navbar-fixed">
         <nav>
             <div class="nav-wrapper amber">
-                <a href="#/" class="brand-logo center">SWAPIT</a>
+                <a href="#/" class="brand-logo center"><img class="responsive-img" src="http://localhost/sw_app/images/logo.png" style="height: 100px;"> </a>
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
                     <li>
                         <a ng-show="userLoged != false" class='dropdown-button' data-hover="true"
@@ -26,7 +26,8 @@
                     <li class="divider"></li>
                     <li><a href="#/propManager"><i class="material-icons left">attach_money</i>Minhas propostas</a></li>
                     <li class="divider"></li>
-                    <li><a href="#/login"><i class="material-icons left">home</i> Favoritos</a></li>
+                    <li><a href="#/favorites"><i class="material-icons left">home</i> Favoritos</a></li>
+                    <li ng-hide="admin == false"><a href="#/adm"><i class="material-icons left">assignment_ind</i> Admin</a></li>
                     <li class="divider"></li>
                     <li><a href="" ng-click="logout()"><i class="material-icons left">exit_to_app</i> Sair</a></li>
                 </ul>
