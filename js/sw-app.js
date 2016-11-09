@@ -167,10 +167,9 @@ swApp.controller('personActivateController', ['$scope','$routeParams','$http','h
         }
     };
 
-    httpq.get('http://localhost:8080/swapitws/rs/person/getbyID/'+ $routeParams.userId)
+    httpq.get('http://10.11.0.96:8080/swapitws/rs/person/getbyID/'+ $routeParams.userId)
     
         .then(function (response) {
-            console.log(response)
             if(response.blocked == 0){
                 $location.path('/start')
             }
@@ -185,7 +184,7 @@ swApp.controller('personActivateController', ['$scope','$routeParams','$http','h
     $scope.unlock = function () {
 
         $scope.user.blocked =0
-        $http.put('http://localhost:8080/swapitws/rs/person/update',$scope.user)
+        $http.put('http://10.11.0.96:8080/swapitws/rs/person/update',$scope.user)
             .success(function () {
                 $location.path('/start')
             })
@@ -221,7 +220,7 @@ swApp.controller('registerController', ['$scope', '$filter', '$http', '$location
 
         $scope.person.password = md5.createHash($scope.pswd1 || '');
 
-        $http.post('http://localhost:8080/swapitws/rs/person/save', $scope.person)
+        $http.post('http://10.11.0.96:8080/swapitws/rs/person/save', $scope.person)
             .success(function (result) {
                 var $toastContent = $('<span>' +
                     '<i class="material-icons green-text">check</i>Conta criada!' +
@@ -233,8 +232,6 @@ swApp.controller('registerController', ['$scope', '$filter', '$http', '$location
 
             })
             .error(function (data, status) {
-
-                console.log(data);
                 var $toastContent = $('<span><i class="material-icons red-text">error_outline</i>  Algo deu errado!' +
                     '<p class="center">Tente novamente daqui a pouco...</p>' +
                     '</span>');
@@ -258,12 +255,12 @@ swApp.controller('registerController', ['$scope', '$filter', '$http', '$location
         $scope.person.password = md5.createHash($scope.person.password || userDetails.email);
 
         //TENTA SALVAR A PESSOA
-        $http.post('http://localhost:8080/swapitws/rs/person/save', $scope.person)
+        $http.post('http://10.11.0.96:8080/swapitws/rs/person/save', $scope.person)
 
         //CASO SUCESSO USUÄRIO NÃO EXISTE SALVA A PESSOA
             .success(function () {
 
-                httpq.get('http://localhost:8080/swapitws/rs/person/getbyemail/' + $scope.person.email)
+                httpq.get('http://10.11.0.96:8080/swapitws/rs/person/getbyemail/' + $scope.person.email)
                     .then(function (result) {
                         //SALVA COOKIE
                         if ($scope.remember == true) {
@@ -292,7 +289,7 @@ swApp.controller('registerController', ['$scope', '$filter', '$http', '$location
 
             //CASO ERRO USUÄRIO JÄ EXISTE
             .error(function (data, status) {
-                httpq.get('http://localhost:8080/swapitws/rs/person/getbyemail/' + $scope.person.email)
+                httpq.get('http://10.11.0.96:8080/swapitws/rs/person/getbyemail/' + $scope.person.email)
                     .then(function (result) {
                         //SALVA COOKIE
                         if ($scope.remember == true) {
@@ -326,8 +323,6 @@ swApp.controller('loginController', ['$scope','$http','md5','$location','$cookie
 
     //VERIFICA SE EXISTE LOGIN
 
-    console.log('from login',loginService)
-
     if(loginService.userLoged == true){
         $location.path(loginService.path);
     }
@@ -342,7 +337,7 @@ swApp.controller('loginController', ['$scope','$http','md5','$location','$cookie
         //ENVIA DADOS PARA O WS
         $scope.login = function () {
             $scope.loginData.pass = md5.createHash($scope.loginData.pass || '');
-            $http.get('http://localhost:8080/swapitws/rs/person/login/'+$scope.loginData.email+'/'+$scope.loginData.pass)
+            $http.get('http://10.11.0.96:8080/swapitws/rs/person/login/'+$scope.loginData.email+'/'+$scope.loginData.pass)
                 .success(function (result) {
                     if ($scope.remember == true) {
                         var now = new Date(),
@@ -381,12 +376,12 @@ swApp.controller('loginController', ['$scope','$http','md5','$location','$cookie
             $scope.person.password = md5.createHash($scope.person.password || userDetails.email);
 
             //TENTA SALVAR A PESSOA
-            $http.post('http://localhost:8080/swapitws/rs/person/save', $scope.person)
+            $http.post('http://10.11.0.96:8080/swapitws/rs/person/save', $scope.person)
 
             //CASO SUCESSO USUÄRIO NÃO EXISTE SALVA A PESSOA
                 .success(function () {
 
-                    httpq.get('http://localhost:8080/swapitws/rs/person/getbyemail/' + $scope.person.email)
+                    httpq.get('http://10.11.0.96:8080/swapitws/rs/person/getbyemail/' + $scope.person.email)
                         .then(function (result) {
                             //SALVA COOKIE
                             if ($scope.remember == true) {
@@ -415,7 +410,7 @@ swApp.controller('loginController', ['$scope','$http','md5','$location','$cookie
 
                 //CASO ERRO USUÄRIO JÄ EXISTE
                 .error(function (data, status) {
-                    httpq.get('http://localhost:8080/swapitws/rs/person/getbyemail/' + $scope.person.email)
+                    httpq.get('http://10.11.0.96:8080/swapitws/rs/person/getbyemail/' + $scope.person.email)
                         .then(function (result) {
                             //SALVA COOKIE
                             if ($scope.remember == true) {
@@ -452,7 +447,6 @@ swApp.controller('forgotController', ['$scope', function ($scope) {
 
 swApp.controller('startController', ['$scope','$location','$cookies','propService','loginService', function ($scope, $location,$cookies,propService,loginService) {
 
-    console.log('from start',loginService)
     $scope.selectCategory = function (categoryId) {
         propService.category = categoryId;
         $location.path('/main');
@@ -467,7 +461,7 @@ swApp.controller('mainController', ['$scope','httpq','$location','propService', 
 
 
     $scope.getProps = function () {
-        httpq.get('http://localhost:8080/swapitws/rs/proposition/getPropLike/'+propService.title+'/'+propService.category+'/'+propService.city+'/'+propService.price_max+'/'+propService.price_min)
+        httpq.get('http://10.11.0.96:8080/swapitws/rs/proposition/getPropLike/'+propService.title+'/'+propService.category+'/'+propService.city+'/'+propService.price_max+'/'+propService.price_min)
             .then(function (response) {
                 $scope.propostas = response;
             })
@@ -528,7 +522,7 @@ swApp.controller('detailsController', ['$scope','propService','httpq','$location
 
     }
    //BUSCA PROPOSTA
-    httpq.get('http://localhost:8080/swapitws/rs/proposition/getbyID/'+$scope.propositionId)
+    httpq.get('http://10.11.0.96:8080/swapitws/rs/proposition/getbyID/'+$scope.propositionId)
 
         .then(function (response) {
             $scope.proposition = response;
@@ -563,14 +557,12 @@ swApp.controller('detailsController', ['$scope','propService','httpq','$location
 
         })
         .catch(function (response) {
-            console.log(response)
         })
 
 
     $scope.addDenunce = function () {
-        $http.post('http://localhost:8080/swapitws/rs/proposition/denunce/'+$scope.propositionId)
+        $http.post('http://10.11.0.96:8080/swapitws/rs/proposition/denunce/'+$scope.propositionId)
             .success(function (response) {
-                console.log(response)
                 var $toastContent = $('<span>' +
                     '<i class="material-icons red-text left">block</i>Ok! Vamos verrificar isso...' +
                     '</span>');
@@ -608,7 +600,7 @@ swApp.controller('detailsController', ['$scope','propService','httpq','$location
             }
         }];
 
-        httpq.get('http://localhost:8080/swapitws/rs/person/getbyID/' + $scope.userId)
+        httpq.get('http://10.11.0.96:8080/swapitws/rs/person/getbyID/' + $scope.userId)
             .then(function (data) {
                 //ATUALIZA MODEL
                 $scope.person = data;
@@ -618,9 +610,7 @@ swApp.controller('detailsController', ['$scope','propService','httpq','$location
                         "propositionid": $scope.propositionId
                     })
 
-                console.log($scope.person)
-
-                $http.put('http://localhost:8080/swapitws/rs/person/update', $scope.person)
+                $http.put('http://10.11.0.96:8080/swapitws/rs/person/update', $scope.person)
                     .success(function (result) {
                         var $toastContent = $('<span>' +
                             '<i class="material-icons red-text left">favorite</i>Salvamos o favorito pra você' +
@@ -644,7 +634,6 @@ swApp.controller('detailsController', ['$scope','propService','httpq','$location
 
 swApp.controller('newProposalController', ['$scope','Upload','$timeout','httpq','$http','loginService','$location','propService',function ($scope, Upload, $timeout,httpq,$http,loginService,$location,propService) {
 
-    console.log('from new',loginService)
     if(loginService.userLoged == true) {
         $scope.userID = loginService.user.personId;
         $scope.zipcode = '';
@@ -700,7 +689,7 @@ swApp.controller('newProposalController', ['$scope','Upload','$timeout','httpq',
 
             var request = {
                 method: 'POST',
-                url: 'http://localhost:8080/swapitws/rs/propositionIMG/upload',
+                url: 'http://10.11.0.96:8080/swapitws/rs/propositionIMG/upload',
                 data: formdata,
                 headers: {
                     'Content-Type': undefined
@@ -733,7 +722,7 @@ swApp.controller('newProposalController', ['$scope','Upload','$timeout','httpq',
         $scope.$watch(function () {return propService.newPropCat},function () {
             if($scope.category == null){
 
-                httpq.get('http://localhost:8080/swapitws/rs/category/getParent/e1408c61-98bc-11e6-a3ce-80fa5b2affba')
+                httpq.get('http://10.11.0.96:8080/swapitws/rs/category/getParent/e1408c61-98bc-11e6-a3ce-80fa5b2affba')
                     .then(function (response) {
                         $scope.categories = response;
                     })
@@ -743,7 +732,7 @@ swApp.controller('newProposalController', ['$scope','Upload','$timeout','httpq',
             }
             else {
 
-                httpq.get('http://localhost:8080/swapitws/rs/category/getParent/'+$scope.category)
+                httpq.get('http://10.11.0.96:8080/swapitws/rs/category/getParent/'+$scope.category)
                     .then(function (response) {
                         $scope.categories = response;
                     })
@@ -772,7 +761,7 @@ swApp.controller('newProposalController', ['$scope','Upload','$timeout','httpq',
         $scope.$watch(function () {return propService.newPropCatInterest},function () {
             if($scope.categoryInterest == null){
 
-                httpq.get('http://localhost:8080/swapitws/rs/category/getParent/e1408c61-98bc-11e6-a3ce-80fa5b2affba')
+                httpq.get('http://10.11.0.96:8080/swapitws/rs/category/getParent/e1408c61-98bc-11e6-a3ce-80fa5b2affba')
                     .then(function (response) {
                         $scope.interestCategories = response;
                     })
@@ -782,7 +771,7 @@ swApp.controller('newProposalController', ['$scope','Upload','$timeout','httpq',
             }
             else {
 
-                httpq.get('http://localhost:8080/swapitws/rs/category/getParent/'+$scope.categoryInterest)
+                httpq.get('http://10.11.0.96:8080/swapitws/rs/category/getParent/'+$scope.categoryInterest)
                     .then(function (response) {
                         $scope.interestCategories = response;
                     })
@@ -808,7 +797,7 @@ swApp.controller('newProposalController', ['$scope','Upload','$timeout','httpq',
 
         //CAREGANDO O ENDEREÇO DA PROPOSTA
         $scope.getAddress = function () {
-            httpq.get('http://localhost:8080/swapitws/rs/street/getbycep/' + $scope.zipcode)
+            httpq.get('http://10.11.0.96:8080/swapitws/rs/street/getbycep/' + $scope.zipcode)
                 .then(function (data) {
                     $scope.newProp.addressReduce.streetid = data.streetid;
                     $scope.city = data.district.city.name;
@@ -816,7 +805,6 @@ swApp.controller('newProposalController', ['$scope','Upload','$timeout','httpq',
 
                 })
                 .catch(function (response) {
-                    console.error(response.status, response.data);
                 })
         };
 
@@ -828,17 +816,23 @@ swApp.controller('newProposalController', ['$scope','Upload','$timeout','httpq',
             var datestring = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
             $scope.newProp.publish_date = datestring;
 
+            if($scope.newProp.interest_category.categoryId == ''){
+                $scope.newProp.interest_category.categoryId = null;
+            }
+
             //ENVIA IMAGENS E ATUALIZA MODEL
 
-            console.log('proposta ao enviar', $scope.newProp);
-            $http.post('http://localhost:8080/swapitws/rs/proposition/save', $scope.newProp)
+            $http.post('http://10.11.0.96:8080/swapitws/rs/proposition/save', $scope.newProp)
 
                 .success(function (result) {
                     var $toastContent = $('<span>' +
                         '<i class="material-icons green-text">check</i>Proposta Salva!' +
                         '</span>');
                     Materialize.toast($toastContent, 5000);
-                    clearProp();
+
+                    $scope.clearProp()
+
+                    %location.path('/main')
 
                 })
                 .error(function (data, status) {
@@ -918,19 +912,18 @@ swApp.controller('profileController', ['$scope','httpq','$http','loginService','
         }];
 
         //OS DADOS ABAIXO SÃO CARREGADOS AO ACESSAR A PÁGINA
-        httpq.get('http://localhost:8080/swapitws/rs/person/getbyID/' + $scope.userID)
+        httpq.get('http://10.11.0.96:8080/swapitws/rs/person/getbyID/' + $scope.userID)
             .then(function (data) {
 
                 //ATUALIZA MODEL
                 $scope.person = data;
             })
             .catch(function (response) {
-                console.error('Xabu na consulta', response.status, response.data);
             });
 
         //OS DADOS ABAIXO SÃO CARREGADOS AO BUSCAR CEP
         $scope.getAddress = function () {
-            httpq.get('http://localhost:8080/swapitws/rs/street/getbycep/' + $scope.person.addressReduce.zipcode)
+            httpq.get('http://10.11.0.96:8080/swapitws/rs/street/getbycep/' + $scope.person.addressReduce.zipcode)
                 .then(function (data) {
 
                     //ATUALIZA MODEL COM
@@ -947,12 +940,11 @@ swApp.controller('profileController', ['$scope','httpq','$http','loginService','
 
                 })
                 .catch(function (response) {
-                    console.error('Xabu na consulta', response.status, response.data);
                 })
         };
 
         $scope.updatePerson = function () {
-            $http.put('http://localhost:8080/swapitws/rs/person/update', $scope.person)
+            $http.put('http://10.11.0.96:8080/swapitws/rs/person/update', $scope.person)
 
                 .success(function (result) {
                     var $toastContent = $('<span>' +
@@ -972,7 +964,7 @@ swApp.controller('profileController', ['$scope','httpq','$http','loginService','
 
         $scope.removeAccount = function () {
             $scope.person.blocked = 1;
-            $http.put('http://localhost:8080/swapitws/rs/person/update', $scope.person)
+            $http.put('http://10.11.0.96:8080/swapitws/rs/person/update', $scope.person)
 
                 .success(function (result) {
                     $cookies.remove('loginData');
@@ -1008,7 +1000,7 @@ swApp.controller('proposalManagerController', ['$scope','httpq','$http','propSer
         $scope.singleProp = {};
 
         //BUSCA TODAS AS PROPOSTA DO USUÄRIO
-        httpq.get('http://localhost:8080/swapitws/rs/proposition/getPropPerson/' + $scope.userID)
+        httpq.get('http://10.11.0.96:8080/swapitws/rs/proposition/getPropPerson/' + $scope.userID)
 
             .then(function (response) {
                 $scope.userProps = response;
@@ -1020,10 +1012,8 @@ swApp.controller('proposalManagerController', ['$scope','httpq','$http','propSer
 
         $scope.deleteProp = function (propositionId) {
 
-            console.log(propositionId)
-
             //BUSCA A PROPOSTA
-            httpq.get('http://localhost:8080/swapitws/rs/proposition/getbyID/' + propositionId)
+            httpq.get('http://10.11.0.96:8080/swapitws/rs/proposition/getbyID/' + propositionId)
 
                 .then(function (response) {
                     $scope.singleProp = response;
@@ -1039,7 +1029,7 @@ swApp.controller('proposalManagerController', ['$scope','httpq','$http','propSer
 
 
                     //ATUALIZA A PROPOSTA
-                    $http.put('http://localhost:8080/swapitws/rs/proposition/update', $scope.singleProp)
+                    $http.put('http://10.11.0.96:8080/swapitws/rs/proposition/update', $scope.singleProp)
 
                         .success(function (response) {
                             var $toastContent = $('<span>' +
@@ -1048,7 +1038,7 @@ swApp.controller('proposalManagerController', ['$scope','httpq','$http','propSer
                             Materialize.toast($toastContent, 5000);
 
                             //ATUALIZA O ESCOPO DE PROPOSTAS DO USUÄRIO
-                            httpq.get('http://localhost:8080/swapitws/rs/proposition/getPropPerson/' + $scope.userID)
+                            httpq.get('http://10.11.0.96:8080/swapitws/rs/proposition/getPropPerson/' + $scope.userID)
 
                                 .then(function (response) {
                                     $scope.userProps = response;
@@ -1059,7 +1049,6 @@ swApp.controller('proposalManagerController', ['$scope','httpq','$http','propSer
                         })
 
                         .error(function (response) {
-                            console.log(response);
                             var $toastContent = $('<span>' +
                                 '<i class="material-icons red-text">check</i>Não consegui remover a proposta!<p>Tente mais tarde :`(</p>' +
                                 '</span>');
@@ -1138,10 +1127,9 @@ swApp.controller('propEditController', ['$scope','httpq','$http','propService','
     $scope.sw_sell='';
 
 
-    httpq.get('http://localhost:8080/swapitws/rs/proposition/getbyID/'+$scope.propositionId)
+    httpq.get('http://10.11.0.96:8080/swapitws/rs/proposition/getbyID/'+$scope.propositionId)
 
         .then(function (response) {
-            console.log(response)
             $scope.proposition.propositionId = response.propositionId;
             $scope.proposition.title = response.title;
             $scope.proposition.description = response.description;
@@ -1195,7 +1183,7 @@ swApp.controller('propEditController', ['$scope','httpq','$http','propService','
 
         var request = {
             method: 'POST',
-            url: 'http://localhost:8080/swapitws/rs/propositionIMG/upload',
+            url: 'http://10.11.0.96:8080/swapitws/rs/propositionIMG/upload',
             data: formdata,
             headers: {
                 'Content-Type': undefined
@@ -1271,7 +1259,7 @@ swApp.controller('propEditController', ['$scope','httpq','$http','propService','
         return rootElements;
     }
     //CARREGANDO CATEGORIAS
-    httpq.get('http://localhost:8080/swapitws/rs/category/getAll')
+    httpq.get('http://10.11.0.96:8080/swapitws/rs/category/getAll')
         .then(function (data) {
 
             $scope.flatData = data;
@@ -1284,7 +1272,6 @@ swApp.controller('propEditController', ['$scope','httpq','$http','propService','
         })
 
         .catch(function (response) {
-            console.error('Xabu na consulta', response.status, response.data);
         });
 
 
@@ -1311,14 +1298,13 @@ swApp.controller('propEditController', ['$scope','httpq','$http','propService','
 
     //CAREGANDO O ENDEREÇO DA PROPOSTA
     $scope.getAddress = function () {
-        httpq.get('http://localhost:8080/swapitws/rs/street/getbycep/'+$scope.proposition.addressReduce.zipcode)
+        httpq.get('http://10.11.0.96:8080/swapitws/rs/street/getbycep/'+$scope.proposition.addressReduce.zipcode)
             .then(function (data) {
                 $scope.proposition.addressReduce.streetid = data.streetid;
                 $scope.district = data.district.name;
                 $scope.city = data.district.city.name;
             })
             .catch(function (response) {
-                console.error('Xabu na consulta',response.status, response.data);
             })
     };
 
@@ -1338,10 +1324,8 @@ swApp.controller('propEditController', ['$scope','httpq','$http','propService','
         $scope.proposition.publish_date = datestring;
 
 
-       $http.put('http://localhost:8080/swapitws/rs/proposition/update', $scope.proposition)
+       $http.put('http://10.11.0.96:8080/swapitws/rs/proposition/update', $scope.proposition)
             .success(function (result) {
-                console.log($scope.proposition)
-
                 var $toastContent = $('<span>' +
                     '<i class="material-icons green-text">check</i>Proposta atualizada com sucesso !' +
                     '</span>');
@@ -1351,9 +1335,6 @@ swApp.controller('propEditController', ['$scope','httpq','$http','propService','
 
             })
             .error(function (data, status) {
-                console.log($scope.proposition)
-                console.log(data,status);
-                console.log($scope.newProp);
                 var $toastContent = $('<span><i class="material-icons red-text">error_outline</i>  Algo deu errado!' +
                     '<p class="center">Tente novamente daqui a pouco...</p>' +
                     '</span>');
@@ -1364,8 +1345,43 @@ swApp.controller('propEditController', ['$scope','httpq','$http','propService','
 
 }])
 
-swApp.controller('sideMenuController', ['$scope','$routeParams','$http','httpq','$location','propService', function ($scope,$routeParams,$http,httpq,$location,propService) {
+swApp.controller('sideMenuController', ['$scope','$routeParams','$http','httpq','$location','propService','loginService','$cookies', function ($scope,$routeParams,$http,httpq,$location,propService,loginService,$cookies) {
 
+    // Perfect Scrollbar
+    $('select').not('.disabled').material_select();
+    var leftnav = $(".page-topbar").height();
+    var leftnavHeight = window.innerHeight - leftnav;
+    $('.leftside-navigation').height(leftnavHeight).perfectScrollbar({
+        suppressScrollX: true
+    });
+
+    $scope.adm = false;
+    $scope.$watch(function () {return loginService.userLoged},function () {
+        $scope.userLoged = loginService.userLoged;
+    })
+    $scope.$watch(function () {return loginService.user},function () {
+        $scope.admin = loginService.user.level;
+    })
+    $scope.$watch(function () {return loginService.user.personName},function () {
+        $scope.userName = loginService.user.personName;
+    })
+
+    $scope.logout = function () {
+
+        $cookies.remove('loginData');
+        loginService.userLoged = false;
+        loginService.user = {};
+        $location.path('/start');
+
+    }
+
+    $scope.filters = {
+        title:'',
+        city:'',
+        category:'',
+        maxPrice:'',
+        minPrice:''
+    }
 
     $scope.cities = '';
     $scope.states = '';
@@ -1382,7 +1398,7 @@ swApp.controller('sideMenuController', ['$scope','$routeParams','$http','httpq',
 
 
     //BUSCA TODOS OS ESTADOS
-    httpq.get('http://localhost:8080/swapitws/rs/state/get')
+    httpq.get('http://10.11.0.96:8080/swapitws/rs/state/get')
 
         .then(function (response) {
             $scope.states = response;
@@ -1393,7 +1409,7 @@ swApp.controller('sideMenuController', ['$scope','$routeParams','$http','httpq',
 
     //BUSCA AS CIDADES DO ESTADO SELECIONADO
     $scope.$watch('selectedState', function () {
-        httpq.get('http://localhost:8080/swapitws/rs/city/getCityState/'+$scope.selectedState)
+        httpq.get('http://10.11.0.96:8080/swapitws/rs/city/getCityState/'+$scope.selectedState)
 
             .then(function (response) {
                 $scope.cities = response;
@@ -1403,15 +1419,18 @@ swApp.controller('sideMenuController', ['$scope','$routeParams','$http','httpq',
     });
 
     $scope.$watch('selectedCity', function () {
-        propService.city = $scope.selectedCity;
-        propService.selectedState = $scope.selectedState;
+        if($scope.selectedCity !=null){
+            propService.city = $scope.selectedCity;
+            propService.selectedState = $scope.selectedState;;
+        }
+
     });
 
 
     $scope.$watch(function () {return propService.category},function () {
         if($scope.category == null){
 
-            httpq.get('http://localhost:8080/swapitws/rs/category/getParent/e1408c61-98bc-11e6-a3ce-80fa5b2affba')
+            httpq.get('http://10.11.0.96:8080/swapitws/rs/category/getParent/e1408c61-98bc-11e6-a3ce-80fa5b2affba')
                 .then(function (response) {
                     $scope.categories = response;
                 })
@@ -1421,7 +1440,7 @@ swApp.controller('sideMenuController', ['$scope','$routeParams','$http','httpq',
         }
         else {
 
-            httpq.get('http://localhost:8080/swapitws/rs/category/getParent/'+$scope.category)
+            httpq.get('http://10.11.0.96:8080/swapitws/rs/category/getParent/'+$scope.category)
                 .then(function (response) {
                     $scope.categories = response;
                 })
@@ -1451,6 +1470,11 @@ swApp.controller('sideMenuController', ['$scope','$routeParams','$http','httpq',
             propService.title = $scope.title;
         }
 
+    }
+
+    $scope.resetSearchByTitle = function () {
+        propService.title = null;
+        $scope.title = undefined;
     }
 
     $scope.searchByPrice = function () {
@@ -1565,7 +1589,7 @@ swApp.controller('favoritesController', ['$scope', '$location', 'loginService', 
             $scope.propFavIds = [];
             $scope.favProps = [];
 
-            httpq.get('http://localhost:8080/swapitws/rs/person/getbyID/' + $scope.userId)
+            httpq.get('http://10.11.0.96:8080/swapitws/rs/person/getbyID/' + $scope.userId)
                 .then(function (response) {
 
                     $scope.rawFavs = response.favorite;
@@ -1574,7 +1598,7 @@ swApp.controller('favoritesController', ['$scope', '$location', 'loginService', 
                         $scope.propFavIds.push($scope.rawFavs[i].propositionid)
                     }
                     for (var j = 0; j < $scope.propFavIds.length; j++) {
-                        httpq.get('http://localhost:8080/swapitws/rs/proposition/getbyID/' + $scope.propFavIds[j])
+                        httpq.get('http://10.11.0.96:8080/swapitws/rs/proposition/getbyID/' + $scope.propFavIds[j])
                             .then(function (response) {
                                 $scope.favProps.push(response)
                             })
@@ -1597,7 +1621,7 @@ swApp.controller('favoritesController', ['$scope', '$location', 'loginService', 
 
         $scope.deleteFav = function (propId) {
 
-            httpq.get('http://localhost:8080/swapitws/rs/person/getbyID/' + $scope.userId)
+            httpq.get('http://10.11.0.96:8080/swapitws/rs/person/getbyID/' + $scope.userId)
                 .then(function (response) {
 
                     $scope.person = response;
@@ -1608,7 +1632,7 @@ swApp.controller('favoritesController', ['$scope', '$location', 'loginService', 
                             $scope.person.favorite.splice(i, 1);
                         }
                     }
-                    $http.put('http://localhost:8080/swapitws/rs/person/update', $scope.person)
+                    $http.put('http://10.11.0.96:8080/swapitws/rs/person/update', $scope.person)
                         .success(function (result) {
                             var $toastContent = $('<span>' +
                                 '<i class="material-icons green-text left">delete</i>Favorito removido!' +
@@ -1649,7 +1673,7 @@ swApp.controller('admController',['$scope','$http','httpq','loginService','$loca
 
         $scope.getDenunces = function () {
             $scope.denuncedProps = [];
-            httpq.get('http://localhost:8080/swapitws/rs/proposition/getDenunce/')
+            httpq.get('http://10.11.0.96:8080/swapitws/rs/proposition/getDenunce/')
                 .then(function (response) {
                     $scope.denuncedProps = response;
                 })
@@ -1662,15 +1686,14 @@ swApp.controller('admController',['$scope','$http','httpq','loginService','$loca
 
         //BLOQUEAR USER
         $scope.blockUser = function (userId) {
-            httpq.get('http://localhost:8080/swapitws/rs/person/getbyID/'+ userId)
+            httpq.get('http://10.11.0.96:8080/swapitws/rs/person/getbyID/'+ userId)
                 .then(function (data) {
 
                     $scope.person = data;
                     $scope.person.blocked = 4;
 
-                    $http.put('http://localhost:8080/swapitws/rs/person/update', $scope.person)
+                    $http.put('http://10.11.0.96:8080/swapitws/rs/person/update', $scope.person)
                         .success(function (result) {
-                            console.log($scope.person);
                             var $toastContent = $('<span>' +
                                 '<i class="material-icons red-text">block</i>Usuário Bloquado!' +
                                 '</span>');
@@ -1688,7 +1711,6 @@ swApp.controller('admController',['$scope','$http','httpq','loginService','$loca
                         });
                 })
                 .catch(function (response) {
-                    console.error('Xabu na consulta', response.status, response.data);
                 });
 
 
@@ -1696,7 +1718,7 @@ swApp.controller('admController',['$scope','$http','httpq','loginService','$loca
 
         $scope.removeProposal = function (propId) {
 
-            httpq.get('http://localhost:8080/swapitws/rs/proposition/getbyID/'+propId)
+            httpq.get('http://10.11.0.96:8080/swapitws/rs/proposition/getbyID/'+propId)
 
                 .then(function (response) {
                     $scope.proposition = response;
@@ -1711,7 +1733,7 @@ swApp.controller('admController',['$scope','$http','httpq','loginService','$loca
                     $scope.proposition.removel_date = datestring;
 
 
-                    $http.put('http://localhost:8080/swapitws/rs/proposition/update', $scope.proposition)
+                    $http.put('http://10.11.0.96:8080/swapitws/rs/proposition/update', $scope.proposition)
                         .success(function (result) {
                             var $toastContent = $('<span>' +
                                 '<i class="material-icons green-text">delete</i>Poposta Removida!' +
@@ -1733,7 +1755,7 @@ swApp.controller('admController',['$scope','$http','httpq','loginService','$loca
 
         $scope.allowProposal = function (propId) {
 
-            httpq.get('http://localhost:8080/swapitws/rs/proposition/getbyID/'+propId)
+            httpq.get('http://10.11.0.96:8080/swapitws/rs/proposition/getbyID/'+propId)
 
                 .then(function (response) {
 
@@ -1775,7 +1797,7 @@ swApp.controller('admController',['$scope','$http','httpq','loginService','$loca
                     delete $scope.proposition.personReduce.favorite;
                     delete $scope.proposition.personReduce.phone;*/
 
-                    $http.put('http://localhost:8080/swapitws/rs/proposition/update', $scope.proposition)
+                    $http.put('http://10.11.0.96:8080/swapitws/rs/proposition/update', $scope.proposition)
                         .success(function (result) {
                             var $toastContent = $('<span>' +
                                 '<i class="material-icons green-text">check_all</i>Poposta Liberada!' +

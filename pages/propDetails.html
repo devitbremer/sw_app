@@ -20,13 +20,13 @@
                                              ng-swipe-right="showPrev()"
                                              ng-swipe-left="showNext()"
                                              ng-show="isActive($index)"
-                                             ng-src="{{'http://localhost:8080/swapitws/rs/propositionIMG/download/'+photo.imageid}}"
+                                             ng-src="{{'http://10.11.0.96:8080/swapitws/rs/propositionIMG/download/'+photo.imageid}}"
                                              style="max-height: 300px"
                                         />
                                         <!-- THUMBS -->
                                         <ul class="nav">
                                             <li ng-repeat="photo in photos" ng-class="{'active':isActive($index)}">
-                                                <img ng-src="{{'http://localhost:8080/swapitws/rs/propositionIMG/download/'+photo.imageid}}"
+                                                <img ng-src="{{'http://10.11.0.96:8080/swapitws/rs/propositionIMG/download/'+photo.imageid}}"
                                                      ng-click="showPhoto($index);"
                                                      style="height: 50px"
                                                      class="responsive-img"

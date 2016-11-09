@@ -213,7 +213,7 @@ $(function() {
         low: 0,
         showArea: true
     });
-  */
+
 
   //Trending chart for small screen
   if(window_width <= 480){    
@@ -221,6 +221,6 @@ $(function() {
       height: '200'
     });
   }
-
+   */
 
 }); // end of document ready
