@@ -1,5 +1,12 @@
 <!-- INICIA CONTEUDO -->
-        <section id="content" class="-">
+        <section id="content">
+            <div class="row" ng-if="favProps == '' " style="margin-top: 30px">
+                <div class="col s12 m10 l9 card offset-m1">
+                    <div class="card-content center">
+                        <span class="flow-text"><i class="material-icons medium red-text">cloud_off</i> <br> Você não tem favoritos salvos...<br>Vamos procurar alguns? <br><a href="#/main">Cique aqui.</a> </span>
+                    </div>
+                </div>
+            </div>
             <div class="row" ng-repeat="prop in favProps">
                 <div class="col s12 m10 l9 card hoverable valign-wrapper offset-m1">
                     <div class="col s4 m3 l2 valign card">

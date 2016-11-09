@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
 <!-- Creator: CorelDRAW X6 -->
-<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="2480px" height="3508px" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
-viewBox="0 0 2480 3507"
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="96px" height="96px" version="1.0" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 96 96"
  xmlns:xlink="http://www.w3.org/1999/xlink">
  <defs>
   <style type="text/css">
    <![CDATA[
-    .fil0 {fill:#FEFEFE}
+    .fil0 {fill:white}
    ]]>
   </style>
  </defs>
  <g id="Camada_x0020_1">
   <metadata id="CorelCorpID_0Corel-Layer"/>
-  <g id="_400971000">
-   <path class="fil0" d="M2023 798c-147,-32 -298,-37 -447,-14l461 461c22,-148 18,-300 -14,-447z"/>
-   <path class="fil0" d="M563 2258c147,32 298,37 447,14l-461 -461c-22,148 -18,300 14,447z"/>
-   <path class="fil0" d="M894 1129c-162,162 -269,358 -321,565l555 555c207,-52 403,-160 565,-321 162,-162 269,-358 321,-565l-555 -555c-207,52 -403,160 -565,321zm688 343l-81 -81 -132 132 81 81 -71 71 -81 -81 -143 143 81 81 -71 71 -232 -232 71 -71 81 81 143 -143 -81 -81 71 -71 81 81 132 -132 -81 -81 71 -71 232 232 -71 71z"/>
+  <g id="_420463384">
+   <path class="fil0" d="M91 5c-9,-2 -18,-2 -27,-1l28 28c1,-9 1,-18 -1,-27l0 0z"/>
+   <path class="fil0" d="M5 91c9,2 18,2 27,1l-28 -28c-1,9 -1,18 1,27l0 0z"/>
+   <path class="fil0" d="M24 25c-10,10 -16,21 -19,33l33 33c12,-3 24,-10 33,-19 10,-10 16,-21 19,-33l-33 -33c-12,3 -24,10 -33,19l0 0zm41 20l-5 -5 -8 8 5 5 -4 4 -5 -5 -9 9 5 5 -4 4 -14 -14 4 -4 5 5 9 -9 -5 -5 4 -4 5 5 8 -8 -5 -5 4 -4 14 14 -4 4 0 0z"/>
   </g>
  </g>
 </svg>

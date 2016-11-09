@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <!-- Creator: CorelDRAW X6 -->
-<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="2480px" height="3508px" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
-viewBox="0 0 2480 3507"
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="96px" height="96px" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 9600000 9600000"
  xmlns:xlink="http://www.w3.org/1999/xlink">
  <defs>
   <style type="text/css">
    <![CDATA[
-    .fil0 {fill:#FEFEFE}
+    .fil0 {fill:white}
    ]]>
   </style>
  </defs>
  <g id="Camada_x0020_1">
   <metadata id="CorelCorpID_0Corel-Layer"/>
   <g id="acoustic-guitar.eps">
-   <path class="fil0" d="M2265 961l-25 -78c-3,-10 -11,-19 -22,-22l-78 -25c-11,-4 -24,0 -31,9l-114 130 -5 38 -585 572c-167,-122 -358,-102 -431,-26 -138,142 -64,162 -152,250 -88,88 -283,-10 -503,231 -135,147 -63,440 120,623 183,183 476,255 623,120 241,-221 143,-415 231,-504 88,-88 108,-14 250,-151 76,-74 96,-265 -26,-431l572 -585 38 -5 130 -114c9,-8 12,-20 9,-31zm-1084 1135c-49,49 -128,49 -177,0 -49,-49 -49,-128 0,-177 49,-49 128,-49 177,0 49,49 49,128 0,177z"/>
+   <path class="fil0" d="M9067559 880748l-116102 -348425c0,0 0,-116102 -116220,-116102l-348425 -116220c0,0 -116102,0 -116102,0l-464646 580748 0 116220 -2555315 2555315c-696969,-580748 -1626142,-464528 -1858465,-116102 -580748,580748 -232323,696850 -696850,1161496 -348543,348425 -1277717,0 -2207008,1045394 -580748,696969 -232323,1974567 580748,2787638 813071,813071 2090787,1161496 2787756,580748 1045394,-929173 580748,-1858346 1045394,-2206890 348425,-348425 464528,-116102 1161496,-696850 348425,-348543 464646,-1161614 -116220,-1858465l2555433 -2555433 116102 0 580748 -464528c0,0 0,-116220 0,-116220l0 0 -232323 -232323zm-4762205 4994646c-232323,232323 -580748,232323 -813071,0 -232323,-232323 -232323,-580748 0,-813071 232323,-232323 580748,-232323 813071,0 232323,232323 232323,580748 0,813071z"/>
   </g>
  </g>
 </svg>

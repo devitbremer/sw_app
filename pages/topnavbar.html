@@ -4,13 +4,13 @@
     <div class="navbar-fixed">
         <nav>
             <div class="nav-wrapper amber">
-                <a href="#/" class="brand-logo center"><img class="responsive-img" src="http://localhost/sw_app/images/logo.png" style="height: 100px;"> </a>
+                <h1 class="logo-wrapper"><a href="#/" class="brand-logo center darken-1"><img class="responsive-img" src="images/logo.png" style="max-height: 60px;"> </a></h1>
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
                     <li>
                         <a ng-show="userLoged != false" class='dropdown-button' data-hover="true"
                            data-beloworigin="true" data-activates='dropdown1'>
                             <i class="material-icons left">account_circle</i><i class="material-icons right">arrow_drop_down</i>
-                            MINHA CONTA
+                            {{userName}}
                         </a>
                         <a ng-show="userLoged == false" class='dropdown-button' data-hover="true"
                            data-beloworigin="true" data-activates='dropdown2'>
@@ -22,20 +22,21 @@
 
                 <!-- Opções Dropdown -->
                 <ul id='dropdown1' class='dropdown-content'>
-                    <li><a href="#/profile"><i class="material-icons left">person</i> Meu perfil</a></li>
+                    <li><a href="#/profile" class="blue-grey-text text-darken-3"><i class="material-icons left">person</i> Meu perfil</a></li>
                     <li class="divider"></li>
-                    <li><a href="#/propManager"><i class="material-icons left">attach_money</i>Minhas propostas</a></li>
+                    <li><a href="#/propManager" class="blue-grey-text text-darken-3"><i class="material-icons left">content_copy</i>Minhas propostas</a></li>
                     <li class="divider"></li>
-                    <li><a href="#/favorites"><i class="material-icons left">home</i> Favoritos</a></li>
-                    <li ng-hide="admin == false"><a href="#/adm"><i class="material-icons left">assignment_ind</i> Admin</a></li>
+                    <li><a href="#/favorites" class="blue-grey-text text-darken-3"><i class="material-icons left">home</i> Favoritos</a></li>
                     <li class="divider"></li>
-                    <li><a href="" ng-click="logout()"><i class="material-icons left">exit_to_app</i> Sair</a></li>
+                    <li ng-hide="admin == false"><a href="#/adm" class="blue-grey-text text-darken-3"><i class="material-icons left">assignment_ind</i> Admin</a></li>
+                    <li class="divider"></li>
+                    <li><a href="" ng-click="logout()" class="blue-grey-text text-darken-3"><i class="material-icons left">exit_to_app</i> Sair</a></li>
                 </ul>
 
                 <ul id='dropdown2' class='dropdown-content'>
-                    <li><a href="#/register"><i class="material-icons left">person_add</i> Nova Conta</a></li>
+                    <li><a href="#/register" class="blue-grey-text text-darken-3"><i class="material-icons left">person_add</i> Nova Conta</a></li>
                     <li class="divider"></li>
-                    <li><a href="#/login"><i class="material-icons left">home</i> Entrar</a></li>
+                    <li><a href="#/login" class="blue-grey-text text-darken-3"><i class="material-icons left">home</i> Entrar</a></li>
                     <li class="divider"></li>
 
                 </ul>
