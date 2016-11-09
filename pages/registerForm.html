@@ -71,8 +71,22 @@
             <div class="divider"></div>
             <div class="row">
                 <div class="input-field col s12 l8 offset-l2 center">
-                    <button ng-disabled="registerForm.$invalid" class="btn waves-effect waves-light col s12"
-                            ng-click="newPerson()">Salvar
+                    <button ng-disabled="registerForm.$invalid" class="btn waves-effect waves-light col s8 offset-s2"
+                            ng-click="newPerson()">
+                        <i class="material-icons">save</i> Salvar
+                    </button>
+                </div>
+            </div>
+            <p class="medium-small center flow-text">Ou entre com: </p>
+            <div class="row">
+                <div class="input-field col s12 l8 offset-l2 center">
+                    <button href="index.html" class="btn waves-effect waves-teal col s8 offset-s2 valign-wrapper white indigo-text" fb-login>
+                        Facebook
+                    </button>
+                </div>
+                <div class="input-field col s12 l8 offset-l2 center">
+                    <button href="index.html" class="btn waves-effect waves-red col s8 offset-s2 valign-wrapper white red-text" g-login>
+                        google
                     </button>
                 </div>
             </div>

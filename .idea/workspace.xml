@@ -2,7 +2,78 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7a40145a-9ec8-4c8c-8067-e792f5e7db04" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/logo.png" afterPath="$PROJECT_DIR$/images/logo.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/icons/Cat-BebesECriancas-BERCOS.svg" afterPath="$PROJECT_DIR$/icons/Cat-BebesECriancas-BERCOS.svg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/icons/Cat-BebesECriancas-BRINQ.svg" afterPath="$PROJECT_DIR$/icons/Cat-BebesECriancas-BRINQ.svg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/icons/Cat-BebesECriancas-CARRINHOS.svg" afterPath="$PROJECT_DIR$/icons/Cat-BebesECriancas-CARRINHOS.svg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/icons/Cat-BebesECriancas-ROUPAS.svg" afterPath="$PROJECT_DIR$/icons/Cat-BebesECriancas-ROUPAS.svg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/icons/Cat-BebesECriancas.svg" afterPath="$PROJECT_DIR$/icons/Cat-BebesECriancas.svg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/icons/Cat-Eletronicos-CelulareseTelefonia.svg" afterPath="$PROJECT_DIR$/icons/Cat-Eletronicos-CelulareseTelefonia.svg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/icons/Cat-Eletronicos-ComputadoreseAcessorios.svg" afterPath="$PROJECT_DIR$/icons/Cat-Eletronicos-ComputadoreseAcessorios.svg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/icons/Cat-Eletronicos-FotografiaTVAudio.svg" afterPath="$PROJECT_DIR$/icons/Cat-Eletronicos-FotografiaTVAudio.svg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/icons/Cat-Eletronicos-VideoGames.svg" afterPath="$PROJECT_DIR$/icons/Cat-Eletronicos-VideoGames.svg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/icons/Cat-Eletronicos.svg" afterPath="$PROJECT_DIR$/icons/Cat-Eletronicos.svg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/icons/Cat-Empregos-Curriculos.svg" afterPath="$PROJECT_DIR$/icons/Cat-Empregos-Curriculos.svg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/icons/Cat-Empregos-IndustriaComercio.svg" afterPath="$PROJECT_DIR$/icons/Cat-Empregos-IndustriaComercio.svg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/icons/Cat-Empregos-OfertasDeEmprego.svg" afterPath="$PROJECT_DIR$/icons/Cat-Empregos-OfertasDeEmprego.svg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/icons/Cat-Empregos-Servicos.svg" afterPath="$PROJECT_DIR$/icons/Cat-Empregos-Servicos.svg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/icons/Cat-Empregos.svg" afterPath="$PROJECT_DIR$/icons/Cat-Empregos.svg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/icons/Cat-Esportes-Ciclismo.svg" afterPath="$PROJECT_DIR$/icons/Cat-Esportes-Ciclismo.svg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/icons/Cat-Esportes-Futebol.svg" afterPath="$PROJECT_DIR$/icons/Cat-Esportes-Futebol.svg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/icons/Cat-Esportes-LutaEFitness.svg" afterPath="$PROJECT_DIR$/icons/Cat-Esportes-LutaEFitness.svg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/icons/Cat-Esportes-OutrosEsportes.FUTAMERIC.svg" afterPath="$PROJECT_DIR$/icons/Cat-Esportes-OutrosEsportes.FUTAMERIC.svg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/icons/Cat-Esportes-PranchasEEspAquat.svg" afterPath="$PROJECT_DIR$/icons/Cat-Esportes-PranchasEEspAquat.svg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/icons/Cat-Esportes-SkatesEPatins.svg" afterPath="$PROJECT_DIR$/icons/Cat-Esportes-SkatesEPatins.svg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/icons/Cat-Esportes-Tenis.svg" afterPath="$PROJECT_DIR$/icons/Cat-Esportes-Tenis.svg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/icons/Cat-Esportes.svg" afterPath="$PROJECT_DIR$/icons/Cat-Esportes.svg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/icons/Cat-Imoveis-Apartamentos.svg" afterPath="$PROJECT_DIR$/icons/Cat-Imoveis-Apartamentos.svg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/icons/Cat-Imoveis-Casas.svg" afterPath="$PROJECT_DIR$/icons/Cat-Imoveis-Casas.svg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/icons/Cat-Imoveis-Lojas.svg" afterPath="$PROJECT_DIR$/icons/Cat-Imoveis-Lojas.svg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/icons/Cat-Imoveis-Quartos.svg" afterPath="$PROJECT_DIR$/icons/Cat-Imoveis-Quartos.svg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/icons/Cat-Imoveis-Temporadas.svg" afterPath="$PROJECT_DIR$/icons/Cat-Imoveis-Temporadas.svg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/icons/Cat-Imoveis-TerrenosFazendasSitios.svg" afterPath="$PROJECT_DIR$/icons/Cat-Imoveis-TerrenosFazendasSitios.svg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/icons/Cat-Imoveis.svg" afterPath="$PROJECT_DIR$/icons/Cat-Imoveis.svg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/icons/Cat-ItensDomesticos-ArtesEDecoracoes.svg" afterPath="$PROJECT_DIR$/icons/Cat-ItensDomesticos-ArtesEDecoracoes.svg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/icons/Cat-ItensDomesticos-CamaMesaBanho.svg" afterPath="$PROJECT_DIR$/icons/Cat-ItensDomesticos-CamaMesaBanho.svg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/icons/Cat-ItensDomesticos-Eletrodomesticos.svg" afterPath="$PROJECT_DIR$/icons/Cat-ItensDomesticos-Eletrodomesticos.svg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/icons/Cat-ItensDomesticos-Jardinagem.svg" afterPath="$PROJECT_DIR$/icons/Cat-ItensDomesticos-Jardinagem.svg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/icons/Cat-ItensDomesticos-Moveis.svg" afterPath="$PROJECT_DIR$/icons/Cat-ItensDomesticos-Moveis.svg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/icons/Cat-ItensDomesticos.PARASUACASA.svg" afterPath="$PROJECT_DIR$/icons/Cat-ItensDomesticos.PARASUACASA.svg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/icons/Cat-ModaeBeleza-BelezaESaude.svg" afterPath="$PROJECT_DIR$/icons/Cat-ModaeBeleza-BelezaESaude.svg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/icons/Cat-ModaeBeleza-BijouteriaRelogios.svg" afterPath="$PROJECT_DIR$/icons/Cat-ModaeBeleza-BijouteriaRelogios.svg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/icons/Cat-ModaeBeleza-Bolsas.svg" afterPath="$PROJECT_DIR$/icons/Cat-ModaeBeleza-Bolsas.svg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/icons/Cat-ModaeBeleza-RoupasECalcados.svg" afterPath="$PROJECT_DIR$/icons/Cat-ModaeBeleza-RoupasECalcados.svg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/icons/Cat-ModaeBeleza.svg" afterPath="$PROJECT_DIR$/icons/Cat-ModaeBeleza.svg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/icons/Cat-MusicaEHobbies-Antiguidades.svg" afterPath="$PROJECT_DIR$/icons/Cat-MusicaEHobbies-Antiguidades.svg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/icons/Cat-MusicaEHobbies-Hobbies.svg" afterPath="$PROJECT_DIR$/icons/Cat-MusicaEHobbies-Hobbies.svg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/icons/Cat-MusicaEHobbies-InstrumentosMusic.svg" afterPath="$PROJECT_DIR$/icons/Cat-MusicaEHobbies-InstrumentosMusic.svg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/icons/Cat-MusicaEHobbies-LivroseRevistas.svg" afterPath="$PROJECT_DIR$/icons/Cat-MusicaEHobbies-LivroseRevistas.svg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/icons/Cat-MusicaEHobbies-MusicasEFilme.svg" afterPath="$PROJECT_DIR$/icons/Cat-MusicaEHobbies-MusicasEFilme.svg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/icons/Cat-MusicaEHobbies.svg" afterPath="$PROJECT_DIR$/icons/Cat-MusicaEHobbies.svg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/icons/Cat-Veiculos-Barcos.svg" afterPath="$PROJECT_DIR$/icons/Cat-Veiculos-Barcos.svg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/icons/Cat-Veiculos-CaminhoesOnibus.svg" afterPath="$PROJECT_DIR$/icons/Cat-Veiculos-CaminhoesOnibus.svg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/icons/Cat-Veiculos-Carros.svg" afterPath="$PROJECT_DIR$/icons/Cat-Veiculos-Carros.svg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/icons/Cat-Veiculos-Motos.svg" afterPath="$PROJECT_DIR$/icons/Cat-Veiculos-Motos.svg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/icons/Cat-Veiculos-Pecas.svg" afterPath="$PROJECT_DIR$/icons/Cat-Veiculos-Pecas.svg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/icons/Cat-Veiculos.svg" afterPath="$PROJECT_DIR$/icons/Cat-Veiculos.svg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/icons/Categoria-Animais-Cachorro.svg" afterPath="$PROJECT_DIR$/icons/Categoria-Animais-Cachorro.svg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/icons/Categoria-Animais-CachorroLADO.svg" afterPath="$PROJECT_DIR$/icons/Categoria-Animais-CachorroLADO.svg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/icons/Categoria-Animais-Cavalo.svg" afterPath="$PROJECT_DIR$/icons/Categoria-Animais-Cavalo.svg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/icons/Categoria-Animais-Gato.svg" afterPath="$PROJECT_DIR$/icons/Categoria-Animais-Gato.svg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/icons/Categoria-Animais-OutrosTartaruga.svg" afterPath="$PROJECT_DIR$/icons/Categoria-Animais-OutrosTartaruga.svg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/icons/Categoria-Animais-Peixe.svg" afterPath="$PROJECT_DIR$/icons/Categoria-Animais-Peixe.svg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/icons/Categoria-Animais-Roedores.svg" afterPath="$PROJECT_DIR$/icons/Categoria-Animais-Roedores.svg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/icons/Categoria-Animais.svg" afterPath="$PROJECT_DIR$/icons/Categoria-Animais.svg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/sw-app.js" afterPath="$PROJECT_DIR$/js/sw-app.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/admProposals.html" afterPath="$PROJECT_DIR$/pages/admProposals.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/favorites.html" afterPath="$PROJECT_DIR$/pages/favorites.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/main.html" afterPath="$PROJECT_DIR$/pages/main.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/newProposal.html" afterPath="$PROJECT_DIR$/pages/newProposal.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/propDetails.html" afterPath="$PROJECT_DIR$/pages/propDetails.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/registerForm.html" afterPath="$PROJECT_DIR$/pages/registerForm.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/sideMenu.html" afterPath="$PROJECT_DIR$/pages/sideMenu.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/start.html" afterPath="$PROJECT_DIR$/pages/start.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/topnavbar.html" afterPath="$PROJECT_DIR$/pages/topnavbar.html" />
     </list>
     <ignored path="sw_app.iws" />
@@ -29,8 +100,8 @@
       <file leaf-file-name="sw-app.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/sw-app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="29">
-              <caret line="195" column="36" selection-start-line="195" selection-start-column="18" selection-end-line="195" selection-end-column="36" />
+            <state relative-caret-position="385">
+              <caret line="1655" column="44" selection-start-line="1655" selection-start-column="44" selection-end-line="1655" selection-end-column="44" />
               <folding>
                 <element signature="e#0#42#0" expanded="false" />
               </folding>
@@ -38,32 +109,36 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="registerForm.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/pages/registerForm.html">
+      <file leaf-file-name="sideMenu.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/pages/sideMenu.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="271">
-              <caret line="38" column="131" selection-start-line="38" selection-start-column="131" selection-end-line="38" selection-end-column="131" />
-              <folding />
+            <state relative-caret-position="465">
+              <caret line="88" column="91" selection-start-line="88" selection-start-column="91" selection-end-line="88" selection-end-column="91" />
+              <folding>
+                <element signature="n#style#0;n#div#0;n#ul#0;n#aside#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#2;n#ul#0;n#aside#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="favorites.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pages/favorites.html">
+      <file leaf-file-name="newProposal.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pages/newProposal.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="442">
-              <caret line="26" column="40" selection-start-line="26" selection-start-column="40" selection-end-line="26" selection-end-column="40" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="topnavbar.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pages/topnavbar.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="442">
-              <caret line="26" column="110" selection-start-line="26" selection-start-column="110" selection-end-line="26" selection-end-column="110" />
-              <folding />
+            <state relative-caret-position="-684">
+              <caret line="43" column="46" selection-start-line="43" selection-start-column="46" selection-end-line="43" selection-end-column="46" />
+              <folding>
+                <element signature="n#style#0;n#button#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#form#0;n#div#0;n#div#0;n#section#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#2;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#form#0;n#div#0;n#div#0;n#section#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#0;n#div#2;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#form#0;n#div#0;n#div#0;n#section#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#button#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#3;n#div#0;n#div#4;n#div#0;n#form#0;n#div#0;n#div#0;n#section#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#0;n#div#3;n#div#0;n#div#4;n#div#0;n#form#0;n#div#0;n#div#0;n#section#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#0;n#div#3;n#div#0;n#div#4;n#div#0;n#form#0;n#div#0;n#div#0;n#section#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#4;n#div#0;n#div#4;n#div#0;n#form#0;n#div#0;n#div#0;n#section#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#button#0;n#div#1;n#div#0;n#div#2;n#div#4;n#div#0;n#div#4;n#div#0;n#form#0;n#div#0;n#div#0;n#section#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#2;n#div#0;n#div#2;n#div#4;n#div#0;n#div#4;n#div#0;n#form#0;n#div#0;n#div#0;n#section#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#0;n#div#2;n#div#0;n#div#2;n#div#4;n#div#0;n#div#4;n#div#0;n#form#0;n#div#0;n#div#0;n#section#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -116,23 +191,23 @@
         <option value="$PROJECT_DIR$/pages/activate.html" />
         <option value="$PROJECT_DIR$/css/style.css" />
         <option value="$PROJECT_DIR$/pages/propEdit.html" />
-        <option value="$PROJECT_DIR$/pages/newProposal.html" />
         <option value="$PROJECT_DIR$/pages/proposalManager.html" />
-        <option value="$PROJECT_DIR$/pages/main.html" />
-        <option value="$PROJECT_DIR$/pages/start.html" />
         <option value="$PROJECT_DIR$/pages/forgotForm.html" />
         <option value="$PROJECT_DIR$/pages/terms.html" />
         <option value="$PROJECT_DIR$/pages/profileManager.html" />
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/pages/loginForm.html" />
         <option value="$PROJECT_DIR$/js/angularjs-social-login.js" />
-        <option value="$PROJECT_DIR$/pages/sideMenu.html" />
-        <option value="$PROJECT_DIR$/pages/propDetails.html" />
-        <option value="$PROJECT_DIR$/pages/admProposals.html" />
-        <option value="$PROJECT_DIR$/pages/favorites.html" />
-        <option value="$PROJECT_DIR$/js/sw-app.js" />
-        <option value="$PROJECT_DIR$/pages/topnavbar.html" />
+        <option value="$PROJECT_DIR$/pages/start.html" />
         <option value="$PROJECT_DIR$/pages/registerForm.html" />
+        <option value="$PROJECT_DIR$/pages/newProposal.html" />
+        <option value="$PROJECT_DIR$/pages/topnavbar.html" />
+        <option value="$PROJECT_DIR$/pages/propDetails.html" />
+        <option value="$PROJECT_DIR$/js/sw-app.js" />
+        <option value="$PROJECT_DIR$/pages/favorites.html" />
+        <option value="$PROJECT_DIR$/pages/admProposals.html" />
+        <option value="$PROJECT_DIR$/pages/main.html" />
+        <option value="$PROJECT_DIR$/pages/sideMenu.html" />
       </list>
     </option>
   </component>
@@ -172,6 +247,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -206,8 +283,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -221,14 +296,14 @@
     <property name="nodejs_interpreter_path" value="C:/Program Files/nodejs/node" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\xampp\htdocs\sw_app" />
-      <recent name="C:\xampp\htdocs\sw_app\pages" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\xampp\htdocs\sw_app\pages" />
       <recent name="C:\xampp\htdocs\sw_app" />
       <recent name="C:\Users\devit\Desktop\Swapit\sw_app" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\sw_app" />
+      <recent name="C:\xampp\htdocs\sw_app\pages" />
     </key>
   </component>
   <component name="RunManager">
@@ -335,12 +410,13 @@
       <workItem from="1478086546522" duration="14474000" />
       <workItem from="1478110627638" duration="62671000" />
       <workItem from="1478394526462" duration="42693000" />
-      <workItem from="1478476472248" duration="26958000" />
+      <workItem from="1478476472248" duration="51288000" />
+      <workItem from="1478649415886" duration="3281000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="556654000" />
+    <option name="totallyTimeSpent" value="584265000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="0" width="1929" height="1047" extended-state="0" />
@@ -350,19 +426,19 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32998884" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24973656" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="REST Client" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.451505" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -517,24 +593,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pages/newProposal.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="594">
-          <caret line="239" column="0" selection-start-line="239" selection-start-column="0" selection-end-line="239" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pages/activate.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
           <caret line="18" column="49" selection-start-line="18" selection-start-column="49" selection-end-line="18" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/proposalManager.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="373">
-          <caret line="90" column="0" selection-start-line="90" selection-start-column="0" selection-end-line="90" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -548,25 +610,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://D:/Projetos/PetSysBaseCss/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2300">
-          <caret line="90" column="13" selection-start-line="90" selection-start-column="13" selection-end-line="90" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/css/style.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="4" column="1" selection-start-line="4" selection-start-column="1" selection-end-line="4" selection-end-column="1" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/start.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="81" column="16" selection-start-line="81" selection-start-column="16" selection-end-line="81" selection-end-column="16" />
         </state>
       </provider>
     </entry>
@@ -588,7 +636,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="433">
           <caret line="100" column="117" selection-start-line="100" selection-start-column="117" selection-end-line="100" selection-end-column="117" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -596,14 +643,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="373">
           <caret line="48" column="37" selection-start-line="48" selection-start-column="37" selection-end-line="48" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/loginForm.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="731">
-          <caret line="44" column="79" selection-start-line="44" selection-start-column="79" selection-end-line="44" selection-end-column="79" />
         </state>
       </provider>
     </entry>
@@ -614,69 +653,113 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pages/sideMenu.html">
+    <entry file="file://$PROJECT_DIR$/pages/loginForm.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="20" column="83" selection-start-line="20" selection-start-column="83" selection-end-line="20" selection-end-column="83" />
-          <folding />
+        <state relative-caret-position="476">
+          <caret line="35" column="12" selection-start-line="35" selection-start-column="12" selection-end-line="48" selection-end-column="18" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pages/main.html">
+    <entry file="file://$PROJECT_DIR$/pages/registerForm.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-34">
-          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="466">
+          <caret line="71" column="29" selection-start-line="71" selection-start-column="29" selection-end-line="71" selection-end-column="29" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pages/propDetails.html">
+    <entry file="file://$PROJECT_DIR$/pages/start.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="31" selection-start-line="4" selection-start-column="31" selection-end-line="4" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/admProposals.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="25" column="118" selection-start-line="25" selection-start-column="118" selection-end-line="25" selection-end-column="118" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/favorites.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="26" column="40" selection-start-line="26" selection-start-column="40" selection-end-line="26" selection-end-column="40" />
-          <folding />
+        <state relative-caret-position="653">
+          <caret line="123" column="0" selection-start-line="123" selection-start-column="0" selection-end-line="127" selection-end-column="6" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/pages/topnavbar.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="26" column="110" selection-start-line="26" selection-start-column="110" selection-end-line="26" selection-end-column="110" />
-          <folding />
+        <state relative-caret-position="204">
+          <caret line="12" column="40" selection-start-line="12" selection-start-column="40" selection-end-line="12" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/Projetos/PetSysBaseCss/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="59" column="73" selection-start-line="59" selection-start-column="73" selection-end-line="59" selection-end-column="83" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/propDetails.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="56" column="75" selection-start-line="56" selection-start-column="75" selection-end-line="56" selection-end-column="75" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/favorites.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="200" selection-start-line="5" selection-start-column="200" selection-end-line="5" selection-end-column="200" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/main.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="551">
+          <caret line="73" column="57" selection-start-line="73" selection-start-column="57" selection-end-line="73" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/admProposals.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="53" selection-start-line="4" selection-start-column="53" selection-end-line="4" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/proposalManager.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1530">
+          <caret line="90" column="0" selection-start-line="90" selection-start-column="0" selection-end-line="90" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/js/sw-app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="29">
-          <caret line="195" column="36" selection-start-line="195" selection-start-column="18" selection-end-line="195" selection-end-column="36" />
+        <state relative-caret-position="385">
+          <caret line="1655" column="44" selection-start-line="1655" selection-start-column="44" selection-end-line="1655" selection-end-column="44" />
           <folding>
             <element signature="e#0#42#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pages/registerForm.html">
+    <entry file="file://$PROJECT_DIR$/pages/newProposal.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="271">
-          <caret line="38" column="131" selection-start-line="38" selection-start-column="131" selection-end-line="38" selection-end-column="131" />
-          <folding />
+        <state relative-caret-position="-684">
+          <caret line="43" column="46" selection-start-line="43" selection-start-column="46" selection-end-line="43" selection-end-column="46" />
+          <folding>
+            <element signature="n#style#0;n#button#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#form#0;n#div#0;n#div#0;n#section#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#2;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#form#0;n#div#0;n#div#0;n#section#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#2;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#form#0;n#div#0;n#div#0;n#section#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#button#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#3;n#div#0;n#div#4;n#div#0;n#form#0;n#div#0;n#div#0;n#section#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#0;n#div#3;n#div#0;n#div#4;n#div#0;n#form#0;n#div#0;n#div#0;n#section#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#0;n#div#3;n#div#0;n#div#4;n#div#0;n#form#0;n#div#0;n#div#0;n#section#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#4;n#div#0;n#div#4;n#div#0;n#form#0;n#div#0;n#div#0;n#section#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#button#0;n#div#1;n#div#0;n#div#2;n#div#4;n#div#0;n#div#4;n#div#0;n#form#0;n#div#0;n#div#0;n#section#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#2;n#div#0;n#div#2;n#div#4;n#div#0;n#div#4;n#div#0;n#form#0;n#div#0;n#div#0;n#section#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#2;n#div#0;n#div#2;n#div#4;n#div#0;n#div#4;n#div#0;n#form#0;n#div#0;n#div#0;n#section#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/sideMenu.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="465">
+          <caret line="88" column="91" selection-start-line="88" selection-start-column="91" selection-end-line="88" selection-end-column="91" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#ul#0;n#aside#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#2;n#ul#0;n#aside#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

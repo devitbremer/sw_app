@@ -38,33 +38,39 @@
                                                 produto!</label>
                                         </div>
                                     </div>
+
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-content">
+                                    <i class="material-icons">bookmark</i>
+                                    <span class="card-title">Selecionar Categoria</span>
+                                    <div class="divider"></div>
+                                    <br>
+
                                     <div class="row">
-                                        <div class="input-field col s12 m8 l8 offset-l2 offset-m2">
-                                            <h6>Em qual das categorias abaixo seu produto se encaixa? Clique no ícone
-                                                para expandir.</h6>
-                                            <div class="card grey lighten-1">
-                                                <div class="card-content">
-                                                    <div
-                                                            data-angular-treeview="true"
-                                                            data-tree-id="categorias"
-                                                            data-tree-model="treedata"
-                                                            data-node-id="categoryId"
-                                                            data-node-label="categoryName"
-                                                            data-node-children="children"
-                                                            data-node-collapsed="false">
+                                        <div class="input-field col s12 m10 l10 offset-l1 offset-m1">
+                                            <p class="strong"> Categoria selecionada:{{categoryName}}</span>
+                                            <div class="divider"></div>
+                                            <br>
+                                            <div class="row">
+                                                <button ng-click="resetCategories()" class="btn waves-effect waves-teal white blue-text" style="margin-bottom: 30px; margin-left: 7px;">
+                                                    <i class="material-icons left">refresh</i> Todas as categorias
+                                                </button>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col l2 center white-text" style="padding-right: 5px; margin-bottom: 10px;"  ng-repeat="category in categories">
+                                                    <div class="hoverable" style="background-color: {{category.color}}" ng-click="setCategory(category.categoryId,category.categoryName)" tooltips tooltip-template="{{category.categoryName}}">
+                                                        <img class="responsive-img" ng-src="{{'icons/'+category.icon}}" style="height:50px;width: 96px;">
                                                     </div>
                                                 </div>
                                             </div>
 
-                                            <select class="browser-default"
-                                                    ng-model="newProp.category.categoryId"
-                                                    ng-options="c.categoryName group by c.parentId  for c in flatData">
-
-                                            </select>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
                             <div class="card">
                                 <div class="card-content">
                                     <i class="material-icons">add</i>
@@ -83,7 +89,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="col s12 center">
-                                                <button ng-click="uploadFiles()" class="btn waves-effect btn-large amber">Salvar<i class="material-icons left">save</i> </button>
+                                                <button ng-click="uploadFiles()" class="btn waves-effect btn-large amber">Adicionar<i class="material-icons left">add</i> </button>
                                             </div>
                                         </div>
 
@@ -163,49 +169,64 @@
                                             </div>
 
                                             <div class="row" ng-hide="swap==false">
-                                                <div class="input-field col s12 m6 l6 offset-l3 offset-m3" ng-hide="sell==true || sw_sell==true">
-                                                    <div class="card grey lighten-1">
-                                                        <div class="card-content">
-                                                            <div
-                                                                    data-angular-treeview="true"
-                                                                    data-tree-id="t_category"
-                                                                    data-tree-model="treedata2"
-                                                                    data-node-id="categoryId"
-                                                                    data-node-label="categoryName"
-                                                                    data-node-children="children"
-                                                            >
+                                                <div class="input-field col s12 m10 l10 offset-l1 offset-m1" ng-hide="sell==true || sw_sell==true">
+                                                    <div class="row">
+                                                        <div class="input-field col s12 m10 l10 offset-l1 offset-m1">
+                                                            <p class="strong"> O que você quer em troca: {{interestCategoryName}}</p>
+                                                            <div class="divider"></div>
+                                                            <br>
+                                                            <div class="row">
+                                                                <button ng-click="resetInterestCategories()" class="btn waves-effect waves-teal white blue-text" style="margin-bottom: 30px; margin-left: 7px;">
+                                                                    <i class="material-icons left">refresh</i> Todas as categorias
+                                                                </button>
                                                             </div>
+                                                            <div class="row">
+                                                                <div class="col l2 center white-text" style="padding-right: 5px; margin-bottom: 10px;"  ng-repeat="interestCategory in interestCategories">
+                                                                    <div class="hoverable" style="background-color: {{interestCategory.color}}" ng-click="setInterestCategory(interestCategory.categoryId,interestCategory.categoryName)" tooltips tooltip-template="{{interestCategory.categoryName}}">
+                                                                        <img class="responsive-img" ng-src="{{'icons/'+interestCategory.icon}}" style="height:50px;width: 96px;">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
 
-                                            <div class="row" ng-hide="sw_sell == false">
-
-                                                <div class="input-field col s12 m4 l3">
+                                            <div class="row" ng-hide="sw_sell == false" style="margin-top: 30px;">
+                                                <div class="input-field col s12 m4 l4 offset-l2">
                                                     <input id="sellPrice2" type="text" ng-model="newProp.price" ng-disabled="sw_sell!==true">
-                                                    <label for="sellPrice2">Preço do seu produto</label>
+                                                    <label for="sellPrice2" class="active">Preço do seu produto</label>
                                                 </div>
-                                                <div class="input-field col s12 m4 l6">
-                                                    <div class="card grey lighten-1">
-                                                        <div class="card-content">
-                                                            <div ng-hide="sell==true || swap==true"
-                                                                 data-angular-treeview="true"
-                                                                 data-tree-id="t_category"
-                                                                 data-tree-model="treedata3"
-                                                                 data-node-id="categoryId"
-                                                                 data-node-label="categoryName"
-                                                                 data-node-children="children"
-                                                            >
+                                                <div class="input-field col s12 m4 l4">
+                                                    <input id="intPrice" type="text" ng-model="newProp.priceCatInterest" ng-disabled="sw_sell!==true">
+                                                    <label for="intPrice" class="active">Preço do que você quer</label>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="input-field col s12 m8 l8 offset-l2 offset-m2">
+                                                        <p class="strong"> O que você quer em troca: {{interestCategoryName}}</p>
+                                                        <div class="divider"></div>
+                                                        <br>
+                                                        <div class="row">
+                                                            <button ng-click="resetInterestCategories()" class="btn waves-effect waves-teal white blue-text" style="margin-bottom: 30px; margin-left: 7px;">
+                                                                <i class="material-icons left">refresh</i> Todas as categorias
+                                                            </button>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col l2 center white-text" style="padding-right: 5px; margin-bottom: 10px;"  ng-repeat="interestCategory in interestCategories">
+                                                                <div class="hoverable" style="background-color: {{interestCategory.color}}" ng-click="setInterestCategory(interestCategory.categoryId,interestCategory.categoryName)" tooltips tooltip-template="{{interestCategory.categoryName}}">
+                                                                    <img class="responsive-img" ng-src="{{'icons/'+interestCategory.icon}}" style="height:50px;width: 96px;">
+                                                                </div>
                                                             </div>
                                                         </div>
+
                                                     </div>
                                                 </div>
-                                                <div class="input-field col s12 m4 l3">
-                                                    <input id="intPrice" type="text" ng-model="newProp.priceCatInterest" ng-disabled="sw_sell!==true">
-                                                    <label for="intPrice">Preço do que você quer</label>
-                                                </div>
                                             </div>
+
+
+
+
                                         </div>
                                     </div>
 

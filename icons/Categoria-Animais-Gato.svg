@@ -1,20 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <!-- Creator: CorelDRAW X6 -->
-<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="2480px" height="3508px" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
-viewBox="0 0 2480 3507"
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="96px" height="96px" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 9600000 9600000"
  xmlns:xlink="http://www.w3.org/1999/xlink">
  <defs>
   <style type="text/css">
    <![CDATA[
-    .fil0 {fill:#FEFEFE}
+    .fil0 {fill:white}
    ]]>
   </style>
  </defs>
  <g id="Camada_x0020_1">
   <metadata id="CorelCorpID_0Corel-Layer"/>
-  <g id="halloween-black-cat.eps">
-   <path class="fil0" d="M2013 2810c-13,-109 -133,-121 -203,-114 -74,-280 185,-698 201,-797 16,-106 -76,-725 -86,-1038 -10,-322 -477,-677 -555,-620 -77,85 111,201 12,300 -96,96 -121,160 -192,268 -182,277 312,280 312,280 0,0 -387,287 -473,431 -79,133 -113,282 -208,408 -218,286 -169,785 -169,785 0,0 -413,-135 -186,-607 173,-359 258,-889 -131,-752 -151,53 34,164 66,199 106,119 16,319 -48,434 -80,145 -137,292 -137,429l0 2c0,155 73,296 264,402 161,89 377,111 596,114l555 2c183,9 390,-25 382,-125z"/>
-  </g>
+  <path class="fil0" d="M9300118 801024l-2709567 518740c-537874,-274488 -1146496,-429331 -1790669,-429331 -644055,0 -1252559,154843 -1790669,429331l-2709331 -518740 617717 3292441c-47008,243425 -71811,494409 -71811,751181 0,2180433 1773661,3954331 3954094,3954331 2180315,0 3954331,-1773898 3954331,-3954331 0,-256772 -24921,-507756 -71929,-751181l617835 -3292441zm-3712323 6404173c-312047,0 -593386,-128740 -788150,-342283 -194882,213780 -475748,343937 -787559,343937 -586890,0 -1064528,-487677 -1064528,-1079528l591850 0c0,276260 212008,487795 472677,487795 260669,0 472795,-200906 472795,-461575l-4252 -421890c-347480,-129921 -595630,-472205 -595630,-866811l591732 0c0,197362 144921,323150 323150,323150 178228,0 323268,-125787 323268,-323150l591850 0c0,394606 -248150,736772 -595748,866575l-4134 420354c0,257598 212008,460748 472677,460748 260669,0 472559,-208937 472559,-485197l591850 0c236,591850 -477402,1077874 -1064409,1077874z"/>
  </g>
 </svg>

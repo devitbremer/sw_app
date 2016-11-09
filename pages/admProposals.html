@@ -1,5 +1,12 @@
 <!-- INICIA CONTEUDO -->
-        <section id="content" class="-">
+        <section id="content">
+            <div class="row" ng-if="denuncedProps == undefined" style="margin-top: 30px">
+                <div class="col s12 m10 l9 card offset-m1">
+                    <div class="card-content center">
+                        <span class="flow-text"><i class="material-icons medium green-text">done_all</i> <br>Nice!<br>Nenhuma proposta denunciada!</span>
+                    </div>
+                </div>
+            </div>
             <div class="row" ng-repeat="prop in denuncedProps">
                 <div class="col s12 m10 l9 card hoverable valign-wrapper offset-m1">
                     <div class="col s4 m3 l2 valign card">

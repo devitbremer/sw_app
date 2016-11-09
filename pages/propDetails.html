@@ -54,7 +54,7 @@
                                     <br>
                                     <br>
                                     <div id="actions" class="hide-on-small-and-down">
-                                        <button class="waves-effect btn-flat btn-large waves-red waves-light"  ng-click="addFavorite(proposition.propositionId)"><i
+                                        <button ng-hide="userLoged == false" class="waves-effect btn-flat btn-large waves-red waves-light"  ng-click="addFavorite(proposition.propositionId)"><i
                                                 class="material-icons left red-text">favorite</i>Favorito
                                         </button>
                                         <button class="waves-effect btn-flat btn-large waves-orange waves-light" ng-click="addDenunce(proposition.propositionId)"><i

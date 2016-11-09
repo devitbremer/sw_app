@@ -102,6 +102,7 @@ swApp.directive('ngFiles', ['$parse', function ($parse) {
 
 swApp.service('propService' ,[function () {
 
+    //Essas variáveis são pra pesquisa
         this.propId ='';
         this.category = null;
         this.city = null;
@@ -109,6 +110,10 @@ swApp.service('propService' ,[function () {
         this.price_max = 9999999;
         this.price_min = 0;
         this.title = null;
+
+    //Essas variáveis são para nova proposta
+    this.newPropCat = null;
+    this.newPropCatInterest = null;
 
 }]);
 
@@ -193,7 +198,7 @@ swApp.controller('personActivateController', ['$scope','$routeParams','$http','h
 }])
 
 
-swApp.controller('registerController', ['$scope', '$filter', '$http', '$location','md5', function ($scope, $filter, $http, $location,md5) {
+swApp.controller('registerController', ['$scope', '$filter', '$http', '$location','md5','$rootScope','loginService','httpq','$cookies', function ($scope, $filter, $http, $location,md5,$rootScope,loginService,httpq,$cookies) {
 
 
     $scope.pswd1 = '';
@@ -237,6 +242,81 @@ swApp.controller('registerController', ['$scope', '$filter', '$http', '$location
 
             });
     }
+
+    //LOGIN FACEBOOK.
+    $rootScope.$on('event:social-sign-in-success', function (event, userDetails) {
+
+        $scope.person = {
+            "personName": userDetails.name,
+            "email": userDetails.email,
+            "phone": "",
+            "password": "",
+            "sex": "",
+            "blocked": "0",
+            "level": "null"
+        };
+        $scope.person.password = md5.createHash($scope.person.password || userDetails.email);
+
+        //TENTA SALVAR A PESSOA
+        $http.post('http://localhost:8080/swapitws/rs/person/save', $scope.person)
+
+        //CASO SUCESSO USUÄRIO NÃO EXISTE SALVA A PESSOA
+            .success(function () {
+
+                httpq.get('http://localhost:8080/swapitws/rs/person/getbyemail/' + $scope.person.email)
+                    .then(function (result) {
+                        //SALVA COOKIE
+                        if ($scope.remember == true) {
+                            var now = new Date(),
+                                exp = new Date(now.getFullYear(), now.getMonth() + 2, now.getDate());
+
+                            $cookies.put('loginData', JSON.stringify(result), {
+                                expires: exp
+                            })
+                        }
+                        else {
+                            var now = new Date(),
+                                exp = new Date(now.getFullYear(), now.getMonth(), now.getDate()+1);
+                            $cookies.put('loginData', JSON.stringify(result), {
+                                expires: exp
+                            })
+                        }
+                        loginService.userLoged = true;
+                        loginService.refreshUser();
+                        $location.path(loginService.path);
+                    })
+                    .catch(function () {
+                    })
+
+            })
+
+            //CASO ERRO USUÄRIO JÄ EXISTE
+            .error(function (data, status) {
+                httpq.get('http://localhost:8080/swapitws/rs/person/getbyemail/' + $scope.person.email)
+                    .then(function (result) {
+                        //SALVA COOKIE
+                        if ($scope.remember == true) {
+                            var now = new Date(),
+                                exp = new Date(now.getFullYear(), now.getMonth() + 2, now.getDate());
+                            $cookies.put('loginData', JSON.stringify(result), {
+                                expires: exp
+                            })
+                        }
+                        else {
+                            var now = new Date(),
+                                exp = new Date(now.getFullYear(), now.getMonth(), now.getDate()+1);
+                            $cookies.put('loginData', JSON.stringify(result), {
+                                expires: exp
+                            })
+                        }
+                        loginService.userLoged = true;
+                        loginService.refreshUser();
+                        $location.path(loginService.path);
+                    })
+                    .catch(function () {
+                    })
+            });
+    });
 
 
 
@@ -286,7 +366,7 @@ swApp.controller('loginController', ['$scope','$http','md5','$location','$cookie
                 });
         };
 
-        //LOGIN FACEBOOK.
+        //LOGIN REDES SOCIAIS.
         $rootScope.$on('event:social-sign-in-success', function (event, userDetails) {
 
             $scope.person = {
@@ -298,7 +378,7 @@ swApp.controller('loginController', ['$scope','$http','md5','$location','$cookie
                 "blocked": "0",
                 "level": "null"
             };
-            $scope.person.password = md5.createHash($scope.person.password || '');
+            $scope.person.password = md5.createHash($scope.person.password || userDetails.email);
 
             //TENTA SALVAR A PESSOA
             $http.post('http://localhost:8080/swapitws/rs/person/save', $scope.person)
@@ -359,7 +439,7 @@ swApp.controller('loginController', ['$scope','$http','md5','$location','$cookie
                         .catch(function () {
                         })
                 });
-        })
+        });
 
 /*Abaixo termina o else*/
     }
@@ -434,7 +514,7 @@ swApp.controller('detailsController', ['$scope','propService','httpq','$location
     $scope.propositionId = propService.propId;
     $scope.proposition = {};
     $scope.userId = '';
-    $scope.userLoged = loginService.userLoged;
+    $scope.userLoged = '';
 
 
     if (!propService.propId){
@@ -442,9 +522,10 @@ swApp.controller('detailsController', ['$scope','propService','httpq','$location
         $location.path('/main')
     }
 
-    if($scope.userLoged = true){
+    if(loginService.userLoged == true){
         $scope.userId = loginService.user.personId
-        console.log($scope.userId);
+        $scope.userLoged = loginService.userLoged;
+
     }
    //BUSCA PROPOSTA
     httpq.get('http://localhost:8080/swapitws/rs/proposition/getbyID/'+$scope.propositionId)
@@ -561,7 +642,7 @@ swApp.controller('detailsController', ['$scope','propService','httpq','$location
 
 }]);
 
-swApp.controller('newProposalController', ['$scope','Upload','$timeout','httpq','$http','loginService','$location',function ($scope, Upload, $timeout,httpq,$http,loginService,$location) {
+swApp.controller('newProposalController', ['$scope','Upload','$timeout','httpq','$http','loginService','$location','propService',function ($scope, Upload, $timeout,httpq,$http,loginService,$location,propService) {
 
     console.log('from new',loginService)
     if(loginService.userLoged == true) {
@@ -648,90 +729,81 @@ swApp.controller('newProposalController', ['$scope','Upload','$timeout','httpq',
                 });
         };
 
+        //CATEGORIAS DA PROPOSTA
+        $scope.$watch(function () {return propService.newPropCat},function () {
+            if($scope.category == null){
 
-        //Criando Hierarquia de Categorias
+                httpq.get('http://localhost:8080/swapitws/rs/category/getParent/e1408c61-98bc-11e6-a3ce-80fa5b2affba')
+                    .then(function (response) {
+                        $scope.categories = response;
+                    })
+                    .catch(function () {
 
-        var whereElementsIdIsInThisField = 'categoryId';
-        var andTheReferenceToAParentIsInThisField = 'parentId';
-        var andSaveTheChildrenInThisField = 'children';
+                    })
+            }
+            else {
 
+                httpq.get('http://localhost:8080/swapitws/rs/category/getParent/'+$scope.category)
+                    .then(function (response) {
+                        $scope.categories = response;
+                    })
+                    .catch(function () {
 
-//Função que monta a arvore
-        function buildTree(flatList, idFieldName, parentKeyFieldName, fieldNameForChildren) {
-            var rootElements = [];
-            var lookup = {};
+                    })
+            }
+        });
 
-            // Take the flat list and transform it into a dictionary of key/values.
-            // This will allow us to quickly get the reference of an object like a lookup table.
-            flatList.forEach(function (flatItem) {
-                var itemId = flatItem[idFieldName];
-                lookup[itemId] = flatItem;
-                flatItem[fieldNameForChildren] = [];
-            });
-
-            flatList.forEach(function (flatItem) {
-
-                var parentKey = flatItem[parentKeyFieldName];
-
-                if (parentKey != null) {
-
-                    // Item is linked to a parent, retrieve the parent.
-                    var parentObject = lookup[flatItem[parentKeyFieldName]];
-
-                    if (parentObject) {
-                        // Parent found, add the item as a child.
-                        parentObject[fieldNameForChildren].push(flatItem);
-                    } else {
-                        // No parent found, add the item as a root element.
-                        rootElements.push(flatItem);
-                    }
-                } else {
-                    // No parent, add the item as a root element.
-                    rootElements.push(flatItem);
-                }
-
-            });
-
-            return rootElements;
+        $scope.setCategory = function (categoryid, categoryName) {
+            $scope.category = categoryid;
+            propService.newPropCat = categoryid;
+            $scope.newProp.category.categoryId = categoryid;
+            $scope.categoryName = categoryName
+        }
+        $scope.resetCategories = function () {
+            $scope.category = 'e1408c61-98bc-11e6-a3ce-80fa5b2affba';
+            propService.newPropCat = null;
+            $scope.categoryName = '';
+            $scope.newProp.category.categoryId = '';
         }
 
-        $scope.flatdata = '';
-        //CARREGANDO CATEGORIAS
-        httpq.get('http://localhost:8080/swapitws/rs/category/getAll')
-            .then(function (data) {
-
-                $scope.flatData = data;
-                $scope.flatData3 = data;
-
-                //Monta a arvore
-                $scope.treedata = buildTree($scope.flatData, whereElementsIdIsInThisField, andTheReferenceToAParentIsInThisField, andSaveTheChildrenInThisField);
-                $scope.treedata2 = buildTree(angular.copy($scope.flatData), whereElementsIdIsInThisField, andTheReferenceToAParentIsInThisField, andSaveTheChildrenInThisField);
-                $scope.treedata3 = buildTree(angular.copy($scope.flatData3), whereElementsIdIsInThisField, andTheReferenceToAParentIsInThisField, andSaveTheChildrenInThisField);
-            })
-
-            .catch(function (response) {
-                console.error('Xabu na consulta', response.status, response.data);
-            });
 
 
-        //Watcher para setar as categorias da roposta
-        $scope.$watch('categorias.currentNode', function (newObj, oldObj) {
-            if ($scope.categorias && angular.isObject($scope.categorias.currentNode)) {
-                $scope.newProp.category.categoryId = $scope.categorias.currentNode.categoryId;
+        //CATEGORIAS DE INTERESSE
+        $scope.$watch(function () {return propService.newPropCatInterest},function () {
+            if($scope.categoryInterest == null){
+
+                httpq.get('http://localhost:8080/swapitws/rs/category/getParent/e1408c61-98bc-11e6-a3ce-80fa5b2affba')
+                    .then(function (response) {
+                        $scope.interestCategories = response;
+                    })
+                    .catch(function () {
+
+                    })
             }
-        }, false);
+            else {
 
-        $scope.$watch('vt_category.currentNode', function (newObj, oldObj) {
-            if ($scope.vt_category && angular.isObject($scope.vt_category.currentNode)) {
-                $scope.newProp.interest_category.categoryId = $scope.vt_category.currentNode.categoryId;
-            }
-        }, false);
+                httpq.get('http://localhost:8080/swapitws/rs/category/getParent/'+$scope.categoryInterest)
+                    .then(function (response) {
+                        $scope.interestCategories = response;
+                    })
+                    .catch(function () {
 
-        $scope.$watch('t_category.currentNode', function (newObj, oldObj) {
-            if ($scope.t_category && angular.isObject($scope.t_category.currentNode)) {
-                $scope.newProp.interest_category.categoryId = $scope.t_category.currentNode.categoryId;
+                    })
             }
-        }, false);
+        });
+
+        $scope.setInterestCategory = function (categoryid, categoryName) {
+            $scope.categoryInterest = categoryid;
+            propService.newPropCatInterest = categoryid;
+            $scope.newProp.interest_category.categoryId = categoryid;
+            $scope.interestCategoryName = categoryName
+        }
+        $scope.resetInterestCategories = function () {
+            $scope.categoryInterest = 'e1408c61-98bc-11e6-a3ce-80fa5b2affba';
+            propService.newPropCatInterest = null;
+            $scope.interestCategoryName = '';
+            $scope.newProp.interest_category.categoryId = '';
+        }
 
 
         //CAREGANDO O ENDEREÇO DA PROPOSTA
@@ -1448,7 +1520,10 @@ swApp.controller('topNavController',['$scope','$cookies','$location','loginServi
         $scope.userLoged = loginService.userLoged;
     })
     $scope.$watch(function () {return loginService.user},function () {
-        $scope.admin = true;
+        $scope.admin = loginService.user.level;
+    })
+    $scope.$watch(function () {return loginService.user.personName},function () {
+        $scope.userName = loginService.user.personName;
     })
 
     $scope.logout = function () {
@@ -1562,7 +1637,7 @@ swApp.controller('favoritesController', ['$scope', '$location', 'loginService', 
     }
 }])
 
-swApp.controller('admController',['$scope','$http','httpq','loginService','$location',function ($scope,$http,httpq,loginService,$location) {
+swApp.controller('admController',['$scope','$http','httpq','loginService','$location', function ($scope,$http,httpq,loginService,$location) {
 
     $scope.proposition = [];
 
@@ -1570,16 +1645,19 @@ swApp.controller('admController',['$scope','$http','httpq','loginService','$loca
         if(loginService.user.level !== 'admin'){
             $location.path('/main')
         }
-
         $scope.user = loginService.user;
-        
-        httpq.get('http://localhost:8080/swapitws/rs/proposition/getDenunce/')
-            .then(function (response) {
-                $scope.denuncedProps = response;
-            })
-            .catch(function (response) {
-                
-            })
+
+        $scope.getDenunces = function () {
+            $scope.denuncedProps = [];
+            httpq.get('http://localhost:8080/swapitws/rs/proposition/getDenunce/')
+                .then(function (response) {
+                    $scope.denuncedProps = response;
+                })
+                .catch(function (response) {
+                })
+        }
+
+        $scope.getDenunces();
 
 
         //BLOQUEAR USER
@@ -1597,6 +1675,7 @@ swApp.controller('admController',['$scope','$http','httpq','loginService','$loca
                                 '<i class="material-icons red-text">block</i>Usuário Bloquado!' +
                                 '</span>');
                             Materialize.toast($toastContent, 5000);
+                            $scope.getDenunces();
 
                         })
                         .error(function (data, status) {
@@ -1604,6 +1683,7 @@ swApp.controller('admController',['$scope','$http','httpq','loginService','$loca
                                 '<p class="center">Tente novamente daqui a pouco...</p>' +
                                 '</span>');
                             Materialize.toast($toastContent, 5000);
+                            $scope.getDenunces();
 
                         });
                 })
@@ -1633,7 +1713,11 @@ swApp.controller('admController',['$scope','$http','httpq','loginService','$loca
 
                     $http.put('http://localhost:8080/swapitws/rs/proposition/update', $scope.proposition)
                         .success(function (result) {
-
+                            var $toastContent = $('<span>' +
+                                '<i class="material-icons green-text">delete</i>Poposta Removida!' +
+                                '</span>');
+                            Materialize.toast($toastContent, 5000);
+                            $scope.getDenunces();
                         })
                         .error(function (data, status) {
 
@@ -1652,22 +1736,7 @@ swApp.controller('admController',['$scope','$http','httpq','loginService','$loca
             httpq.get('http://localhost:8080/swapitws/rs/proposition/getbyID/'+propId)
 
                 .then(function (response) {
-                    /*
-                     $scope.proposition.propositionId = response.propositionId;
-                     $scope.proposition.title = response.title;
-                     $scope.proposition.description = response.description;
-                     $scope.proposition.addressReduce.addressid = response.addressReduce.addressid;
-                     $scope.proposition.addressReduce.streetid = response.addressReduce.streetid;
-                     $scope.proposition.price = response.price;
-                     $scope.proposition.priceCatInterest = response.priceCatInterest;
-                     $scope.proposition.totalPrice = response.totalPrice;
-                     $scope.proposition.category.categoryId = response.category.categoryId;
-                     $scope.proposition.interest_category.categoryId = response.interest_category.categoryId;
-                     $scope.proposition.personReduce.personId =  response.personReduce.personId;
-                     $scope.proposition.personReduce.addressReduce.addressid =  response.personReduce.addressReduce.addressid;
-                     $scope.proposition.image =  response.image;
-                     $scope.proposition.publish_date = response.publish_date;
-                     $scope.proposition.removel_date = '';*/
+
                     $scope.proposition = response;
 
 
@@ -1676,13 +1745,46 @@ swApp.controller('admController',['$scope','$http','httpq','loginService','$loca
                     $scope.proposition.publish_date = datestringP;
 
                     delete $scope.proposition.denunce;
+                    /* delete $scope.proposition.addressReduce.zipcode;
+                    delete $scope.proposition.addressReduce.streetName;
+                    delete $scope.proposition.addressReduce.complement;
+                    delete $scope.proposition.addressReduce.districtName;
+                    delete $scope.proposition.addressReduce.cityName;
+                    delete $scope.proposition.addressReduce.stateAcronym;
+                    delete $scope.proposition.addressReduce.stateName;
+                    delete $scope.proposition.addressReduce.countryAcronym;
+                    delete $scope.proposition.addressReduce.countryName;
+
+                    delete $scope.proposition.category.categoryName;
+                    delete $scope.proposition.category.parentId;
+                    delete $scope.proposition.category.color;
+                    delete $scope.proposition.category.icon;
+
+                    delete $scope.proposition.interest_category.categoryName;
+                    delete $scope.proposition.interest_category.parentId;
+                    delete $scope.proposition.interest_category.color;
+                    delete $scope.proposition.interest_category.icon;
+
+                    delete $scope.proposition.personReduce.personName;
+                    delete $scope.proposition.personReduce.personName;
+                    delete $scope.proposition.personReduce.email;
+                    delete $scope.proposition.personReduce.password;
+                    delete $scope.proposition.personReduce.sex;
+                    delete $scope.proposition.personReduce.blocked;
+                    delete $scope.proposition.personReduce.level;
+                    delete $scope.proposition.personReduce.favorite;
+                    delete $scope.proposition.personReduce.phone;*/
 
                     $http.put('http://localhost:8080/swapitws/rs/proposition/update', $scope.proposition)
                         .success(function (result) {
-                            console.log('deu certo',$scope.proposition, result)
+                            var $toastContent = $('<span>' +
+                                '<i class="material-icons green-text">check_all</i>Poposta Liberada!' +
+                                '</span>');
+                            Materialize.toast($toastContent, 5000);
+
+                            $scope.getDenunces();
                         })
                         .error(function (data, status) {
-                            console.log($scope.proposition)
                         });
                 })
                 .catch(function () {

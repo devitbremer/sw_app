@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
 <!-- Creator: CorelDRAW X6 -->
-<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="2480px" height="3508px" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
-viewBox="0 0 2480 3507"
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="96px" height="96px" version="1.0" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 96 96"
  xmlns:xlink="http://www.w3.org/1999/xlink">
  <defs>
   <style type="text/css">
    <![CDATA[
-    .fil0 {fill:#FEFEFE}
+    .fil0 {fill:white}
    ]]>
   </style>
  </defs>
  <g id="Camada_x0020_1">
   <metadata id="CorelCorpID_0Corel-Layer"/>
-  <g id="_595981968">
-   <path class="fil0" d="M866 1419c-12,58 -24,118 -24,182 0,210 171,380 380,380 210,0 380,-171 380,-380 0,-64 -12,-124 -24,-182 -22,-108 -44,-221 31,-327 -114,-68 -246,-107 -388,-107 -142,0 -275,39 -388,107 76,106 53,218 31,327z"/>
-   <path class="fil0" d="M1693 1149c-51,71 -36,146 -16,250 12,60 25,127 25,201 0,265 -215,480 -480,480 -265,0 -480,-215 -480,-480 0,-74 14,-142 25,-201 21,-104 36,-179 -16,-250 -175,139 -288,354 -288,595 0,419 339,758 758,758 419,0 758,-339 758,-758 0,-241 -113,-456 -288,-595z"/>
+  <g id="_420450568">
+   <path class="fil0" d="M27 29c-1,4 -1,7 -1,11 0,12 11,23 23,23 12,0 23,-11 23,-23 0,-4 -1,-8 -1,-11 -1,-7 -3,-13 2,-19 -7,-4 -14,-7 -23,-7 -9,0 -16,2 -23,7 5,7 3,13 2,19l0 0 -2 0z"/>
+   <path class="fil0" d="M76 13c-3,4 -2,9 -1,15 1,4 2,8 2,11 0,15 -12,29 -29,29 -15,0 -29,-12 -29,-29 0,-5 1,-9 2,-11 1,-6 2,-11 -1,-15 -11,9 -17,21 -17,35 0,25 20,45 45,45 25,0 45,-20 45,-45 0,-14 -7,-27 -17,-35l0 0z"/>
   </g>
  </g>
 </svg>
