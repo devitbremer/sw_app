@@ -16,7 +16,7 @@
             <div class="row" ng-repeat="proposta in propostas track by $index">
                 <div class="col s12 m10 l9 card hoverable valign-wrapper offset-m1" ng-click="viewDetails(proposta.propositionId)">
                     <div class="col s4 m3 l2 valign card">
-                        <img ng-src="{{'http://localhost:8080/swapitws/rs/propositionIMG/download/'+proposta.image[0].imageid}}" ng-hide="!proposta.image[0].imageid" class="responsive-img left" style="height: 180px;">
+                        <img ng-src="{{'http://10.11.0.96:8080/swapitws/rs/propositionIMG/download/'+proposta.image[0].imageid}}" ng-hide="!proposta.image[0].imageid" class="responsive-img left" style="height: 180px;">
                         <img src="http://localhost/sw_app/images/sem-foto.jpg" ng-hide="proposta.image[0].imageid" class="responsive-img left" style="height: 180px;">
                     </div>
 
@@ -38,7 +38,7 @@
                             <div class="col s5 m3 l2 center" ng-hide="!proposta.interest_category" style="background-color: {{proposta.interest_category.color}}" >
                                 <span class="white-text truncate">Troco por</span>
                                 <div class="divider white"></div>
-                                <img ng-src="{{'http://localhost/sw_app/icons/'+proposta.interest_category.icon}}" class="responsive-img" style="max-height: 43px;">
+                                <img ng-src="{{'icons/'+proposta.interest_category.icon}}" class="responsive-img" style="max-height: 43px;">
                             </div>
 
                             <div class="col s5 m3 l2 valign center cyan offset-l1 offset-m1 offset-s1 category" ng-hide="!proposta.priceCatInterest">
@@ -50,7 +50,7 @@
                             <div class="col s5 m3 l2 valign center right hide-on-small-and-down category" style="background-color: {{proposta.category.color}}">
                                 <span class="white-text">Categoria</span>
                                 <div class="divider white"></div>
-                                <img ng-src="{{'http://localhost/sw_app/icons/'+proposta.category.icon}}" class="responsive-img" style="max-height: 43px;">
+                                <img ng-src="{{'icons/'+proposta.category.icon}}" class="responsive-img" style="max-height: 43px;">
                             </div>
                         </div>
                     </div>
@@ -71,11 +71,6 @@
                 </div>
             </div>
         </section>
-        <div class="fixed-action-btn hide-on-med-and-down" style="bottom: 20%; right: 16%;">
-            <a href="#/new" class="btn-floating btn-large waves-effect waves-light green darken-2" tooltips tooltip-template = "Nova Proposta!">
-                <i class="material-icons">add</i>
-            </a>
-        </div>
     <!-- FIM CONTEUDO -->
 
 <!-- FIM MAIN -->

@@ -568,7 +568,7 @@ ul.side-nav.fixed hr {
   height: 42px;
 }
 #left-sidebar-nav {
-  position: fixed;
+  position: relative;
   width: 100px;
   left: 180px;
   z-index: 999;
@@ -623,7 +623,7 @@ ul.side-nav.fixed li a {
   font-weight: 400;
 }
 .side-nav .collapsible-body li a{
-    margin: 0 1rem 0 3rem;
+    margin: 0 1rem 0 0;
 }
 ul.side-nav.fixed ul.collapsible-accordion {
   background-color: #FFF;
