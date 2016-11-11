@@ -50,7 +50,7 @@
 
                                     <div class="row">
                                         <div class="input-field col s12 m10 l10 offset-l1 offset-m1">
-                                            <p class="strong"> Categoria selecionada:{{categoryName}}</span>
+                                            <p class="strong"> Categoria selecionada:{{categoryName}}</p>
                                             <div class="divider"></div>
                                             <br>
                                             <div class="row">
@@ -105,7 +105,7 @@
                                         <br>
                                         <div class="input-field col s8 m6 l6">
                                             <i class="material-icons prefix">add_location</i>
-                                            <input id="cep" type="text" name="cep" ng-model="zipcode" mask="99999-999"
+                                            <input class="cep" id="cep" type="text" name="cep" ng-model="zipcode" mask="99999-999"
                                                    clean="true" ng-required="true" ng-minlength="9">
                                             <li ng-show="newProposition.cep.$error.minlength"
                                                 class="red-text medium-small">O CEP deve ter 8 numeros!
@@ -163,7 +163,7 @@
 
                                             <div class="row" ng-hide="sell==false" >
                                                 <div class="input-field col s12 m6 l6 offset-l3 offset-m3">
-                                                    <input id="sellPrice" type="text" ng-model="newProp.price" ng-disabled="sell!==true">
+                                                    <input class="money" id="sellPrice" type="text" ng-model="newProp.price" ng-disabled="sell!==true">
                                                     <label for="sellPrice" class="active">Preço</label>
                                                 </div>
                                             </div>
@@ -195,11 +195,11 @@
 
                                             <div class="row" ng-hide="sw_sell == false" style="margin-top: 30px;">
                                                 <div class="input-field col s12 m4 l4 offset-l2">
-                                                    <input id="sellPrice2" type="text" ng-model="newProp.price" ng-disabled="sw_sell!==true">
+                                                    <input class="money" id="sellPrice2" type="text" ng-model="newProp.price" ng-disabled="sw_sell!==true">
                                                     <label for="sellPrice2" class="active">Preço do seu produto</label>
                                                 </div>
                                                 <div class="input-field col s12 m4 l4">
-                                                    <input id="intPrice" type="text" ng-model="newProp.priceCatInterest" ng-disabled="sw_sell!==true">
+                                                    <input class="money" id="intPrice" type="text" ng-model="newProp.priceCatInterest" ng-disabled="sw_sell!==true">
                                                     <label for="intPrice" class="active">Preço do que você quer</label>
                                                 </div>
                                                 <div class="row">
