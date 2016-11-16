@@ -3,8 +3,8 @@ body {
   background-color: #fcfcfc;
 }
 #main,
-footer {
-  padding-left: 360px;
+page-footer {
+  padding-left: 340px;
 }
 .margin {
   margin: 0;
@@ -320,6 +320,14 @@ li.li-hover:hover{
   height: 100%;
   z-index: 1000;
 }
+#loader-text{
+  display: block;
+  position: absolute;
+  left: 50%;
+  top:90%;
+  width: 150px;
+  height: 150px;
+}
 #loader {
   display: block;
   position: relative;
@@ -344,9 +352,10 @@ li.li-hover:hover{
   position: absolute;
   left: 48%;
   top: 46%;
-  background: url(../images/user-bg.jpg) no-repeat center center;  
+  background: url(../images/logo-login.png) no-repeat center center;
   z-index: 1001;
 }
+
 #loader:before {
   content: "";
   position: absolute;

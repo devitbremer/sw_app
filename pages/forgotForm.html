@@ -10,7 +10,7 @@
             <div class="row margin">
                 <div class="input-field col s12 l8 offset-l2 center">
                     <i class="material-icons prefix">person</i>
-                    <input id="email" type="text">
+                    <input id="email" type="text" ng-model="personEmail">
                     <label for="email" class="center-align">E-mail cadastrado</label>
                 </div>
             </div>
@@ -18,7 +18,7 @@
             <div class="divider"></div>
             <div class="row">
                 <div class="input-field col s12 l8 offset-l2 center">
-                    <a href="#/login" class="btn waves-effect waves-light col s12">Recuperar</a>
+                    <button ng-click="recover()" class="btn waves-effect waves-light col s12">Recuperar</button>
                 </div>
             </div>
 
