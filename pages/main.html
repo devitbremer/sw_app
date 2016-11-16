@@ -13,10 +13,10 @@
                 </div>
             </div>
 
-            <div class="row" ng-repeat="proposta in propostas track by $index">
+            <div class="row" ng-repeat="proposta in propostas |limitTo:limit track by $index">
                 <div class="col s12 m10 l9 card hoverable valign-wrapper offset-m1" ng-click="viewDetails(proposta.propositionId)">
                     <div class="col s4 m3 l2 valign card">
-                        <img ng-src="{{'http://10.11.0.96:8080/swapitws/rs/propositionIMG/download/'+proposta.image[0].imageid}}" ng-hide="!proposta.image[0].imageid" class="responsive-img left" style="height: 180px;">
+                        <img ng-src="{{'http://localhost:8080/swapitws/rs/propositionIMG/download/'+proposta.image[0].imageid}}" ng-hide="!proposta.image[0].imageid" class="responsive-img left" style="height: 180px;">
                         <img src="http://localhost/sw_app/images/sem-foto.jpg" ng-hide="proposta.image[0].imageid" class="responsive-img left" style="height: 180px;">
                     </div>
 
@@ -32,7 +32,7 @@
                             <div class="col s5 m3 l2 valign center green" ng-hide="proposta.interest_category">
                                 <span class="white-text truncate">Vendo por</span>
                                 <div class="divider white"></div>
-                                <p class="white-text center-align">R$ {{proposta.price}}</p>
+                                <p class="white-text center-align">{{proposta.price |currency}}</p>
                             </div>
 
                             <div class="col s5 m3 l2 center" ng-hide="!proposta.interest_category" style="background-color: {{proposta.interest_category.color}}" >
@@ -44,7 +44,7 @@
                             <div class="col s5 m3 l2 valign center cyan offset-l1 offset-m1 offset-s1 category" ng-hide="!proposta.priceCatInterest">
                                 <span class="white-text truncate">E quero </span>
                                 <div class="divider white"></div>
-                                <p class="white-text center-align">+ R$ {{proposta.priceCatInterest}}</p>
+                                <p class="white-text center-align">+{{proposta.priceCatInterest | currency}}</p>
                             </div>
 
                             <div class="col s5 m3 l2 valign center right hide-on-small-and-down category" style="background-color: {{proposta.category.color}}">
@@ -58,16 +58,8 @@
             </div>
             <div class="row" ng-hide="propostas == '' ">
                 <div class="col s12 m8 l8 center">
-                    <ul class="pagination">
-                        <li class="disabled"><a href="#!"><i class="material-icons">keyboard_arrow_left</i></a></li>
-                        <li class="active"><a href="#!">1</a></li>
-                        <li class="waves-effect"><a href="#!">2</a></li>
-                        <li class="waves-effect"><a href="#!">3</a></li>
-                        <li class="waves-effect"><a href="#!">4</a></li>
-                        <li class="waves-effect"><a href="#!">5</a></li>
-                        <li class="waves-effect"><a href="#!"><i class="material-icons">keyboard_arrow_right</i></a>
-                        </li>
-                    </ul>
+                    <button ng-click="loadMore()"
+                            class="btn waves-effect waves-light amber"><i class="material-icons left">add</i>Mais propostas </button>
                 </div>
             </div>
         </section>

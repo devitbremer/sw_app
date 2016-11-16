@@ -73,6 +73,10 @@ swApp.config(function ($routeProvider) {
             templateUrl:'pages/admProposals.html',
             controller:'admController'
         })
+        .when('/reset/:userId',{
+            templateUrl:'pages/resetPass.html',
+            controller:'resetController'
+        })
 });
 
 swApp.factory('httpq', function($http, $q) {
@@ -355,6 +359,14 @@ swApp.controller('loginController', ['$scope','$http','md5','$location','$cookie
                             expires: exp
                         })
                     }
+                    else{
+                        var now = new Date(),
+                            exp = new Date(now.getFullYear(), now.getMonth(), now.getDate()+1);
+
+                        $cookies.put('loginData',JSON.stringify(result),{
+                            expires: exp
+                        })
+                    }
                     loginService.userLoged = true;
                     loginService.refreshUser();
                     $location.path(loginService.path);
@@ -449,9 +461,104 @@ swApp.controller('loginController', ['$scope','$http','md5','$location','$cookie
 
 }]);
 
-swApp.controller('forgotController', ['$scope', function ($scope) {
+swApp.controller('forgotController', ['$scope','httpq','$location', function ($scope, httpq, $location) {
+
+    $scope.personEmail = '';
+
+    $scope.recover = function () {
+
+        httpq.get('http://localhost:8080/swapitws/rs/person/recoverPassWord/'+$scope.personEmail)
+            .then(function () {
+                var $toastContent = $('<span><i class="material-icons red-text">check_all</i> Ok!' +
+                    '<p class="center">Enviamos instruções para alterar sua senha</p>' +
+                    '<p class="center">Verifique a sua caixa de entrada!</p> '+
+                    '</span>');
+                Materialize.toast($toastContent, 5000);
+
+                $location.path('/login')
+
+            })
+            .catch(function () {
+                var $toastContent = $('<span><i class="material-icons red-text">search</i> Desculpe!' +
+                    '<p class="center">Não encontramos sua conta...</p>' +
+                        '<p class="center">Verifique o endereço</p> '+
+                    '</span>');
+                Materialize.toast($toastContent, 5000);
+            })
+    }
 
 }]);
+
+swApp.controller('resetController',['$scope','$routeParams','httpq','$http','$location','md5',function ($scope,$routeParams,httpq,$http,$location,md5) {
+
+    $scope.pswd1 = '';
+    $scope.pswd2 = '';
+
+    $scope.user= {
+        "personId": "",
+        "personName": "",
+        "email": "",
+        "phone": "",
+        "password": "",
+        "sex": "",
+        "blocked": "",
+        "level": "",
+        "favorite": [],
+        "addressReduce": {
+            "streetid": "",
+            "zipcode": "",
+            "streetName": "",
+            "complement": "",
+            "number": "",
+            "districtName": "",
+            "cityName": "",
+            "stateAcronym": "",
+            "stateName": "",
+            "countryAcronym": "",
+            "countryName": ""
+        }
+    };
+
+    httpq.get('http://localhost:8080/swapitws/rs/person/getbyID/'+ $routeParams.userId)
+
+        .then(function (response) {
+            $scope.user=response;
+        })
+        .catch(function () {
+            var $toastContent = $('<span><i class="material-icons red-text">search</i> Desculpe!' +
+                '<p class="center">Não encontramos sua conta...</p>' +
+                '</span>');
+            Materialize.toast($toastContent, 5000);
+            $location.path('/start')
+        })
+
+
+    $scope.reset = function () {
+        if(!$scope.user.favorite){
+            delete $scope.user.favorite;
+        }
+        if(!$scope.user.addressReduce){
+            $scope.user.addressReduce =  {
+                "streetid": "",
+            }
+        }
+        $scope.user.password = md5.createHash($scope.pswd1 || '');
+
+        $http.put('http://localhost:8080/swapitws/rs/person/update',$scope.user)
+            .success(function () {
+                var $toastContent = $('<span><i class="material-icons green-text">check_all</i>' +
+                    '<p class="center">Senha redefinida</p>' +
+                    '<p class="center">Vamos às ccompras?</p> '+
+                    '</span>');
+                Materialize.toast($toastContent, 5000);
+                $location.path('/login')
+            })
+            .error(function () {
+
+            })
+    }
+
+}])
 
 swApp.controller('startController', ['$scope','$location','$cookies','propService','loginService', function ($scope, $location,$cookies,propService,loginService) {
 
@@ -466,6 +573,12 @@ swApp.controller('startController', ['$scope','$location','$cookies','propServic
 swApp.controller('mainController', ['$scope','httpq','$location','propService', function ($scope,httpq,$location,propService) {
 
     $scope.propostas = [];
+    $scope.limit = 5;
+    
+    $scope.loadMore = function () {
+        $scope.limit = $scope.limit +5;
+        $scope.getProps();
+    }
 
 
     $scope.getProps = function () {
@@ -1220,87 +1333,81 @@ swApp.controller('propEditController', ['$scope','httpq','$http','propService','
             });
     };
 
+    //CATEGORIAS DA PROPOSTA
+    $scope.$watch(function () {return propService.newPropCat},function () {
+        if($scope.category == null){
 
-    //Criando Hierarquia de Categorias
+            httpq.get('http://localhost:8080/swapitws/rs/category/getParent/e1408c61-98bc-11e6-a3ce-80fa5b2affba')
+                .then(function (response) {
+                    $scope.categories = response;
+                })
+                .catch(function () {
 
-    var whereElementsIdIsInThisField = 'categoryId';
-    var andTheReferenceToAParentIsInThisField =  'parentId';
-    var andSaveTheChildrenInThisField  = 'children';
+                })
+        }
+        else {
 
+            httpq.get('http://localhost:8080/swapitws/rs/category/getParent/'+$scope.category)
+                .then(function (response) {
+                    $scope.categories = response;
+                })
+                .catch(function () {
 
-//Função que monta a arvore
-    function buildTree(flatList, idFieldName, parentKeyFieldName, fieldNameForChildren) {
-        var rootElements = [];
-        var lookup = {};
+                })
+        }
+    });
 
-        // Take the flat list and transform it into a dictionary of key/values.
-        // This will allow us to quickly get the reference of an object like a lookup table.
-        flatList.forEach(function (flatItem) {
-            var itemId = flatItem[idFieldName];
-            lookup[itemId] = flatItem;
-            flatItem[fieldNameForChildren] = [];
-        });
-
-        flatList.forEach(function (flatItem) {
-
-            var parentKey = flatItem[parentKeyFieldName];
-
-            if (parentKey != null) {
-
-                // Item is linked to a parent, retrieve the parent.
-                var parentObject = lookup[flatItem[parentKeyFieldName]];
-
-                if(parentObject){
-                    // Parent found, add the item as a child.
-                    parentObject[fieldNameForChildren].push(flatItem);
-                }else{
-                    // No parent found, add the item as a root element.
-                    rootElements.push(flatItem);
-                }
-            } else {
-                // No parent, add the item as a root element.
-                rootElements.push(flatItem);
-            }
-
-        });
-
-        return rootElements;
+    $scope.setCategory = function (categoryid, categoryName) {
+        $scope.category = categoryid;
+        propService.newPropCat = categoryid;
+        $scope.proposition.category.categoryId = categoryid;
+        $scope.categoryName = categoryName
     }
-    //CARREGANDO CATEGORIAS
-    httpq.get('http://localhost:8080/swapitws/rs/category/getAll')
-        .then(function (data) {
-
-            $scope.flatData = data;
-            $scope.flatData3 = data;
-
-            //Monta a arvore
-            $scope.treedata = buildTree($scope.flatData, whereElementsIdIsInThisField, andTheReferenceToAParentIsInThisField, andSaveTheChildrenInThisField);
-            $scope.treedata2 = buildTree(angular.copy($scope.flatData), whereElementsIdIsInThisField, andTheReferenceToAParentIsInThisField, andSaveTheChildrenInThisField);
-            $scope.treedata3 = buildTree(angular.copy($scope.flatData3), whereElementsIdIsInThisField, andTheReferenceToAParentIsInThisField, andSaveTheChildrenInThisField);
-        })
-
-        .catch(function (response) {
-        });
+    $scope.resetCategories = function () {
+        $scope.category = 'e1408c61-98bc-11e6-a3ce-80fa5b2affba';
+        propService.newPropCat = null;
+        $scope.categoryName = '';
+        $scope.proposition.category.categoryId = '';
+    }
 
 
-    //Watcher para setar as categorias da roposta
-    $scope.$watch( 'categorias.currentNode', function( newObj, oldObj ) {
-        if( $scope.categorias && angular.isObject($scope.categorias.currentNode) ) {
-            $scope.proposition.category.categoryId = $scope.categorias.currentNode.categoryId;
+
+    //CATEGORIAS DE INTERESSE
+    $scope.$watch(function () {return propService.newPropCatInterest},function () {
+        if($scope.categoryInterest == null){
+
+            httpq.get('http://localhost:8080/swapitws/rs/category/getParent/e1408c61-98bc-11e6-a3ce-80fa5b2affba')
+                .then(function (response) {
+                    $scope.interestCategories = response;
+                })
+                .catch(function () {
+
+                })
         }
-    }, false);
+        else {
 
-    $scope.$watch( 'vt_category.currentNode', function( newObj, oldObj ) {
-        if( $scope.vt_category && angular.isObject($scope.vt_category.currentNode) ) {
-            $scope.proposition.interest_category.categoryId = $scope.vt_category.currentNode.categoryId;
-        }
-    }, false);
+            httpq.get('http://localhost:8080/swapitws/rs/category/getParent/'+$scope.categoryInterest)
+                .then(function (response) {
+                    $scope.interestCategories = response;
+                })
+                .catch(function () {
 
-    $scope.$watch( 't_category.currentNode', function( newObj, oldObj ) {
-        if( $scope.t_category && angular.isObject($scope.t_category.currentNode) ) {
-            $scope.proposition.interest_category.categoryId = $scope.t_category.currentNode.categoryId;
+                })
         }
-    }, false);
+    });
+
+    $scope.setInterestCategory = function (categoryid, categoryName) {
+        $scope.categoryInterest = categoryid;
+        propService.newPropCatInterest = categoryid;
+        $scope.proposition.interest_category.categoryId = categoryid;
+        $scope.interestCategoryName = categoryName
+    }
+    $scope.resetInterestCategories = function () {
+        $scope.categoryInterest = 'e1408c61-98bc-11e6-a3ce-80fa5b2affba';
+        propService.newPropCatInterest = null;
+        $scope.interestCategoryName = '';
+        $scope.proposition.interest_category.categoryId = '';
+    }
 
 
 
@@ -1511,14 +1618,15 @@ swApp.controller('indexController',['$scope','$location',function ($scope,$locat
 
     $scope.$watch(function () {return $location.path();},function () {
         var path = $location.path().split('/');
-        $scope.activate = path[1]
+        $scope.location = path[1]
         if (
             $location.path() === ('/') ||
             $location.path() === ('/start') ||
             $location.path() === ('/login') ||
             $location.path() === ('/register') ||
             $location.path() ===('/forgot') ||
-            $scope.activate === ('activate') ||
+            $scope.location === ('activate') ||
+            $scope.location === ('reset') ||
             $location.path() === ('/terms')
         ){
             $scope.showSideBar = false;
@@ -1536,7 +1644,8 @@ swApp.controller('indexController',['$scope','$location',function ($scope,$locat
             $location.path() === ('/login') ||
             $location.path() === ('/register') ||
             $location.path() ===('/forgot') ||
-            $scope.activate === ('activate') ||
+            $scope.location === ('activate') ||
+            $scope.location === ('reset') ||
             $location.path() === ('/terms')
         ){
             $scope.showTopMenu = false;
