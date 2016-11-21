@@ -77,7 +77,7 @@
                     </select>
                     <span class="white-text">Cidade:</span>
                     <select class="browser-default" ng-model="selectedCity">
-                        <option ng-repeat="city in cities track by $index" value="{{city}}">{{city.name}}
+                        <option ng-repeat="city in cities track by $index" value="{{city.cityid}}">{{city.name}}
                         </option>
                     </select>
                 </div>
@@ -88,9 +88,11 @@
             <div class="card-content">
                 <div id="chCategories" class="row">
                     <span class="strong white-text">Filtrar por categoria</span><br><br>
-                    <button ng-click="resetCategories()" class="btn waves-effect waves-light blue white-text col s12">
-                        <i class="material-icons left">arrow_backt</i> Voltar
-                    </button>
+                    <div class="center">
+                        <button ng-click="resetCategories()" class="btn waves-effect waves-light blue white-text">
+                            <i class="material-icons left">refresh</i> Todas
+                        </button>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col s3 center white-text" style=" padding: 5px;" ng-repeat="category in categories">
@@ -140,6 +142,7 @@
        class="button-collapse sidebar-collapse btn-floating btn-medium waves-effect waves-light hide-on-large-only blue-grey darken-4"><i
             class="material-icons">menu</i></a>
 </aside>
+
 
 <!-- END LEFT SIDEBAR NAV-->
 
