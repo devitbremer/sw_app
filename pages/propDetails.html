@@ -7,8 +7,10 @@
                 <div class="col l9 m10 s12 offset-m1">
                     <div class="card">
                         <div class="card-content center">
-                            <i class="material-icons">star</i>
-                            <span class="card-title bold">{{proposition.title}}</span>
+                            <div class="row">
+                                <img class="circle responsive-img" src="{{'icons/'+proposition.category.icon}}" style="max-height: 35px; background-color: {{proposition.category.color}}">
+                                <span class="card-title bold">{{proposition.title}}</span>
+                            </div>
                             <div class="divider"></div>
                             <br>
                             <div class="row">
@@ -43,10 +45,32 @@
                                             <div class="divider"></div>
                                             <br>
                                             <p class="center-align">{{proposition.description}}</p>
+                                            <br>
+                                            <div class="divider"></div>
+
+                                            <div class="row" ng-hide="proposition.interest_category">
+                                                <span class="strong">Vendo por: {{proposition.price | currency}}</span>
+                                            </div>
+                                            <div class="row" ng-hide="!proposition.interest_category">
+                                                <span class="strong">Troco por: {{proposition.interest_category.categoryName}} </span>
+                                            </div>
+                                            <div class="row" ng-hide="!proposition.priceCatInterest">
+                                                <span class="strong">e quero: {{proposition.priceCatInterest | currency}}</span>
+                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="row">
+                                <div class="col l6 m6 s12 offset-l6 offset-m6">
+                                    <div class="card">
+
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="row">
                                 <div class="col l6 m6 s12">
                                     <!--Botões de ação telas grandes-->

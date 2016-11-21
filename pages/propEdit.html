@@ -163,7 +163,7 @@
 
                             <div class="row" ng-hide="sell==false" >
                                 <div class="input-field col s12 m6 l6 offset-l3 offset-m3">
-                                    <input class="money" id="sellPrice" type="text" ng-model="proposition.price" ng-disabled="sell!==true">
+                                    <input  class="money" id="sellPrice" type="text" ng-model="proposition.price" ng-disabled="sell!==true">
                                     <label for="sellPrice" class="active">Preço</label>
                                 </div>
                             </div>
@@ -241,9 +241,9 @@
                                 <div class="col s12 center">
 
                                     <button class="btn btn-large waves-effect waves-light green" ng-disabled="editProposition.$invalid"
-                                            name="action" ng-click="saveProp()">Publicar<i class="material-icons left">cloud</i></button>
+                                            name="action" ng-click="saveProp()">salvar<i class="material-icons left">save</i></button>
                                     <button class="btn btn-large waves-effect waves-light red" type="reset"
-                                            name="action" ng-click="clearProp()">Cancelar<i class="material-icons left">cancel</i></button>
+                                            name="action" ng-click="goBack()">Cancelar<i class="material-icons left">cancel</i></button>
                                 </div>
                             </div>
                         </div>

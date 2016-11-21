@@ -33,7 +33,7 @@ swApp.config(function ($routeProvider) {
             templateUrl:'pages/main.html',
             controller:'mainController'
         })
-        .when('/details',{
+        .when('/details/:propId',{
             templateUrl:'pages/propDetails.html',
             controller:'detailsController'
         })
@@ -111,8 +111,8 @@ swApp.service('propService' ,[function () {
         this.category = null;
         this.city = null;
         this.selectedState = '';
-        this.price_max = 9999999;
-        this.price_min = 0;
+        this.price_max = "9999999";
+        this.price_min = "0";
         this.title = null;
 
     //Essas variáveis são para nova proposta
@@ -191,11 +191,8 @@ swApp.controller('personActivateController', ['$scope','$routeParams','$http','h
 
     $scope.unlock = function () {
         delete $scope.user.favorite;
-        $scope.user.sex = 'M';
         $scope.user.blocked =0
-        $scope.user.addressReduce =  {
-            "streetid": "",
-        }
+
         $http.put('http://localhost:8080/swapitws/rs/person/update',$scope.user)
             .success(function () {
                 $location.path('/start')
@@ -582,6 +579,7 @@ swApp.controller('mainController', ['$scope','httpq','$location','propService', 
 
 
     $scope.getProps = function () {
+
         httpq.get('http://localhost:8080/swapitws/rs/proposition/getPropLike/'+propService.title+'/'+propService.category+'/'+propService.city+'/'+propService.price_max+'/'+propService.price_min)
             .then(function (response) {
                 $scope.propostas = response;
@@ -608,10 +606,28 @@ swApp.controller('mainController', ['$scope','httpq','$location','propService', 
     })
 
     $scope.$watch(function () {return propService.price_max;},function () {
+        var str = propService.price_max;
+        str= str.replace(".","");
+        str = str.replace(",",".");
+        propService.price_max = parseFloat(str);
+
+        var str2 = propService.price_min;
+        str2= str2.replace(".","");
+        str2 = str2.replace(",",".");
+        propService.price_min = parseFloat(str2);
         $scope.getProps();
     })
 
     $scope.$watch(function () {return propService.price_min;},function () {
+        var str = propService.price_max;
+        str= str.replace(".","");
+        str = str.replace(",",".");
+        propService.price_max = parseFloat(str);
+
+        var str2 = propService.price_min;
+        str2= str2.replace(".","");
+        str2 = str2.replace(",",".");
+        propService.price_min = parseFloat(str2);
         $scope.getProps();
     })
 
@@ -619,12 +635,12 @@ swApp.controller('mainController', ['$scope','httpq','$location','propService', 
     //DIRECIONA PARA OS DETALHES DA PROPOSTA
     $scope.viewDetails = function (propositionId) {
         propService.propId = propositionId;
-        $location.path('/details');
+        $location.path('/details/'+propositionId);
     }
 
 }]);
 
-swApp.controller('detailsController', ['$scope','propService','httpq','$location','$http','loginService', function ($scope, propService,httpq,$location,$http,loginService) {
+swApp.controller('detailsController', ['$scope','propService','httpq','$location','$http','loginService','$routeParams', function ($scope, propService,httpq,$location,$http,loginService,$routeParams) {
 
     $scope.propositionId = propService.propId;
     $scope.proposition = {};
@@ -632,7 +648,7 @@ swApp.controller('detailsController', ['$scope','propService','httpq','$location
     $scope.userLoged = '';
 
 
-    if (!propService.propId){
+    if (!$routeParams.propId){
 
         $location.path('/main')
     }
@@ -643,7 +659,7 @@ swApp.controller('detailsController', ['$scope','propService','httpq','$location
 
     }
    //BUSCA PROPOSTA
-    httpq.get('http://localhost:8080/swapitws/rs/proposition/getbyID/'+$scope.propositionId)
+    httpq.get('http://localhost:8080/swapitws/rs/proposition/getbyID/'+$routeParams.propId)
 
         .then(function (response) {
             $scope.proposition = response;
@@ -1215,9 +1231,9 @@ swApp.controller('propEditController', ['$scope','httpq','$http','propService','
                                 "addressid":"",
                                 "streetid":""
                             },
-                            "price": 0,
-                            "priceCatInterest":0,
-                            "totalPrice":0,
+                            "price":"0",
+                            "priceCatInterest":"0",
+                            "totalPrice":"0",
 
                             "category":{
                                 "categoryId":""
@@ -1251,6 +1267,7 @@ swApp.controller('propEditController', ['$scope','httpq','$http','propService','
     httpq.get('http://localhost:8080/swapitws/rs/proposition/getbyID/'+$scope.propositionId)
 
         .then(function (response) {
+            /*
             $scope.proposition.propositionId = response.propositionId;
             $scope.proposition.title = response.title;
             $scope.proposition.description = response.description;
@@ -1264,10 +1281,11 @@ swApp.controller('propEditController', ['$scope','httpq','$http','propService','
             $scope.proposition.personReduce.personId =  response.personReduce.personId;
             $scope.proposition.personReduce.addressReduce.addressid =  response.personReduce.addressReduce.addressid;
             $scope.proposition.image =  response.image;
-            $scope.proposition.publish_date = response.publish_date;
+            $scope.proposition.publish_date = response.publish_date;*/
             $scope.zipcode = response.addressReduce.zipcode;
             $scope.city = response.addressReduce.cityName;
             $scope.district = response.addressReduce.districtName;
+            $scope.proposition = response;
 
             //PREENCHE CHECKBOX
             if(($scope.proposition.price)&&($scope.proposition.priceCatInterest == 0)&&(!$scope.proposition.interest_category)){
@@ -1428,16 +1446,29 @@ swApp.controller('propEditController', ['$scope','httpq','$http','propService','
         if($scope.sell == true){
             $scope.proposition.interest_category = null;
             $scope.proposition.priceCatInterest = 0;
+
+            var str = $scope.proposition.price;
+            str= str.replace(".","");
+            str = str.replace(",",".");
+            $scope.proposition.price = str;
         }
         if($scope.swap == true){
             $scope.proposition.price = 0;
             $scope.proposition.priceCatInterest = 0;
+
+            var str2 = $scope.proposition.price;
+            str2= str2.replace(".","");
+            str2 = str2.replace(",",".");
+            $scope.proposition.priceCatInterest = str2;
         }
 
         var d = new Date($scope.proposition.publish_date);
         var datestring = d.getFullYear()+ "-"  + (d.getMonth()+1) + "-" +d.getDate();
         $scope.proposition.publish_date = datestring;
 
+        var str = $scope.proposition.price;
+        str= str.replace(".","");
+        str = str.replace(",",".");
 
        $http.put('http://localhost:8080/swapitws/rs/proposition/update', $scope.proposition)
             .success(function (result) {
@@ -1457,6 +1488,10 @@ swApp.controller('propEditController', ['$scope','httpq','$http','propService','
 
             });
     };
+
+    $scope.goBack = function () {
+        $location.path('/main')
+    }
 
 }])
 
@@ -1536,7 +1571,7 @@ swApp.controller('sideMenuController', ['$scope','$routeParams','$http','httpq',
     $scope.$watch('selectedCity', function () {
         if($scope.selectedCity !=null){
             propService.city = $scope.selectedCity;
-            propService.selectedState = $scope.selectedState;;
+            propService.selectedState = $scope.selectedState;
         }
 
     });
